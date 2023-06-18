@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+/*
+{#264653 #2A9D8F #E9C46A #F4A261 #E76F51}
+*/
+
+:root{
+    --wallpaper1: #264653;
+    --wallpaper2: #E9C46A;
+    --wallpaper3: #F4A261;
+    --wallpaper4: #E76F51;
+    --cortina: #5ca16fb4;
+    --navback: #264653;
+    --marcado: #246e8b;
+    --atext: yellow;
+    --h1text: yellow;
+    --borda: wheat;
+    --livrop: black;
+    --livrom: yellow;
+    --titulo: black;
+}
+
+
+*{
+    font-family: 'Open Sans', sans-serif;
+
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+/*@media screen and (min-width: 1400px){*/
+    html{
+        height: 100vh;
+        --sz: 8px; 
+        --ts: 50%/ calc(var(--sz) * 12.8) calc(var(--sz) * 22);
+        background:
+            linear-gradient(var(--cortina), var(--cortina)),
+            conic-gradient(from 120deg at 50% 86.5%, var(--wallpaper2) 0 120deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from 120deg at 50% 86.5%, var(--wallpaper2) 0 120deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from 120deg at 50% 74%, var(--wallpaper1) 0 120deg, #fff0 0 360deg) var(--ts), 
+            conic-gradient(from 60deg at 60% 50%, var(--wallpaper2) 0 60deg, var(--wallpaper3) 0 120deg, #fff0 0 360deg) var(--ts), 
+            conic-gradient(from 180deg at 40% 50%, var(--wallpaper4) 0 60deg, var(--wallpaper2) 0 120deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from 0deg at 90% 35%, var(--wallpaper1) 0 90deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from -90deg at 10% 35%, var(--wallpaper1) 0 90deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from 0deg at 90% 35%, var(--wallpaper1) 0 90deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from -90deg at 10% 35%, var(--wallpaper1) 0 90deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from -60deg at 50% 13.5%, var(--wallpaper2) 0 120deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from -60deg at 50% 13.5%, var(--wallpaper2) 0 120deg, #fff0 0 360deg) var(--ts),
+            conic-gradient(from -60deg at 50% 41%, var(--wallpaper3) 0 60deg, var(--wallpaper4) 0 120deg, #fff0 0 360deg) var(--ts), var(--wallpaper1);
+    }
+
+    a{
+        font-weight: bolder;
+        color: var(--atext);
+        text-decoration: none;
+    }
+
+    h1{
+        font-weight: bolder;
+        color: var(--h1text);
+        text-decoration: none;
+        text-shadow: -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black, 1px 1px 1px black;
+    }
+    /*
+    body{
+        background-image: url(Imagens/wallpaper.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }*/
+
+
+    /*Barra de Navegação*/
+    .Nav{
+        background: var(--navback);
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-bottom: 5px solid var(--borda);
+        z-index: 1;
+    }
+    .Enviar{
+        display: none;
+    }
+    .Itens{
+        font-size: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 2%;
+    }
+    .Itens ul{
+        display: flex;
+        align-items: center;
+        justify-content: right;
+    }
+    .Itens ul a{
+        white-space: nowrap;
+        padding: 0 4%;
+        display: block;
+    }
+    ul a:hover{
+        color: var(--borda);
+    }
+    .Busca{
+        font-size: large;
+        font-weight: bold;
+        background-color: var(--navback);
+        width: 300px;
+        text-decoration: none;
+        padding: 1.5% 4%;
+        border-radius: 20px;
+        border-style: inset;
+        border-color: var(--atext);
+        color: var(--atext);
+    }
+    .Busca::placeholder{
+        color: var(--atext);
+    }
+
+    /*Busca avançado*/
+    .Buscaavancada{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .Nacionalidade, .Genero, .Categoria, .Data{
+        box-sizing: border-box;
+        background-color: var(--navback);
+        width: 100%;
+        font-size: medium;
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 5px;
+        cursor: pointer;
+        line-height: 1.4;
+        border-style: inset;
+        border-color: var(--atext);
+        color: var(--atext);
+    }
+
+    .Nacionalidade:valid, .Genero:valid, .Categoria:valid, .Data:valid{
+        background-color: var(--navback);
+    }
+
+    .Busca2{
+        box-sizing: border-box;
+        font-size: large;
+        font-weight: bold;
+        background-color: var(--navback);
+        width: 100%;
+        text-decoration: none;
+        padding: 1.5% 4%;
+        border-radius: 20px;
+        border-style: inset;
+        border-color: var(--atext);
+        color: var(--atext);
+    }
+    .Busca2::placeholder{
+        color: var(--atext);
+    }
+
+
+    /*Corpo do site*/
+    .Conteudo{
+        padding: 6%;
+    }
+
+    /*Sobre*/
+    .Caixa{
+        display: flex;
+        background-color: var(--cortina);
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .Texto_sobre{
+        margin-right: 2%;
+        display: flex;
+        font-size: large;
+        text-align: justify;
+        font-weight: bolder;
+    }
+    .Texto_sobre a{
+        color: var(--atext);
+    }
+    .Instagram{
+        margin-right: 1%;
+        display: flex;
+    }
+    .Instagram img{
+        width: 300px;
+        height: 300px;
+        border-radius: 100%;
+        box-shadow: 0px 0px 10px 5px rgba(0.1, 0.1, 0.1, 0.4);
+    }
+    .Instagram img:hover{
+        box-shadow: 0px 0px 5px 1px white;
+    }
+
+
+    /*Livros*/
+    .Livros{
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .Livro a{
+        color: var(--titulo);
+        font-weight: bold;
+        font-size: large;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .Livro{
+        cursor: pointer;
+        display: flex;
+        height: 240px;
+        width: 150px;
+        font-weight: bold;
+        font-size: medium;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 2%;
+        margin-top: 2%;
+        background-color: var(--livrom);
+        box-shadow: 10px 10px 10px rgba(0.1, 0.1, 0.1, 0.4);
+    }
+    
+    .Livro::after{
+        content: "Machado de Assis";
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 170px;
+        height: 70px;
+        width: 150px;
+        background-color: var(--livrop);
+        color: var(--atext);
+    }
+    .Livro::before{
+        content: "Biblioteca Digital";
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin-top: 170px;
+        height: 70px;
+        width: 150px;
+        background-color: var(--livrop);
+        color: var(--atext);
+    }
+    .Livro:hover{
+        box-shadow: 0px 0px 5px 1px white;
+    }
+
+    /*Pagina do livro*/
+    .Capa a{
+        color: var(--titulo);
+    }
+    .Capa{
+        display: flex;
+        height: 480px;
+        width: 300px;
+        font-weight: bold;
+        font-size: xx-large;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: var(--livrom);
+    }
+    .Capa::after{
+        content: "Machado de Assis";
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 340px;
+        height: 140px;
+        width: 300px;
+        background-color: var(--livrop);
+        color: var(--atext);
+    }
+    .Capa::before{
+        content: "Biblioteca Digital";
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        margin-top: 340px;
+        height: 140px;
+        width: 300px;
+        background-color: var(--livrop);
+        color: var(--atext);
+    }
+    table, th, td {
+        border-spacing: 20px;
+    }
+    .Tab{
+        width: 70%;
+    }
+    .Resumo{
+        font-size: large;
+        padding: 0.5% 2%;
+        text-align: justify;
+        font-weight: bolder;
+        text-indent: 2%;
+        background-color: var(--navback);
+    }
+    .Resumo a{
+        color: var(--atext);
+    }
+    .Baixar, .Compartilhar, .Ler, .Favoritar{
+        cursor: pointer;
+        color: var(--atext);
+        padding: 2%;
+        background-color: var(--navback);
+    }
+    .Ler:hover, .Baixar:hover a.Link, .Favoritar:hover, .Compartilhar:hover{
+        color: white;
+    }
+
+    .Livroonline{
+        z-index: 2;
+        display: none;
+    }
+
+/*}*/

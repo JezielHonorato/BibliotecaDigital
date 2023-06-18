@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<link rel="shortcut icon" href="/Imagens/favicon.ico" type="image/x-icon">
+<title>Memorias Postumas de Bras Cubas</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' type='text/css' media='screen' href='/BibliotecaDigital.css'>
+<script src='/BibliotecaDigital.js'></script>
+</head>
+<body>
+    <nav class="Nav">
+        <div class="Itens">
+            <div class="Logo">
+                <h1> <a href="BibliotecaDigital.html">Biblioteca Digital</a> </h1>
+            </div>
+            <ul>
+                <a href="/BibliotecaDigital.html" class="current">Home</a>
+                <a href="/Livros.html">Livros</a>
+                <a href="/Sobre.html">Sobre</a>
+                <a href="/Favoritos.html">Favoritos</a>
+                <a href="/Login.html">Login</a>
+                <form action="/Livros.html" method="get" id="form">
+                    <input type="text" class="Busca" name="busca" placeholder="Buscar..." id="busca">
+                    <input type="submit" class="Enviar">
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="Conteudo">
+        <div class="Caixa">
+            <div class="Capa" id="capa"><a>Memórias Póstumas de Brás Cubas</a></div>
+            <table class="Tab" id="tab">
+                <tr>
+                    <th class="Ler" onclick="Ler()"id="ler">Marcar como Lido</th>
+                    <th class="Favoritar" onclick="Favoritar(memorias_postumas_de_bras_cubas)" id="favoritar">Favoritos</th>
+                    <th class="Baixar"><a class="Link" href="/Livros/Machado de Assis/Romances/memorias_postumas_de_bras_cubas.pdf" download="Memórias Póstumas de Brás Cubas">Baixar Livro em PDF</a></th>
+                    <th class="Compartilhar">Compartilhar</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="Resumo"><a>Neste romance, narrado por Brás Cubas, um defunto autor, Machado de Assis apresenta uma visão satírica e irônica da sociedade brasileira do século XIX. O protagonista narra suas memórias desde a infância até a morte, explorando seus relacionamentos, suas conquistas e suas falhas. A obra aborda temas como a morte, a vaidade, o amor não correspondido e a busca por sentido na existência. Com sua narrativa inovadora e perspicaz, Machado de Assis desconstrói as convenções literárias e sociais, deixando uma marca indelével na literatura brasileira.</a></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

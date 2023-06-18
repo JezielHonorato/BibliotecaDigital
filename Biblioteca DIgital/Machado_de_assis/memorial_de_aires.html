@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<link rel="shortcut icon" href="/Imagens/favicon.ico" type="image/x-icon">
+<title>Memoriasl de Aires</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' type='text/css' media='screen' href='/BibliotecaDigital.css'>
+<script src='/BibliotecaDigital.js'></script>
+</head>
+<body>
+    <nav class="Nav">
+        <div class="Itens">
+            <div class="Logo">
+                <h1> <a href="BibliotecaDigital.html">Biblioteca Digital</a> </h1>
+            </div>
+            <ul>
+                <a href="/BibliotecaDigital.html" class="current">Home</a>
+                <a href="/Livros.html">Livros</a>
+                <a href="/Sobre.html">Sobre</a>
+                <a href="/Favoritos.html">Favoritos</a>
+                <a href="/Login.html">Login</a>
+                <form action="/Livros.html" method="get" id="form">
+                    <input type="text" class="Busca" name="busca" placeholder="Buscar..." id="busca">
+                    <input type="submit" class="Enviar">
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="Conteudo">
+        <div class="Caixa">
+            <div class="Capa" id="capa"><a>Memorial de Aires</a></div>
+            <table class="Tab" id="tab">
+                <tr>
+                    <th class="Ler" onclick="Ler()"id="ler">Marcar como Lido</th>
+                    <th class="Favoritar" onclick="Favoritar(memorial_de_aires)" id="favoritar">Favoritos</th>
+                    <th class="Baixar"><a class="Link" href="/Livros/Machado de Assis/Romances/memorial_de_aires.pdf" download="Memorial de Aires">Baixar Livro em PDF</a></th>
+                    <th class="Compartilhar">Compartilhar</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="Resumo"><a>"Memorial de Aires" é o último romance completo de Machado de Assis. A obra é uma narrativa epistolar que retrata as memórias e reflexões de Aires, um diplomata aposentado. Ambientado no Rio de Janeiro, o romance aborda temas como envelhecimento, solidão e a complexidade das relações humanas. Machado de Assis utiliza sua prosa elegante e irônica para explorar as experiências e observações de Aires, oferecendo insights profundos sobre a natureza humana, os dilemas morais e a busca por significado na vida.</a></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

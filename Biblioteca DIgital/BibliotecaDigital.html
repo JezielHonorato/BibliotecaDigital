@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <link rel="shortcut icon" href="Imagens/favicon.ico" type="image/x-icon">
+    <title>Biblioteca Digital</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='BibliotecaDigital.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <nav class="Nav">
+        <div class="Itens">
+            <div class="Logo">
+                <h1> <a href="BibliotecaDigital.html">Biblioteca Digital</a> </h1>
+            </div>
+            <ul>
+                <a href="BibliotecaDigital.html" class="current">Home</a>
+                <a href="Livros.html">Livros</a>
+                <a href="Sobre.html">Sobre</a>
+                <a href="#">Favoritos</a>
+                <a href="Login.html">Login</a>
+                <form action="/Livros.html" method="get" id="form">
+                    <input type="text" class="Busca" name="busca" placeholder="Buscar..." id="busca">
+                    <input type="submit" class="Enviar">
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="Conteudo">
+        <div class="Livros">
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/a_mao_e_a_luva.html'"><a>A Mão e a Luva</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/casa_velha.html'"><a>Casa Velha</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/dom_casmurro.html'"><a>Dom Casmurro</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/esau_e_jaco.html'"><a>Esaú e Jacó</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/helena.html'"><a>Helena</a> </div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/iaia_garcia.html'"><a>Iaiá Garcia</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/memorial_de_aires.html'"><a>Memorial de Aires</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/memorias_postumas_de_bras_cubas.html'"><a>Memórias Póstumas de Brás Cubas</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/quincas_borba.html'"><a>Quincas Borbas</a></div>
+            <div class="Livro" onclick="location.href = 'Machado_de_assis/ressurreicao.html'"><a>Ressureição</a></div>
+        </div>
+    </div>
+</body>
+
+</html>
