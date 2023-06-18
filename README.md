@@ -1,3 +1,3 @@
 # BibliotecaDigital
     Projeto da biblioteca digital
-    Tentando ver se fazer programa  pra mim.
+    Tentando ver se fazer programa é pra mim.
