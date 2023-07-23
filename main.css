@@ -1,0 +1,266 @@
+/* Reset */
+
+*{
+    margin: 0;
+	padding: 0;
+	border: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+body{
+    background-color: var(--Cfun);
+}
+
+/* Roots */
+:root{
+    /* IF cores #2F9E41; #CD191E; #000000;  */
+    --Cfun: #0B1622;
+    --Cnav: #151F2E;
+    --Ctxt: #9BADBD;
+    --Chov: #FFFFFF;
+    --Cati: #3DB4F2;
+}
+
+.Invisivel{
+    display: none
+}
+
+/* Texto */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+a, label, option, ::placeholder{
+    font-size: 1rem;
+    color: var(--Ctxt);
+    text-decoration: none;
+}
+select{
+    color: var(--Ctxt);
+    text-decoration: none;
+}
+h1{
+    font-size: 1.5rem;
+    color: var(--Ctxt);
+    text-decoration: none;
+    margin: 1rem;
+}
+a:hover, label:hover, .Lupa:hover{
+    color: var(--Chov);
+}
+
+/* Barra de navegação */
+
+.Header{
+    background: var(--Cnav);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 20px 0px #000;
+    z-index: 1;
+}
+.Itens{
+    display: flex;
+    justify-content: space-around;
+}
+.Logo{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.Itens ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Itens ul a{
+    white-space: nowrap;
+    margin: 10%;
+}
+.Pesquisa{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.Lupa, .Expandir{
+    font-family: 'Material Symbols Outlined';
+    color: var(--Ctxt);
+    font-size: 1.5rem;
+}
+
+.Menor{
+    font-size: 1.4rem;
+}
+/* Estilo do rodapé */
+.Rodape{
+    position: fixed;
+    background: var(--Cnav);
+    padding: 20px;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+}
+
+
+/* Busca Avançada */
+
+
+.BuscaAvancada{
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+}
+
+.GrupoCampo{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
+
+.Campo{
+    display: flex;
+    align-items: center;
+    background-color: var(--Cnav);
+    border-radius: 5px;
+    width: 18%;
+    padding: 0 1%;
+}
+.CampoR{
+    display: block;
+    background-color: transparent;
+    border-radius: 5px;
+    width: 18%;
+}
+
+.Pesquisar{
+    padding: 0.5rem 1rem;
+    background-color: var(--Cnav);
+    width: 100%;
+    color: var(--Ctxt);
+}
+.Pesquisar::placeholder{
+    color: var(--Ctxt);
+}
+.AnoValue{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Select{
+    padding: 0.5rem 1rem;
+    background-color: var(--Cnav);
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+
+
+
+
+.Ano{
+    width: 100%;
+}
+
+
+.Linha{
+    height: 5px;
+    border-radius: 5px;
+    position: relative;
+    background-color: var(--Cnav);
+}
+.Progresso{
+    height: 5px;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    border-radius: 5px;
+    background-color: var(--Cati);
+}
+
+.LinhaDupla input[type=range]{
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    background: none;
+    appearance: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background: var(--Cati);
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+/* Livros */
+
+.Conteudo{
+    border-radius: 10px;
+    width: 80%;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.livro {
+    background-color: var(--Cnav);
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    margin: 1rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,202 @@
+
+TbLivro {
+	id_livro int pk increments
+	idAno int > TbAno.idAno
+	idTitulo int > TbTitulo.idTitulo
+	IdAutor int > TbAutor.idAutor
+	idGenero int > TbGenero.idGenero
+	idCategoria int > TbCategoria.idCategoria
+	idImagem int > TbImagem.idImagem
+	idResumo int > TbResumo.idResumo
+}
+
+TbAutor {
+	idAutor int pk increments
+	autor varchar(50)
+}
+
+TbGenero {
+	idGenero int pk increments
+	genero varchar(50)
+}
+
+TbImagem {
+	idImagem int pk increments
+	link varchar(100)
+}
+
+TbTitulo {
+	idTitulo int pk increments
+	titulo varchar(70)
+}
+
+TbCategoria {
+	idCategoria int pk increments
+	categoria varchar(50)
+}
+
+TbResumo {
+    idResumo int pk increments
+    resumo varchar (500)
+}
+
+TbAno{
+    idAno int pk increments
+    Ano date int
+}
+
+
+
+//
+<form action="#">
+	<input type="text" class="Busca" name="busca" placeholder="Buscar..." id="busca">
+	<input type="submit" class="Invisivel">
+</form>
+
+.Busca{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    border-bottom-color: var(--color3);
+}
+
+
+
+<?php/*
+    include_once('rede.php');
+    if(isset($_POST['submit'])){
+        $genero = $_POST['genero'];
+        $categoria = $_POST['categoria'];
+        $nacionalidade = $_POST['nacionalidade'];
+    }*/
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Biblioteca Digital</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <header class="Header">
+        <div class="Itens">
+            <div class="Logo">
+                <img src="./image/logo.png" alt="Logo">
+            </div>
+            <ul>
+                <a href="#" class="current">Home</a>
+                <a href="#">Livros</a>
+                <a href="#">Sobre</a>
+                <a href="#">Favoritos</a>
+                <a href="#">Login</a>
+            </ul>
+            <div class="Pesquisa">
+                <span class="Lupa">search</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="BuscaAvancada">
+        <form action="index.php" merhod="POST">
+            <div class="GrupoCampo">
+                <div class="Campo">
+                    <label for="titulo_autor">Pesquisar</label><br>
+                    <input type="text" class="Pesquisar" id="titulo_autor">
+                </div>
+
+                <div class="Campo">
+                    <label for="genero">Gênero</label><br> 
+                    <select class="Select" id="genero" name="genero">
+                        <option></option>
+                        <option value="Misterio">Mistério</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Fantasia">Fantasia</option>
+                        <option value="Não-ficção">Não-ficção</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="categoria">Categoria</label><br>
+                    <select class="Select" id="categoria" name="categoria">
+                        <option></option>
+                        <option value="Romance">Romance</option>
+                        <option value="Poema">Poema</option>
+                        <option value="Poesia">Poesia</option>
+                        <option value="Cordel">Cordel</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="nacionalidade">Nacionalidade</label><br>
+                    <select class="Select" id="nacionalidade" name="nacionalidade">
+                        <option></option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Alemanha">Alemanha</option>
+                        <option value="Rússia">Rússia</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <div class="AnoValue">
+                        <div class="Radio">
+                            <input type="radio" id="radio" class="Invisivel">
+                            <label onclick="AntesDepois()" id="radio_label" for="radio">Escolha a Data</label>
+                        </div>
+                        <span id="ano_value"></span>
+                    </div>
+                    <input type="range" class="Ano" min="0" max="2023" value="" onChange="RangeData(this.value)">
+                </div>
+            </div>
+
+            <div class="Invisivel">
+                <input type="submit" value="Buscar">
+            </div>
+        </form>
+    </div>
+
+    <div class="Conteudo">
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+        <div class="livro">
+            <h1>Dom Casmurro</h1>
+            <a>Machado de Assis - </a>
+            <a>1954</a>
+        </div>
+    </div>
+
+    <footer class="Rodape">
+        <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
+    </footer>
+</body>
+</html>
