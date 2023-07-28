@@ -29,6 +29,13 @@ body{
 .Invisivel{
     display: none
 }
+.Rede{
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    color: black;
+    padding: 1rem;
+}
 
 /* Texto */
 
@@ -37,7 +44,7 @@ body{
 *{
     font-family: 'Open Sans', sans-serif;
 }
-a, label, option, ::placeholder{
+a, label, option, ::placeholder, th{
     font-size: 1rem;
     color: var(--Ctxt);
     text-decoration: none;
@@ -47,12 +54,11 @@ select{
     text-decoration: none;
 }
 h1{
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: var(--Ctxt);
     text-decoration: none;
-    margin: 1rem;
 }
-a:hover, label:hover, .Lupa:hover{
+a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover{
     color: var(--Chov);
 }
 
@@ -91,14 +97,18 @@ a:hover, label:hover, .Lupa:hover{
     align-items: center;
     cursor: pointer;
 }
-.Lupa, .Expandir{
+.Lupa, .Expandir, .Ordenar, .Cartaz, .Menu, .Cor{
     font-family: 'Material Symbols Outlined';
     color: var(--Ctxt);
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .Menor{
     font-size: 1.4rem;
+}
+.Menor2{
+    font-size: 1rem;
 }
 /* Estilo do rodapé */
 .Rodape{
@@ -156,24 +166,11 @@ a:hover, label:hover, .Lupa:hover{
 .Pesquisar::placeholder{
     color: var(--Ctxt);
 }
-.AnoValue{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 .Select{
     padding: 0.5rem 1rem;
     background-color: var(--Cnav);
     border-radius: 5px;
-    width: 100%;
-}
-
-
-
-
-
-
-.Ano{
     width: 100%;
 }
 
@@ -186,9 +183,9 @@ a:hover, label:hover, .Lupa:hover{
 }
 .Progresso{
     height: 5px;
+    width: 100%;
+    background: linear-gradient(to right, var(--Cnav) 50% 50%, var(--Cati) 50% 90%, var(--Cnav) 90%);
     position: absolute;
-    left: 25%;
-    right: 25%;
     border-radius: 5px;
     background-color: var(--Cati);
 }
@@ -215,25 +212,86 @@ input[type=range]::-webkit-slider-thumb {
 /* Livros */
 
 .Conteudo{
-    border-radius: 10px;
-    width: 80%;
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.livro {
     background-color: var(--Cnav);
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 20px;
-    width: 250px;
-    margin: 1rem;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+.Livro{
+    display: flex;
+}
+.Indice, .Titulo, .Autor, .Data, .Mais{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border: 2px solid var(--Cfun);
+}
+.Indice{
+    width: 5%;
+}
+.Titulo{
+    width: 52%;
+}
+.Autor{
+    width: 32%;;
+}
+.Data{
+    width: 11%;
 }
 
+
+
+
+
+
+
+
+
+
+/*
+
+.Livros {
+    width: 100%;
+    background-color: var(--Cnav);
+}
+table, thead, tbody, th{
+    height: 2rem;
+    border: 1px solid var(--Cfun);
+    border-collapse: collapse;
+} 
+
+.Indice, .Titulo, .Autor, .Data, .Mais{
+    display: flexbox;
+    text-align: left;
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.Indice{
+    width: 5%;
+    justify-content: center;
+}
+.Titulo{
+    padding: 1rem;
+    width: 50%;
+}
+.Autor{
+    padding: 1rem;
+    width: 30%;;
+}
+.Data{
+    padding: 1rem;
+
+    width: 10%;
+}
+.Mais{
+    width: 5%;
+    justify-content: center;
+}
+*/
+
+/* border: 0.2rem var(--Cfun) solid;*/
 
 
 

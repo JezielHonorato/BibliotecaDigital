@@ -1,13 +1,3 @@
-<?php/*
-    include_once('rede.php');
-    if(isset($_POST['submit'])){
-        $genero = $_POST['genero'];
-        $categoria = $_POST['categoria'];
-        $nacionalidade = $_POST['nacionalidade'];
-    }*/
-?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,7 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src='main.js'></script>
+    <script src='main.js' defer></script>
 </head>
 
 <body>
@@ -40,16 +30,16 @@
     </header>
 
     <div class="BuscaAvancada">
-        <form action="index.php" merhod="POST">
+        <form action="teste.php" merhod="post">
             <div class="GrupoCampo">
                 <div class="Campo">
-                    <label class="Lupa Menor">search</label>
-                    <input type="text" class="Pesquisar" id="pesquisar">
+                    <span class="Lupa Menor">search</span>
+                    <input type="text" class="Pesquisar" id="pesquisar" name="pesquisar">
                 </div>
 
                 <div class="Campo">
                     <span class="Expandir">expand_more</span>
-                    <select class="Select" id="genero" name="genero">
+                    <select class="Select" id="genero" name="genero" name="genero">
                         <option></option>
                         <option value="Misterio">Mistério</option>
                         <option value="Romance">Romance</option>
@@ -81,66 +71,33 @@
                 </div>
 
                 <div class="Campo CampoR">
-                    <!--<div class="AnoValue">
-                        <div class="Radio">
-                            <input type="radio" id="radio" class="Invisivel">
-                            <label onclick="AntesDepois()" id="radio_label" for="radio">Escolha a Data</label>
-                        </div>
-                        <span id="ano_value"></span>
-                    </div>
-                    <input type="range" class="Ano" min="0" max="2023" value="" onChange="RangeData(this.value)">-->
                     <div class="Linha">
-                        <div class="Progresso"></div>
+                        <div class="Progresso" id="progresso"></div>
                         <span class="LinhaDupla">
-                            <input type="range" min="0" max="2023" value="1000" id="min" class="Periodo">
-                            <input type="range" min="0" max="2023" value="2000" id="max" class="Periodo">
+                            <input type="range" min="0" max="2023" value="1000" id="range_menor" class="Periodo" onchange="MudarPeriodo()">
+                            <input type="range" min="0" max="2023" value="2000" id="range_maior" class="Periodo" onchange="MudarPeriodo()">
                         </span>
                     </div>
-                    
-
                 </div>
-            </div>
-
-            <div class="Invisivel">
-                <input type="submit" value="Buscar">
+                <input type="submit" name="submit" value="" class="Invisivel">
             </div>
         </form>
     </div>
 
     <div class="Conteudo">
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
+        <div class="Livro">
+            <div class="Indice"> <h1>#</h1></div>
+            <div class="Titulo"> <h1>Titulo</h1> <span class="Ordenar Menor2">swap_vert</span></div>
+            <div class="Autor"> <h1>Autor</h1> <span class="Ordenar Menor2">swap_vert</span></div>
+            <div class="Data"> <h1>Data</h1> <span class="Ordenar Menor2">swap_vert</span></div>
+            <div class="Opcoes"></div>
         </div>
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
-        </div>
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
-        </div>
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
-        </div>
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
-        </div>
-        <div class="livro">
-            <h1>Dom Casmurro</h1>
-            <a>Machado de Assis - </a>
-            <a>1954</a>
-        </div>
+
     </div>
 
+    
     <footer class="Rodape">
+        <a onclick="MudarCor()"><span class="Cor"> dialogs </span></a>
         <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
     </footer>
 </body>
