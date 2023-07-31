@@ -4,11 +4,11 @@
     $senha = "";
     $bancodedados = "bibliotecadigital";
 
-    $conexao = new mysqli($host,$user,$senha,$bancodedados);
+    $conexao = new mysqli($host, $user, $senha, $bancodedados);
 
     /*
     if($conexao ->connect_errno){
-        echo "<div class=\"Rede\">". "ERRO". "</div>";
+        echo "Falha na conexão! (" . $conexao ->connect_errno . ") " . $conexao ->connect_error;
     } else{
         echo "<div class=\"Rede\">". "Conexão realizada com sucesso". "</div>";
     }

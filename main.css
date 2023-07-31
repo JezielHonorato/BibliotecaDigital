@@ -19,6 +19,7 @@ body{
 /* Roots */
 :root{
     /* IF cores #2F9E41; #CD191E; #000000;  */
+    /* IF memoria cores #95a5a6; #2c3e50 */
     --Cfun: #0B1622;
     --Cnav: #151F2E;
     --Ctxt: #9BADBD;
@@ -110,16 +111,6 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover{
 .Menor2{
     font-size: 1rem;
 }
-/* Estilo do rodapé */
-.Rodape{
-    position: fixed;
-    background: var(--Cnav);
-    padding: 20px;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-}
-
 
 /* Busca Avançada */
 
@@ -147,14 +138,13 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover{
     align-items: center;
     background-color: var(--Cnav);
     border-radius: 5px;
-    width: 18%;
+    width: 23%;
     padding: 0 1%;
 }
 .CampoR{
     display: block;
     background-color: transparent;
     border-radius: 5px;
-    width: 18%;
 }
 
 .Pesquisar{
@@ -184,7 +174,7 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover{
 .Progresso{
     height: 5px;
     width: 100%;
-    background: linear-gradient(to right, var(--Cnav) 50% 50%, var(--Cati) 50% 90%, var(--Cnav) 90%);
+    background: linear-gradient(to right, var(--Cnav) 50% 50%, var(--Cati) 50% 95%, var(--Cnav) 95%);
     position: absolute;
     border-radius: 5px;
     background-color: var(--Cati);
@@ -242,83 +232,39 @@ input[type=range]::-webkit-slider-thumb {
 
 
 
-
-
-
-
-
-
-
-/*
-
-.Livros {
+/* Estilo do rodapé */
+.Rodape{
+    position: fixed;
+    display: flex;
+    background: var(--Cnav);
+    padding: 20px;
     width: 100%;
-    background-color: var(--Cnav);
-}
-table, thead, tbody, th{
-    height: 2rem;
-    border: 1px solid var(--Cfun);
-    border-collapse: collapse;
-} 
-
-.Indice, .Titulo, .Autor, .Data, .Mais{
-    display: flexbox;
-    text-align: left;
-    align-items: center;
-    display: inline-flex;
+    bottom: 0;
     justify-content: space-between;
+    text-align: center;
 }
-.Indice{
-    width: 5%;
-    justify-content: center;
+
+/* inserir novos livros */
+
+.Inserir{
+    width: 80%;
+    margin: auto;
+    margin-top: 20vh;
 }
-.Titulo{
-    padding: 1rem;
-    width: 50%;
+.Inserir label{
+    margin: 0.5rem;
 }
-.Autor{
-    padding: 1rem;
-    width: 30%;;
+
+.InserirSelect{
+    padding: 0.5rem 1rem;
+    background-color: var(--Cnav);
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    width: 100%;
+    color: var(--Ctxt);
 }
-.Data{
-    padding: 1rem;
 
-    width: 10%;
+.File{
+    width: 20%;
+    height: 100px;
 }
-.Mais{
-    width: 5%;
-    justify-content: center;
-}
-*/
-
-/* border: 0.2rem var(--Cfun) solid;*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
