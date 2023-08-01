@@ -45,7 +45,7 @@ body{
 *{
     font-family: 'Open Sans', sans-serif;
 }
-a, label, option, ::placeholder, th{
+a, label, option, ::placeholder, th, button{
     font-size: 1rem;
     color: var(--Ctxt);
     text-decoration: none;
@@ -59,7 +59,7 @@ h1{
     color: var(--Ctxt);
     text-decoration: none;
 }
-a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover{
+a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, button:hover{
     color: var(--Chov);
 }
 
@@ -249,9 +249,9 @@ input[type=range]::-webkit-slider-thumb {
 .Inserir{
     width: 80%;
     margin: auto;
-    margin-top: 20vh;
+    margin-top: 15vh;
 }
-.Inserir label{
+.Label{
     margin: 0.5rem;
 }
 
@@ -265,6 +265,21 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .File{
-    width: 20%;
-    height: 100px;
+    margin: 0px;
+    font-size: smaller;
+    display: block;
+    margin-bottom: 2rem;    
+    background-color: var(--Cnav);
+    color: var(--Ctxt);
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.7rem;
+}
+
+.BotaoInserir{
+    width: 100%;
+    background-color: var(--Cati);
+    color: var(--Cfun);
+    border-radius: 5px;
+    padding: 0.7rem;
 }

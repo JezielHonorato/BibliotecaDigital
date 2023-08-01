@@ -28,10 +28,10 @@
                 <img src="./image/logo.png" alt="Logo">
             </div>
             <ul>
-                <a href="#" class="current">Home</a>
+                <a href="./Index.php" class="current">Home</a>
                 <a href="#">Livros</a>
                 <a href="#">Sobre</a>
-                <a href="#">Favoritos</a>
+                <a href="./salvar.php">Inserir</a>
                 <a href="#">Login</a>
             </ul>
             <div class="Pesquisa">

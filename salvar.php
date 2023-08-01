@@ -58,10 +58,10 @@
                 <img src="./image/logo.png" alt="Logo">
             </div>
             <ul>
-                <a href="#" class="current">Home</a>
+                <a href="./Index.php" class="current">Home</a>
                 <a href="#">Livros</a>
                 <a href="#">Sobre</a>
-                <a href="#">Favoritos</a>
+                <a href="./salvar.php">Inserir</a>
                 <a href="#">Login</a>
             </ul>
             <div class="Pesquisa">
@@ -72,10 +72,10 @@
 
     <form method="post" enctype="multipart/form-data" action="" class="Inserir">
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
-        <label>Título</label>
+        <label class="Label">Título</label>
         <input type="text" class="InserirSelect" id="titulo" name="titulo">
 
-        <label for="autor">Autor:</label>
+        <label class="Label" for="autor">Autor:</label>
         <select class="InserirSelect" id="autor" name="autor">
             <option>Selecione o autor da obra</option>
             <?php while($autor = $sql_query_autor->fetch_assoc()){
@@ -84,7 +84,7 @@
             ?>
         </select>
 
-        <label for="pais">Nacionalidade:</label>
+        <label class="Label" for="pais">Nacionalidade:</label>
         <select class="InserirSelect" id="pais" name="pais">
             <option> Escolha a nacionalidade da obra</option>
             <?php while($pais = $sql_query_pais->fetch_assoc()){
@@ -93,7 +93,7 @@
             ?>
         </select>
 
-        <label for="categoria">Categoria:</label>
+        <label class="Label" for="categoria">Categoria:</label>
         <select class="InserirSelect" id="categoria" name="categoria">
             <option>Escolha o tipo da obra</option>
             <?php while($categoria = $sql_query_categoria->fetch_assoc()){
@@ -102,9 +102,11 @@
             ?>
         </select>
 
-        <label for="">Selecione o arquivo</label>
-            <input class="File" type="file" name="file">
-            <button type="submit" name="submit">Enviar</button>
+        <label for="file" class="Label">Selecione o arquivo:</label>
+        <label for="file" class="File">Selecione o arquivo</label>
+        <input class="Invisivel" type="file" name="file" id="file">
+
+        <button class="BotaoInserir" type="submit" name="submit">Enviar</button>
     </form>
 
     <footer class="Rodape">
