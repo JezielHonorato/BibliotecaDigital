@@ -15,7 +15,7 @@
         var_dump($_FILES['file']);
         $file = $_FILES['file'];
         $pasta = "assets/";
-        $titulo = $file['name'];
+        $titulo = $_POST['name'];
         $extensao = strtolower(pathinfo($titulo, PATHINFO_EXTENSION));
         $titulo = $_POST['titulo'];
         $autor = $_POST['autor'];
@@ -33,7 +33,7 @@
         $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo);
 
         if($finalizado){
-            $mysqli->query("INSERT INTO tblivros (titulo, idautor, idcategoria, idpais, data, PATH) VALUES($titulo, $autor, $pais, $categoria) OR die($mysqli->error");
+            $mysqli->query("INSERT INTO tblivros (titulo, idautor, idcategoria, idpais, data, PATH) VALUES($titulo, $autor, $categoria, $pais,  ) OR die($mysqli->error");
             echo "<p> arquivo enviado com sucesso! Para acessa-lo, clique aqui: <a target='_blank' href='assets/$titulo'> Arquivo </a></p>";
         }
     }
@@ -70,31 +70,46 @@
         </div>
     </header>
 
-    <form method="post" enctype="multipart/form-data" action="" class="Inserir">
+    <form method="post" enctype="multipart/form-data" action="Index.php" class="Inserir">
+
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
-        <label class="Label">Título</label>
-        <input type="text" class="InserirSelect" id="titulo" name="titulo">
+        <div class="TituloData">
+            <div class="AdTitulo">
+                <p><label class="Label">Título:</label></p>
+                <input type="text" id="titulo" name="titulo" class="InserirInput">
+            </div>
+            <div class="AdTitulo">
+                <p><label class="Label" for="data">Ano de Publicação:</label></p>
+                <input type="number" name="data" id="data" class="InserirInput">
+            </div>
+        </div>
 
         <label class="Label" for="autor">Autor:</label>
-        <select class="InserirSelect" id="autor" name="autor">
-            <option>Selecione o autor da obra</option>
-            <?php while($autor = $sql_query_autor->fetch_assoc()){
-                echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
-            }
-            ?>
-        </select>
+        <div class="CampoInserir">
+            <select class="InserirSelect" id="autor" name="autor">
+                <option>Selecione o autor da obra</option>
+                <?php while($autor = $sql_query_autor->fetch_assoc()){
+                    echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
+                }
+                ?>
+            </select>
+            <button class="NovoInserir" onclick="AddAutor()">+</button>
+        </div>
 
         <label class="Label" for="pais">Nacionalidade:</label>
-        <select class="InserirSelect" id="pais" name="pais">
-            <option> Escolha a nacionalidade da obra</option>
-            <?php while($pais = $sql_query_pais->fetch_assoc()){
-                echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
-            }
-            ?>
-        </select>
+        <div class="CampoInserir">
+            <select class="InserirSelect" id="pais" name="pais">
+                <option> Escolha a nacionalidade da obra</option>
+                <?php while($pais = $sql_query_pais->fetch_assoc()){
+                    echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                }
+                ?>
+            </select>
+        <button class="NovoInserir" onclick="AddPais()">+</button>
+        </div>
 
         <label class="Label" for="categoria">Categoria:</label>
-        <select class="InserirSelect" id="categoria" name="categoria">
+        <select class="InserirSelect Preencher" id="categoria" name="categoria">
             <option>Escolha o tipo da obra</option>
             <?php while($categoria = $sql_query_categoria->fetch_assoc()){
                 echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";

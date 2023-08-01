@@ -12,6 +12,9 @@
 ::-webkit-scrollbar{
     display: none;
 }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
 body{
     background-color: var(--Cfun);
 }
@@ -105,12 +108,6 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     cursor: pointer;
 }
 
-.Menor{
-    font-size: 1.4rem;
-}
-.Menor2{
-    font-size: 1rem;
-}
 
 /* Busca Avançada */
 
@@ -254,14 +251,41 @@ input[type=range]::-webkit-slider-thumb {
 .Label{
     margin: 0.5rem;
 }
+.TituloData{
+    display: flex;
+}
+.AdTitulo{
+    width: 100%;
+}
+.InserirInput{
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: var(--Cnav);
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    width: 90%;
+    color: var(--Ctxt);
+}
+
+.CampoInserir{
+    display: flex;
+}
 
 .InserirSelect{
     padding: 0.5rem 1rem;
     background-color: var(--Cnav);
     margin-bottom: 2rem;
     border-radius: 5px;
-    width: 100%;
+    width: 95%;
     color: var(--Ctxt);
+}
+.NovoInserir{
+    padding: 0.5rem 1rem;
+    background-color: var(--Cati);
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    width: 5%;
+    color: var(--Cnav);
 }
 
 .File{
@@ -282,4 +306,25 @@ input[type=range]::-webkit-slider-thumb {
     color: var(--Cfun);
     border-radius: 5px;
     padding: 0.7rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.Menor{
+    font-size: 1.4rem;
+}
+.Menor2{
+    font-size: 1rem;
+}
+.Preencher{
+    width: 100%;
 }
