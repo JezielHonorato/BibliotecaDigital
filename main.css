@@ -109,10 +109,10 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
 }
 
 
-/* Busca Avançada */
+/* Pesquisar */
 
 
-.BuscaAvancada{
+.Busca{
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -137,13 +137,18 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     border-radius: 5px;
     width: 23%;
     padding: 0 1%;
+    height: 2rem;
 }
 .CampoR{
     display: block;
     background-color: transparent;
     border-radius: 5px;
+    position: relative;
 }
-
+.PesquisarLabel{
+    position: absolute;
+    margin-bottom: 4rem;
+}
 .Pesquisar{
     padding: 0.5rem 1rem;
     background-color: var(--Cnav);
@@ -161,12 +166,23 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     width: 100%;
 }
 
-
-.Linha{
-    height: 5px;
-    border-radius: 5px;
-    position: relative;
-    background-color: var(--Cnav);
+.ValorRange{
+    display: flex;
+    justify-content: space-between;
+}
+.RangeValor{
+    display: none;
+    justify-content: right;
+    width: 50%;
+    right: 0;
+}
+.RangeMaiorValor, .RangeMenorValor, .RangeSepararValor{
+    display: flex;
+    justify-content: center;
+    width: 2rem;
+}
+.RangeSepararValor{
+    width: 1rem
 }
 .Progresso{
     height: 5px;

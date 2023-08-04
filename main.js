@@ -21,6 +21,9 @@ function MudarCor(){
 
 
 function MudarPeriodo(){
+    var RangeValor = document.getElementById('range_valor');
+    var RangeMenorValor = document.getElementById('range_menor_valor');
+    var RangeMaiorValor = document.getElementById('range_maior_valor');
     var RangeMenor = parseInt(document.getElementById('range_menor').value);
     var RangeMaior = parseInt(document.getElementById('range_maior').value);
     var Progresso = document.getElementById('progresso');
@@ -34,6 +37,12 @@ function MudarPeriodo(){
     var Pmaior = (RangeMaior/2023)*100
     var Pmenor = (RangeMenor/2023)*100
 
+    RangeValor.style.display = "flex"
     Progresso.style.cssText ="background: linear-gradient(to right, var(--Cnav)" + Pmenor + "% " + Pmenor + "%, var(--Cati) " + Pmenor + "% " + Pmaior + "%, var(--Cnav) " + Pmaior + "%);"
 
+    RangeMenorValor.innerHTML = RangeMenor
+    if(RangeMenor == 0){
+        RangeMenorValor.innerHTML = "A.C"
+    }
+    RangeMaiorValor.innerHTML = RangeMaior
 }

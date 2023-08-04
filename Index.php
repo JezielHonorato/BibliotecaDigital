@@ -15,6 +15,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Biblioteca Digital</title>
+    <link rel="shortcut icon" href="./image/logo.ico" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -40,14 +41,16 @@
         </div>
     </header>
 
-    <div class="BuscaAvancada">
+    <div class="Busca">
         <form action="index.php" merhod="post" class="GrupoCampo">
             <div class="Campo">
+                <label for="pesquisar" class="PesquisarLabel">Pesquisar</label>
                 <label for="pesquisar" class="Lupa Menor">search</label>
                 <input type="text" class="Pesquisar" id="pesquisar" name="pesquisar">
             </div>
 
             <div class="Campo">
+                <label for="categoria" class="PesquisarLabel">Categoria</label>
                 <label class="Expandir">expand_more</label>
                 <select class="Select" id="categoria" name="categoria">
                     <option></option>
@@ -59,6 +62,7 @@
             </div>
 
             <div class="Campo">
+                <label for="nacionalidade" class="PesquisarLabel">Pais</label>
                 <label for="nacionalidade" class="Expandir">expand_more</label>
                 <select class="Select" id="nacionalidade" name="nacionalidade">
                     <option></option>
@@ -70,13 +74,14 @@
             </div>
 
             <div class="Campo CampoR">
-                <div class="Linha">
-                    <div class="Progresso" id="progresso"></div>
-                    <span class="LinhaDupla">
-                        <input type="range" min="0" max="2023" value="1000" id="range_menor" class="Periodo" onchange="MudarPeriodo()">
-                        <input type="range" min="0" max="2023" value="2000" id="range_maior" class="Periodo" onchange="MudarPeriodo()">
-                    </span>
+                <div class="ValorRange">
+                    <a >Periodo:</a> <a class="RangeValor" id="range_valor"> <span id="range_menor_valor" class="RangeMenorValor">0</span> <span class="RangeSepararValor">-</span> <span id="range_maior_valor" class="RangeMaiorValor">0</span></a>
                 </div>
+                <div class="Progresso" id="progresso"></div>
+                <span class="LinhaDupla">
+                    <input type="range" min="0" max="2023" value="1000" id="range_menor" class="Periodo" onchange="MudarPeriodo()">
+                    <input type="range" min="0" max="2023" value="2000" id="range_maior" class="Periodo" onchange="MudarPeriodo()">
+                </span>
             </div>
             <button type="submit" name="submit" value="" class="Invisivel">
         </form>
@@ -91,7 +96,6 @@
             <div class="Opcoes"></div>
         </div>
 
-        
     </div>
 
     
