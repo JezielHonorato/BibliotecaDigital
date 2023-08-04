@@ -12,20 +12,14 @@
     $sql_query_autor = $conexao->query($sql_code_autor) or die($conexao->error);
 
     if(isset($_FILES['file'])){
-        var_dump($_FILES['file']);
-        $file = $_FILES['file'];
         $pasta = "assets/";
-        $titulo = $_POST['name'];
-        $extensao = strtolower(pathinfo($titulo, PATHINFO_EXTENSION));
         $titulo = $_POST['titulo'];
+        $data = $_POST['data'];
         $autor = $_POST['autor'];
         $pais = $_POST['pais'];
         $categoria = $_POST['categoria'];
+        $file = $_FILES['file'];
 
-
-        if($extensao != "pdf"){
-            die("Tipo de arquivo incompativel, utilize somente arquivos.pdf");
-        };
         if($file['error']){
             die("Falha ao enviar o arquivo");
         };
@@ -33,8 +27,9 @@
         $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo);
 
         if($finalizado){
-            $mysqli->query("INSERT INTO tblivros (titulo, idautor, idcategoria, idpais, data, PATH) VALUES($titulo, $autor, $categoria, $pais,  ) OR die($mysqli->error");
-            echo "<p> arquivo enviado com sucesso! Para acessa-lo, clique aqui: <a target='_blank' href='assets/$titulo'> Arquivo </a></p>";
+            global $mysqli_query, $titulo, $data, $autor, $pais, $categoria, $file;
+            $mysqli_query("INSERT INTO tblivro (titulo, publicadodata, idautor, idcategoria, idpais, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, '$file')") OR die($mysqli->error);
+            echo "<p> arquivo enviado com sucesso! Para acessa-lo, clique aqui: <a target='_blank' href='assets/$titulo> Arquivo </a></p>";
         }
     }
 
@@ -70,13 +65,13 @@
         </div>
     </header>
 
-    <form method="post" enctype="multipart/form-data" action="Index.php" class="Inserir">
+    <form method="post" enctype="multipart/form-data" action="salvar.php" class="Inserir">
 
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
         <div class="TituloData">
             <div class="AdTitulo">
                 <p><label class="Label">Título:</label></p>
-                <input type="text" id="titulo" name="titulo" class="InserirInput">
+                <input type="text" id="titulo" name="titulo" required class="InserirInput">
             </div>
             <div class="AdTitulo">
                 <p><label class="Label" for="data">Ano de Publicação:</label></p>
@@ -119,7 +114,8 @@
 
         <label for="file" class="Label">Selecione o arquivo:</label>
         <label for="file" class="File">Selecione o arquivo</label>
-        <input class="Invisivel" type="file" name="file" id="file">
+        <input class="Invisivel" type="file" name="file" id="file" required accept="application/pdf" >
+        
 
         <button class="BotaoInserir" type="submit" name="submit">Enviar</button>
     </form>
