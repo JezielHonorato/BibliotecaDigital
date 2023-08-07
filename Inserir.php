@@ -64,7 +64,7 @@
                 <a href="./Index.php" class="current">Home</a>
                 <a href="#">Livros</a>
                 <a href="#">Sobre</a>
-                <a href="./salvar.php">Inserir</a>
+                <a href="./Inserir.php">Inserir</a>
                 <a href="#">Login</a>
             </ul>
             <div class="Pesquisa">
@@ -73,7 +73,7 @@
         </div>
     </header>
 
-    <form method="post" enctype="multipart/form-data" action="salvar.php" class="Inserir">
+    <form method="post" enctype="multipart/form-data" action="Inserir.php" class="Inserir">
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
         <div class="TituloData">
             <div class="AdTitulo">

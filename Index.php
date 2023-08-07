@@ -32,7 +32,7 @@
                 <a href="./Index.php" class="current">Home</a>
                 <a href="#">Livros</a>
                 <a href="#">Sobre</a>
-                <a href="./salvar.php">Inserir</a>
+                <a href="./Inserir.php">Inserir</a>
                 <a href="#">Login</a>
             </ul>
             <div class="Pesquisa">
