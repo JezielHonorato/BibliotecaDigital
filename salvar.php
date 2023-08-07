@@ -12,25 +12,32 @@
     $sql_query_autor = $conexao->query($sql_code_autor) or die($conexao->error);
 
     if(isset($_FILES['file'])){
+        $file = $_FILES['file'];
         $pasta = "assets/";
         $titulo = $_POST['titulo'];
         $data = $_POST['data'];
         $autor = $_POST['autor'];
         $pais = $_POST['pais'];
         $categoria = $_POST['categoria'];
-        $file = $_FILES['file'];
 
         if($file['error']){
             die("Falha ao enviar o arquivo");
+            die;
         };
 
-        $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo);
+        $consulta = $conexao->query("SELECT * FROM tblivro WHERE titulo = '$titulo' AND idautor = $autor");
+        $linha = $consulta->num_rows;
 
-        if($finalizado){
-            global $mysqli_query, $titulo, $data, $autor, $pais, $categoria, $file;
-            $mysqli_query("INSERT INTO tblivro (titulo, publicadodata, idautor, idcategoria, idpais, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, '$file')") OR die($mysqli->error);
-            echo "<p> arquivo enviado com sucesso! Para acessa-lo, clique aqui: <a target='_blank' href='assets/$titulo> Arquivo </a></p>";
+        if($linha >= 1){
+            echo  "<script>alert('Um livro com um mesmo Título e Autor já existe cadastrado no sistema!');</script>";
+        }else{
+            $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo .'.pdf');
+            if($finalizado){
+            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.png')");
+            echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
+            }
         }
+
     }
 
 ?>
@@ -41,6 +48,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Adcionar</title>
+    <link rel="shortcut icon" href="./image/logo.ico" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -66,7 +74,6 @@
     </header>
 
     <form method="post" enctype="multipart/form-data" action="salvar.php" class="Inserir">
-
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
         <div class="TituloData">
             <div class="AdTitulo">
@@ -81,7 +88,7 @@
 
         <label class="Label" for="autor">Autor:</label>
         <div class="CampoInserir">
-            <select class="InserirSelect" id="autor" name="autor">
+            <select class="InserirSelect" id="autor" name="autor" required>
                 <option>Selecione o autor da obra</option>
                 <?php while($autor = $sql_query_autor->fetch_assoc()){
                     echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
@@ -93,7 +100,7 @@
 
         <label class="Label" for="pais">Nacionalidade:</label>
         <div class="CampoInserir">
-            <select class="InserirSelect" id="pais" name="pais">
+            <select class="InserirSelect" id="pais" name="pais" required>
                 <option> Escolha a nacionalidade da obra</option>
                 <?php while($pais = $sql_query_pais->fetch_assoc()){
                     echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
@@ -104,7 +111,7 @@
         </div>
 
         <label class="Label" for="categoria">Categoria:</label>
-        <select class="InserirSelect Preencher" id="categoria" name="categoria">
+        <select class="InserirSelect Preencher" id="categoria" name="categoria" required>
             <option>Escolha o tipo da obra</option>
             <?php while($categoria = $sql_query_categoria->fetch_assoc()){
                 echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
