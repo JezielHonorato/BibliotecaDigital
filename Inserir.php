@@ -73,7 +73,7 @@
         </div>
     </header>
 
-    <form method="post" enctype="multipart/form-data" action="Inserir.php" class="Inserir">
+    <form method="post" enctype="multipart/form-data" action="Inserir.php" class="Inserir" id="inserir">
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
         <div class="TituloData">
             <div class="AdTitulo">
@@ -123,8 +123,37 @@
         <label for="file" class="File">Selecione o arquivo</label>
         <input class="Invisivel" type="file" name="file" id="file" required accept="application/pdf" >
         
-
         <button class="BotaoInserir" type="submit" name="submit">Enviar</button>
+    </form>
+
+    <form class="AddAutor" id="add_autor">
+        <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span Class="Fechar" onclick="FecharAutor()">close</span></a>
+        <div class="AdTitulo">
+            <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
+            <input type="text" id="novo_autor" name="novo_autor" required class="InserirInput Preencher">
+        </div>
+
+        <label class="Label" for="pais">Nacionalidade:</label>
+        <div class="CampoInserir">
+            <select class="InserirSelect" id="pais" name="pais" required>
+                <option> Escolha a nacionalidade do autor</option>
+                <?php while($pais = $sql_query_pais->fetch_assoc()){
+                    echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                }
+                ?>
+            </select>
+            <button class="NovoInserir" onclick="AddPais()">+</button>
+        </div>
+        <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
+    </form>
+
+    <form class="AddPais" id="add_pais">
+        <a Class="AddAutorTitulo"><h1>Adicionar um novo Pais</h1> <span Class="Fechar" onclick="FecharPais()">close</span></a>
+        <div class="AdTitulo">
+            <p><label class="Label" for="novo_autor">Nome do Pais:</label></p>
+            <input type="text" id="novo_pais" name="novo_pais" required class="InserirInput Preencher">
+        </div>
+        <button class="BotaoInserir" type="submit" name="novo_submit_pais">Enviar</button>
     </form>
 
     <footer class="Rodape">

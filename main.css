@@ -48,7 +48,7 @@ body{
 *{
     font-family: 'Open Sans', sans-serif;
 }
-a, label, option, ::placeholder, th, button{
+a, label, option, ::placeholder, th, button, span{
     font-size: 1rem;
     color: var(--Ctxt);
     text-decoration: none;
@@ -62,7 +62,7 @@ h1{
     color: var(--Ctxt);
     text-decoration: none;
 }
-a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, button:hover{
+a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, button:hover, .Fechar:hover{
     color: var(--Chov);
 }
 
@@ -101,7 +101,7 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     align-items: center;
     cursor: pointer;
 }
-.Lupa, .Expandir, .Ordenar, .Cartaz, .Menu, .Cor{
+.Lupa, .Expandir, .Ordenar, .Cartaz, .Menu, .Cor, .Fechar{
     font-family: 'Material Symbols Outlined';
     color: var(--Ctxt);
     font-size: 1.5rem;
@@ -296,7 +296,7 @@ input[type=range]::-webkit-slider-thumb {
     color: var(--Ctxt);
 }
 .NovoInserir{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     background-color: var(--Cati);
     margin-bottom: 2rem;
     border-radius: 5px;
@@ -324,9 +324,26 @@ input[type=range]::-webkit-slider-thumb {
     padding: 0.7rem;
 }
 
+/* NOVO AUTOR E PAIS */ 
 
-
-
+.AddAutor, .AddPais{
+    display: none;
+    position: absolute;
+    padding: 3rem;
+    width: 50%;
+    top: 20vh;
+    background-color: var(--Cfun);
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5px;
+    box-shadow: 0px 1px 200px 50px #000;
+}
+.AddAutorTitulo{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
 
 

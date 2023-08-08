@@ -95,7 +95,6 @@
             <div class="Data"> <h1>Data</h1> <span class="Ordenar Menor2">swap_vert</span></div>
             <div class="Opcoes"></div>
         </div>
-
     </div>
 
     

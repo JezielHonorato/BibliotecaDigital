@@ -46,3 +46,28 @@ function MudarPeriodo(){
     }
     RangeMaiorValor.innerHTML = RangeMaior
 }
+
+function AddPais(){
+    var NovoPais = document.getElementById('add_pais');
+    var Padrao = document.getElementById('inserir');
+    NovoPais.style.display = "block"
+    Padrao.style.display = "none"
+}
+function AddAutor(){
+    var NovoAutor = document.getElementById('add_autor');
+    var Padrao = document.getElementById('inserir');
+    NovoAutor.style.display = "block"
+    Padrao.style.display = "none"
+}
+function FecharAutor(){
+    var NovoAutor = document.getElementById('add_autor');
+    var Padrao = document.getElementById('inserir');
+    NovoAutor.style.display = "none"
+    Padrao.style.display = "block"
+}
+function FecharPais(){
+    var NovoPais = document.getElementById('add_pais');
+    var Padrao = document.getElementById('inserir');
+    NovoPais.style.display = "none"
+    Padrao.style.display = "block"
+}
