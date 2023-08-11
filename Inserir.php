@@ -1,6 +1,5 @@
 <?php
-    // $texto = mb_strtolower($texto1);
-    //echo ucwords($texto);
+
     include ("conexao.php");
 
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
@@ -16,7 +15,7 @@
     if(isset($_FILES['file'])){
         $file = $_FILES['file'];
         $pasta = "assets/";
-        $titulo = $_POST['titulo'];
+        $titulo = ucwords(mb_strtolower($_POST['titulo']));
         $data = $_POST['data'];
         $autor = $_POST['autor'];
         $pais = $_POST['pais'];
@@ -34,7 +33,7 @@
         }else{
             $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo .'.pdf');
             if($finalizado){
-            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.png')");
+            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.pdf')");
             echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
             }
         }
@@ -42,7 +41,7 @@
     }
 
     if(isset($_POST['novo_submit_autor'])){
-        $novo_autor = $_POST['novo_autor'];
+        $novo_autor = ucwords(mb_strtolower($_POST['novo_autor']));
         $novo_pais = $_POST['novo_pais'];
 
         $consulta2 = $conexao->query("SELECT * FROM tbautor WHERE autor = '$novo_autor'");
@@ -57,7 +56,7 @@
     }
 
     if(isset($_POST['novo_submit_pais'])){
-        $novo_pais2 = $_POST['novo_pais2'];
+        $novo_pais2 = ucwords(mb_strtolower($_POST['novo_pais2']));
 
         $consulta3 = $conexao->query("SELECT * FROM tbpais WHERE pais = '$novo_pais2'");
         $linha3 = $consulta3->num_rows;

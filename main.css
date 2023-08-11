@@ -33,6 +33,9 @@ body{
 .Invisivel{
     display: none
 }
+.Pointer{
+    cursor: pointer;
+}
 .Rede{
     position: absolute;
     z-index: 100;

@@ -1,15 +1,15 @@
 <?php
     include ("conexao.php");
 
+    $blank = "_blank";
+
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
     $sql_query_categoria = $conexao->query($sql_code_categoria) or die($conexao->error);
 
     $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
     $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
 
-    //$sql_code_livro = "SELECT * FROM tblivro ORDER BY titulo ASC";
-    $sql_code_livro = "SELECT l.idlivro, l.titulo, a.autor, l.idautor, l.publicadodata FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
-    //$sql_code_livro = "SELECT * FROM tblivro";
+    $sql_code_livro = "SELECT l.idlivro, l.titulo, a.autor, l.idautor, l.publicadodata, l.arquivo FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
     $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);
 ?>
 
@@ -99,22 +99,15 @@
             <div class="Data"> <h1>Data</h1> <span class="Ordenar Menor2">swap_vert</span></div>
             <div class="Opcoes"></div>
         </div>
-        <div class="Livro">
             <?php while($livro = $sql_query_livro->fetch_assoc()){
-                    /*
-                    echo "<div class='Indice'> <h1>#</h1></div>";
-                    echo "<div class='Titulo'> <h1>Titulo</h1>";
-                    echo "<div class='Autor'> <h1>Autor</h1>";
-                    echo "<div class='Data'> <h1>Data</h1>";
-                    echo "<div class='Opcoes'></div>";
-                    */
+                    echo "<div class='Livro Pointer' onclick=\"window.open('" . $livro['arquivo']. "', '_blank')\">";
                     echo "<div class='Indice'> <a>" . $livro['idlivro'] . "</a></div>";
                     echo "<div class='Titulo'><a>" . $livro['titulo'] . "</a></div>";
                     echo "<div class='Autor'><a>" . $livro['autor'] . "</a></div>";
                     echo "<div class='Data'><a>" . $livro['publicadodata'] . "</a></div>";
+                    echo "</div>";
                 }
             ?>
-        </div>
     </div>
 
     
