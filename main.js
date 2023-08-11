@@ -66,8 +66,15 @@ function FecharAutor(){
     Padrao.style.display = "block"
 }
 function FecharPais(){
+    var NovoAutor = document.getElementById('add_autor');
     var NovoPais = document.getElementById('add_pais');
     var Padrao = document.getElementById('inserir');
-    NovoPais.style.display = "none"
-    Padrao.style.display = "block"
+
+    if(NovoAutor.style.display == "block"){
+        NovoPais.style.display = "none"
+    }
+    else{
+        NovoPais.style.display = "none"
+        Padrao.style.display = "block"
+    }
 }

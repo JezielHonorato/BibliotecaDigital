@@ -1,5 +1,6 @@
 <?php
-
+    // $texto = mb_strtolower($texto1);
+    //echo ucwords($texto);
     include ("conexao.php");
 
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
@@ -7,6 +8,7 @@
 
     $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
     $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
+    $sql_query_pais_2 = $conexao->query($sql_code_pais) or die($conexao->error);
 
     $sql_code_autor = "SELECT * FROM tbautor ORDER BY autor ASC";
     $sql_query_autor = $conexao->query($sql_code_autor) or die($conexao->error);
@@ -22,7 +24,6 @@
 
         if($file['error']){
             die("Falha ao enviar o arquivo");
-            die;
         };
 
         $consulta = $conexao->query("SELECT * FROM tblivro WHERE titulo = '$titulo' AND idautor = $autor");
@@ -40,6 +41,34 @@
 
     }
 
+    if(isset($_POST['novo_submit_autor'])){
+        $novo_autor = $_POST['novo_autor'];
+        $novo_pais = $_POST['novo_pais'];
+
+        $consulta2 = $conexao->query("SELECT * FROM tbautor WHERE autor = '$novo_autor'");
+        $linha2 = $consulta2->num_rows;
+
+        if($linha2 >= 1){
+            echo  "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
+        }else{
+            $conexao->query("INSERT INTO tbautor (autor, idpais) VALUES('$novo_autor', $novo_pais)");
+            echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
+        }
+    }
+
+    if(isset($_POST['novo_submit_pais'])){
+        $novo_pais2 = $_POST['novo_pais2'];
+
+        $consulta3 = $conexao->query("SELECT * FROM tbpais WHERE pais = '$novo_pais2'");
+        $linha3 = $consulta3->num_rows;
+
+        if($linha3 >= 1){
+            echo  "<script>alert('Um Pais com o mesmo nome já existe cadastrado no sistema!');</script>";
+        }else{
+            $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais2')");
+            echo  "<script>alert('Pais cadastrado com sucesso!');</script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +155,7 @@
         <button class="BotaoInserir" type="submit" name="submit">Enviar</button>
     </form>
 
-    <form class="AddAutor" id="add_autor">
+    <form class="AddAutor" id="add_autor" method="post" action="Inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span Class="Fechar" onclick="FecharAutor()">close</span></a>
         <div class="AdTitulo">
             <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
@@ -135,10 +164,10 @@
 
         <label class="Label" for="pais">Nacionalidade:</label>
         <div class="CampoInserir">
-            <select class="InserirSelect" id="pais" name="pais" required>
+            <select class="InserirSelect" id="novo_pais" name="novo_pais" required>
                 <option> Escolha a nacionalidade do autor</option>
-                <?php while($pais = $sql_query_pais->fetch_assoc()){
-                    echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                <?php while($pais_2 = $sql_query_pais_2->fetch_assoc()){
+                    echo "<option value='" . $pais_2['idpais'] . "'>" . $pais_2['pais'] . "</option>";
                 }
                 ?>
             </select>
@@ -147,11 +176,11 @@
         <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
     </form>
 
-    <form class="AddPais" id="add_pais">
+    <form class="AddPais" id="add_pais" method="post" action="Inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Pais</h1> <span Class="Fechar" onclick="FecharPais()">close</span></a>
         <div class="AdTitulo">
-            <p><label class="Label" for="novo_autor">Nome do Pais:</label></p>
-            <input type="text" id="novo_pais" name="novo_pais" required class="InserirInput Preencher">
+            <p><label class="Label" for="novo_pais2r">Nome do Pais:</label></p>
+            <input type="text" id="novo_pais" name="novo_pais2" required class="InserirInput Preencher">
         </div>
         <button class="BotaoInserir" type="submit" name="novo_submit_pais">Enviar</button>
     </form>
