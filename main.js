@@ -78,3 +78,15 @@ function FecharPais(){
         Padrao.style.display = "block"
     }
 }
+
+/*
+Pesquisar.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        Search()
+    };
+})
+*/
+function Search(){
+    var Pesquisar = document.getElementById('pesquisar');
+    window.location = "Livros.php?pesquisar=" + Pesquisar.value;
+}

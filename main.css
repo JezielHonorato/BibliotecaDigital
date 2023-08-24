@@ -104,7 +104,7 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     align-items: center;
     cursor: pointer;
 }
-.Lupa, .Expandir, .Ordenar, .Cartaz, .Menu, .Cor, .Fechar{
+.Lupa, .Expandir, .Ordenar, .Cartaz, .Menu, .Cor, .Fechar, .Filtro{
     font-family: 'Material Symbols Outlined';
     color: var(--Ctxt);
     font-size: 1.5rem;
@@ -125,10 +125,15 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     padding: 20px;
     width: 80%;
 }
+.Busca2{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .GrupoCampo{
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; 
     display: flex;
     width: 100%;
 }
@@ -138,7 +143,7 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     align-items: center;
     background-color: var(--Cnav);
     border-radius: 5px;
-    width: 23%;
+    width: 22%;
     padding: 0 1%;
     height: 2rem;
 }
@@ -214,7 +219,15 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
     -webkit-appearance: none;
 }
-
+.Submit{
+    border-radius: 100%;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--Cati);
+}
+.Submit span{
+    color: var(--Cnav);
+}
 /* Livros */
 
 .Conteudo{

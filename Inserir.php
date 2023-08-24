@@ -90,8 +90,7 @@
             </div>
             <ul>
                 <a href="./Index.php" class="current">Home</a>
-                <a href="#">Livros</a>
-                <a href="#">Sobre</a>
+                <a href="./Livros.php">Livros</a>
                 <a href="./Inserir.php">Inserir</a>
                 <a href="#">Login</a>
             </ul>
