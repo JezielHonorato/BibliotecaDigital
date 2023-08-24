@@ -187,6 +187,8 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
 .RangeMaiorValor, .RangeMenorValor, .RangeSepararValor{
     display: flex;
     justify-content: center;
+    color: var(--Ctxt);
+    background-color: var(--Cnav);
     width: 2rem;
 }
 .RangeSepararValor{

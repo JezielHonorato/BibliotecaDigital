@@ -16,19 +16,49 @@
 
             if(!empty($_GET['nacionalidade'])){
                 $nacionalidadev = $_GET['nacionalidade'];
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev";
+
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.idpais = $nacionalidadev";
+                }
             }
             else{
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav";
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.publicadodata BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idcategoria = $categoriav OR a.autor LIKE '%$pesquisa%' AND l.idcategoria = $categoriav";
+                }
             }
         }
         else{
             if(!empty($_GET['nacionalidade'])){
                 $nacionalidadev = $_GET['nacionalidade'];
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev";
+
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idpais = $nacionalidadev";
+                }
             }
             else{
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' OR a.autor LIKE '%$pesquisa%'";
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' AND l.publicadodata BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.titulo LIKE '%$pesquisa%' OR a.autor LIKE '%$pesquisa%'";
+                }
             }
         }
     }
@@ -38,21 +68,50 @@
 
             if(!empty($_GET['nacionalidade'])){
                 $nacionalidadev = $_GET['nacionalidade'];
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav AND l.idpais = $nacionalidadev";
+
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav AND l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav AND l.idpais = $nacionalidadev";
+                }
             }
             else{
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav";
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idcategoria = $categoriav";
+                }
             }
         }
         else{
             if(!empty($_GET['nacionalidade'])){
                 $nacionalidadev = $_GET['nacionalidade'];
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idpais = $nacionalidadev";
+
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idpais = $nacionalidadev AND l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.idpais = $nacionalidadev";
+                }
             }
             else{
-                $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
+                if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
+                    $range_menor = $_GET['range_menor'];
+                    $range_maior = $_GET['range_maior'];
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor WHERE l.publicadodata BETWEEN $range_menor AND $range_maior";
+                }
+                else{
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
+                }
             }
-
         }
     }
     $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);    
@@ -124,12 +183,12 @@
 
             <div class="Campo CampoR">
                 <div class="ValorRange">
-                    <a >Periodo:</a> <a class="RangeValor" id="range_valor"> <span id="range_menor_valor" class="RangeMenorValor">0</span> <span class="RangeSepararValor">-</span> <span id="range_maior_valor" class="RangeMaiorValor">0</span></a>
+                    <a>Periodo:</a> <a class="RangeValor" id="range_valor"> <input type="number" onchange="MudarPeriodoI()" id="range_menor_valor" class="RangeMenorValor"></input> <span class="RangeSepararValor">-</span> <input type="number" onchange="MudarPeriodoI()"  id="range_maior_valor" class="RangeMaiorValor"></input></a>
                 </div>
                 <div class="Progresso" id="progresso"></div>
                 <span class="LinhaDupla">
-                    <input type="range" min="0" max="2023" value="1000" id="range_menor" class="Periodo" onchange="MudarPeriodo()">
-                    <input type="range" min="0" max="2023" value="2000" id="range_maior" class="Periodo" onchange="MudarPeriodo()">
+                    <input type="range" min="0" max="2023" value="1000" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()">
+                    <input type="range" min="0" max="2023" value="2023" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()">
                 </span>
             </div>
         </div>
