@@ -1,4 +1,5 @@
 <?php
+
     include ("conexao.php");
 
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
@@ -132,23 +133,23 @@
 </head>
 
 <body>
-    <header class="Header">
+<header class="Header">
         <div class="Itens">
             <div class="Logo">
                 <img src="./image/logo.png" alt="Logo">
             </div>
             <ul>
-                <a href="./Index.php" class="current">Home</a>
+                <a href="./Index.php">Home</a>
                 <a href="./Livros.php">Livros</a>
                 <a href="./Inserir.php">Inserir</a>
-                <a href="#">Login</a>
+                <a href="./Login.php">Login</a>
             </ul>
-            <div class="Pesquisa">
-                <span class="Lupa">search</span>
-            </div>
+            <form action="Index.php" method="get" class="Pesquisa">
+                <span onclick="window.location.href='./Livros.php'" class="Lupa">search</span>
+            </form>
         </div>
     </header>
-
+    
     <form action="" method="get" class="Busca">
         <div class="GrupoCampo">
             <div class="Campo">
@@ -194,14 +195,18 @@
         </div>
         <div class="Busca2">
             <div class="Atributos">
-            <span class="Filtro">filter_list</span>
+                <span class="Filtro">filter_list</span>
+                <span id="pesquisa_atributo"></span>
+                <span id="categoria_atributo"></span>
+                <span id="pais_atributo"></span>
+                <span id="periodo_atributo"></span>
             </div>       
             <button type="submit" name="submit" value="" class="Submit"><span class="Lupa Menor">search</span></button>
         </div>
     </form>
 
     <div class="Conteudo">
-        <div class="Livro">
+        <div class="Flex">
             <div class="Indice"> <h1>#</h1></div>
             <div class="Titulo"> <h1>Titulo</h1> <span class="Ordenar Menor2">swap_vert</span></div>
             <div class="Autor"> <h1>Autor</h1> <span class="Ordenar Menor2">swap_vert</span></div>
@@ -209,7 +214,7 @@
             <div class="Opcoes"></div>
         </div>
             <?php while($livro = $sql_query_livro->fetch_assoc()){
-                    echo "<div class='Livro Pointer' onclick=\"window.open('" . $livro['arquivo']. "', '_blank')\">";
+                    echo "<div class='Flex Pointer' onclick=\"window.open('" . $livro['arquivo']. "', '_blank')\">";
                     echo "<div class='Indice'> <a>" . $livro['idlivro'] . "</a></div>";
                     echo "<div class='Titulo'><a>" . $livro['titulo'] . "</a></div>";
                     echo "<div class='Autor'><a>" . $livro['autor'] . "</a></div>";

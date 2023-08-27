@@ -30,9 +30,7 @@ body{
     --Cati: #3DB4F2;
 }
 
-.Invisivel{
-    display: none
-}
+
 .Pointer{
     cursor: pointer;
 }
@@ -111,9 +109,25 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     cursor: pointer;
 }
 
+/* Introdução */
+
+.Introducao{
+    align-items: center;
+    display: flex;
+    margin-top: 20vh;
+}
+
+.Imagem{
+    background-color: var(--Cfun);
+    border-radius: 100%;
+    width: 310px;
+    height: 310px;
+}
+.Texto{
+    width: 65%;
+}
 
 /* Pesquisar */
-
 
 .Busca{
     margin-left: auto;
@@ -188,7 +202,7 @@ a:hover, label:hover, .Lupa:hover, .Ordenar:hover, .Expandir:hover, .th:hover, b
     display: flex;
     justify-content: center;
     color: var(--Ctxt);
-    background-color: var(--Cnav);
+    background-color: transparent;
     width: 2rem;
 }
 .RangeSepararValor{
@@ -228,7 +242,7 @@ input[type=range]::-webkit-slider-thumb {
     background-color: var(--Cati);
 }
 .Submit span{
-    color: var(--Cnav);
+    color: var(--Cfun);
 }
 /* Livros */
 
@@ -238,9 +252,7 @@ input[type=range]::-webkit-slider-thumb {
     margin-right: auto;
     width: 80%;
 }
-.Livro{
-    display: flex;
-}
+
 .Indice, .Titulo, .Autor, .Data, .Mais{
     display: flex;
     justify-content: space-between;
@@ -285,12 +297,6 @@ input[type=range]::-webkit-slider-thumb {
 .Label{
     margin: 0.5rem;
 }
-.TituloData{
-    display: flex;
-}
-.AdTitulo{
-    width: 100%;
-}
 .InserirInput{
     display: block;
     padding: 0.5rem 1rem;
@@ -299,10 +305,6 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 5px;
     width: 90%;
     color: var(--Ctxt);
-}
-
-.CampoInserir{
-    display: flex;
 }
 
 .InserirSelect{
@@ -336,6 +338,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .BotaoInserir{
     width: 100%;
+    margin-bottom: 2rem;
     background-color: var(--Cati);
     color: var(--Cfun);
     border-radius: 5px;
@@ -363,11 +366,21 @@ input[type=range]::-webkit-slider-thumb {
     margin-bottom: 1rem;
 }
 
+/* Login */
 
-
-
-
-
+.Login{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20vh;
+    width: 40%;
+    height: 30vh;
+    padding: 2rem;
+}
+.h1Login{
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
 
 
 .Menor{
@@ -378,4 +391,13 @@ input[type=range]::-webkit-slider-thumb {
 }
 .Preencher{
     width: 100%;
+}
+.Flex{
+    display: flex;
+}
+.Invisivel{
+    display: none
+}
+.Transparente{
+    background-color: transparent;
 }

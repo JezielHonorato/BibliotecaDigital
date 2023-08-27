@@ -1,5 +1,20 @@
 <?php
 
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    
+    if(!isset($_SESSION['usuario'])){
+        echo  "
+        <script>
+            var confirmar = confirm('Apenas Administradores podem cadastrar novos livros no sistema!');
+            if(confirmar == true){
+                window.location.href = 'Login.php'
+            }else{
+                window.location.href = 'Index.php'
+            }
+        </script>";
+    }
     include ("conexao.php");
 
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
@@ -52,6 +67,7 @@
         }else{
             $conexao->query("INSERT INTO tbautor (autor, idpais) VALUES('$novo_autor', $novo_pais)");
             echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
+            header("Refresh: 0");
         }
     }
 
@@ -66,6 +82,7 @@
         }else{
             $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais2')");
             echo  "<script>alert('Pais cadastrado com sucesso!');</script>";
+            header("Refresh: 0");
         }
     }
 ?>
@@ -89,32 +106,32 @@
                 <img src="./image/logo.png" alt="Logo">
             </div>
             <ul>
-                <a href="./Index.php" class="current">Home</a>
+                <a href="./Index.php">Home</a>
                 <a href="./Livros.php">Livros</a>
                 <a href="./Inserir.php">Inserir</a>
-                <a href="#">Login</a>
+                <a href="./Login.php">Login</a>
             </ul>
-            <div class="Pesquisa">
-                <span class="Lupa">search</span>
-            </div>
+            <form action="Index.php" method="get" class="Pesquisa">
+                <span onclick="window.location.href='./Livros.php'" class="Lupa">search</span>
+            </form>
         </div>
     </header>
 
     <form method="post" enctype="multipart/form-data" action="Inserir.php" class="Inserir" id="inserir">
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
-        <div class="TituloData">
-            <div class="AdTitulo">
+        <div class="Flex">
+            <div class="Preencher">
                 <p><label class="Label">Título:</label></p>
                 <input type="text" id="titulo" name="titulo" required class="InserirInput">
             </div>
-            <div class="AdTitulo">
+            <div class="Preencher">
                 <p><label class="Label" for="data">Ano de Publicação:</label></p>
                 <input type="number" name="data" id="data" class="InserirInput">
             </div>
         </div>
 
         <label class="Label" for="autor">Autor:</label>
-        <div class="CampoInserir">
+        <div class="Flex">
             <select class="InserirSelect" id="autor" name="autor" required>
                 <option>Selecione o autor da obra</option>
                 <?php while($autor = $sql_query_autor->fetch_assoc()){
@@ -126,7 +143,7 @@
         </div>
 
         <label class="Label" for="pais">Nacionalidade:</label>
-        <div class="CampoInserir">
+        <div class="Flex">
             <select class="InserirSelect" id="pais" name="pais" required>
                 <option> Escolha a nacionalidade da obra</option>
                 <?php while($pais = $sql_query_pais->fetch_assoc()){
@@ -155,13 +172,13 @@
 
     <form class="AddAutor" id="add_autor" method="post" action="Inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span Class="Fechar" onclick="FecharAutor()">close</span></a>
-        <div class="AdTitulo">
+        <div class="Preencher">
             <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
             <input type="text" id="novo_autor" name="novo_autor" required class="InserirInput Preencher">
         </div>
 
         <label class="Label" for="pais">Nacionalidade:</label>
-        <div class="CampoInserir">
+        <div class="Flex">
             <select class="InserirSelect" id="novo_pais" name="novo_pais" required>
                 <option> Escolha a nacionalidade do autor</option>
                 <?php while($pais_2 = $sql_query_pais_2->fetch_assoc()){
@@ -176,7 +193,7 @@
 
     <form class="AddPais" id="add_pais" method="post" action="Inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Pais</h1> <span Class="Fechar" onclick="FecharPais()">close</span></a>
-        <div class="AdTitulo">
+        <div class="Preencher">
             <p><label class="Label" for="novo_pais2r">Nome do Pais:</label></p>
             <input type="text" id="novo_pais" name="novo_pais2" required class="InserirInput Preencher">
         </div>

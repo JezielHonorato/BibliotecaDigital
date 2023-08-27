@@ -5,8 +5,8 @@ function MudarCor(){
     x = x*a
     if(x>=0){
         document.documentElement.style.setProperty('--Cfun', '#FFFFFF');
-        document.documentElement.style.setProperty('--Cnav', '#2c3e50');
-        document.documentElement.style.setProperty('--Ctxt', '#FFFFFF');
+        document.documentElement.style.setProperty('--Cnav', '#49F265');
+        document.documentElement.style.setProperty('--Ctxt', '#000000');
         document.documentElement.style.setProperty('--Chov', '#9BADBD');
         document.documentElement.style.setProperty('--Cati', '#e74c3c');
     }else{
@@ -101,3 +101,5 @@ function FecharPais(){
         Padrao.style.display = "block"
     }
 }
+
+
