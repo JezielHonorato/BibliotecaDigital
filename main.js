@@ -36,7 +36,7 @@ function MudarPeriodo(){
     var Pmenor = (RangeMenor/2023)*100
 
     RangeValor.style.display = "flex"
-    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cnav)" + Pmenor + "% " + Pmenor + "%, var(--Cati) " + Pmenor + "% " + Pmaior + "%, var(--Cnav) " + Pmaior + "%);"
+    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cheader)" + Pmenor + "% " + Pmenor + "%, var(--Cativo) " + Pmenor + "% " + Pmaior + "%, var(--Cheader) " + Pmaior + "%);"
 
     InputMenor.value = RangeMenor
     InputMaior.value = RangeMaior
@@ -65,7 +65,7 @@ function MudarPeriodoI(){
     RangeMenor.value = InputMenorValor 
     RangeMaior.value = InputMaiorValor
     RangeValor.style.display = "flex"
-    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cnav)" + Pmenor + "% " + Pmenor + "%, var(--Cati) " + Pmenor + "% " + Pmaior + "%, var(--Cnav) " + Pmaior + "%);"
+    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cheader)" + Pmenor + "% " + Pmenor + "%, var(--Cativo) " + Pmenor + "% " + Pmaior + "%, var(--Cheader) " + Pmaior + "%);"
 }
 
 
