@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/08/2023 às 20:28
+-- Tempo de geração: 08/10/2023 às 22:59
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -43,7 +43,8 @@ INSERT INTO `tbautor` (`idautor`, `autor`, `idpais`) VALUES
 (3, '', NULL),
 (4, 'Dante Alighieri', 18),
 (5, 'Lima Barreto', 3),
-(6, 'Aluísio Azevedo', 3);
+(6, 'Aluísio Azevedo', 3),
+(7, 'José De Alencar', 3);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,10 @@ INSERT INTO `tblivro` (`idlivro`, `titulo`, `publicadodata`, `idautor`, `idcateg
 (2, 'Dom Casmurro', 1899, 1, 6, 3, './assets/Dom Casmurro.pdf'),
 (3, 'Helena', 1876, 1, 6, 3, './assets/Helena.pdf'),
 (4, 'Memórias Póstumas De Brás Cubas', 1881, 1, 6, 3, './assets/Memórias Póstumas De Brás Cubas.pdf'),
-(5, 'A Divina Comédia', 1472, 4, 5, 18, './assets/A Divina Comédia.pdf');
+(5, 'A Divina Comédia', 1472, 4, 5, 18, './assets/A Divina Comédia.pdf'),
+(6, 'O Cortiço', 1890, 6, 6, 3, './assets/O Cortiço.pdf'),
+(7, 'A Mortalha De Alzira', 1892, 6, 6, 3, './assets/A Mortalha De Alzira.pdf'),
+(8, 'Iracema', 1892, 7, 6, 3, './assets/Iracema.pdf');
 
 -- --------------------------------------------------------
 
@@ -192,7 +196,7 @@ ALTER TABLE `tbusuarios`
 -- AUTO_INCREMENT de tabela `tbautor`
 --
 ALTER TABLE `tbautor`
-  MODIFY `idautor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idautor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoria`
@@ -204,7 +208,7 @@ ALTER TABLE `tbcategoria`
 -- AUTO_INCREMENT de tabela `tblivro`
 --
 ALTER TABLE `tblivro`
-  MODIFY `idlivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idlivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tbpais`
@@ -226,15 +230,15 @@ ALTER TABLE `tbusuarios`
 -- Restrições para tabelas `tbautor`
 --
 ALTER TABLE `tbautor`
-  ADD CONSTRAINT `idpais` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idPais`);
+  ADD CONSTRAINT `idpais` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idpais`);
 
 --
 -- Restrições para tabelas `tblivro`
 --
 ALTER TABLE `tblivro`
-  ADD CONSTRAINT `tblivro_ibfk_1` FOREIGN KEY (`idautor`) REFERENCES `tbautor` (`idAutor`),
-  ADD CONSTRAINT `tblivro_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `tbcategoria` (`idCategoria`),
-  ADD CONSTRAINT `tblivro_ibfk_3` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idPais`);
+  ADD CONSTRAINT `tblivro_ibfk_1` FOREIGN KEY (`idautor`) REFERENCES `tbautor` (`idautor`),
+  ADD CONSTRAINT `tblivro_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `tbcategoria` (`idcategoria`),
+  ADD CONSTRAINT `tblivro_ibfk_3` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idpais`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

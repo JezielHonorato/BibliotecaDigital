@@ -16,6 +16,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     -webkit-appearance: none;
 }
 body{
+    position: relative;
+    min-height: 100vh;
     background-color: var(--Cfundo);
 }
 
@@ -168,14 +170,10 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     align-items: center;
     justify-content: center;
     margin-top: var(--TMargin);
+    margin-bottom: calc(var(--TMargin) - var(--THeader));
     border-radius: 10px;
     padding: 20px;
     width: 80%;
-}
-.Busca2{
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .GrupoCampo{
@@ -277,18 +275,6 @@ input[type=range]::-webkit-slider-thumb {
     color: var(--Cfundo);
 }
 
-.Atributos{
-    display: flex;
-    align-items: center;
-}
-.Filtro{
-    padding: 0.3rem;
-    background-color: var(--Cativo);
-    margin-left: 0.4rem;
-    border-radius: 10px;
-    color: black;
-}
-
 /* Livros */
 
 .Conteudo{
@@ -327,8 +313,8 @@ input[type=range]::-webkit-slider-thumb {
 
 /* Estilo do rodapé */
 .Rodape{
-    position: fixed;
     display: flex;
+    position: absolute;
     background: var(--Cheader);
     padding: 20px;
     width: 100%;

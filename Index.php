@@ -28,9 +28,10 @@
         </div>
     </div>
     <footer class="Rodape">
-        <a onclick="MudarCor()"><span class="Simbolo"> dialogs </span></a>
+        <a onclick="MudarCor()"><span class="Simbolo">dialogs</span></a>
         <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
-        <a>.</a>
+        <a></a>
+        </ul>
     </footer>
 </body>
 </html>
