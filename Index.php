@@ -14,7 +14,6 @@
 
 <?php include("header.php"); ?>
 
-
     <div class="Conteudo Transparente">
         <div class="Introducao">
             <div class="Imagem">
@@ -27,11 +26,8 @@
             </div>
         </div>
     </div>
-    <footer class="Rodape">
-        <a onclick="MudarCor()"><span class="Simbolo">dialogs</span></a>
-        <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
-        <a></a>
-        </ul>
-    </footer>
+
+    <?php include("footer.php"); ?>
+    
 </body>
 </html>

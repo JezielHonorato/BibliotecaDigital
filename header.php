@@ -21,18 +21,18 @@
 
 <body>
     <header class="Header">
-        <div class="Logo">
-            <img src="./image/logo.png" alt="Logo">
+        <div class="Sombra">
+            <a href="./index.php"><img src="./image/logo.png" alt="Logo"></a>
         </div>
-        <ul class="Itens">
-            <a href="./Index.php">Home</a>
-            <a href="./Livros.php">Livros</a>
+        <div class="Itens">
+            <a href="./index.php">Home</a>
+            <a href="./livros.php">Livros</a>
             <?php if(isset($_SESSION['usuario'])){
-                echo "<a href='./Inserir.php'>Inserir</a>";
+                echo "<a href='./inserir.php'>Inserir</a>";
             }?>
             <a href="./Login.php">Login</a>
-        </ul>
-        <a href="./Livros.php"class="Pesquisa"><span class="Simbolo">search</span></a>
+        </div>
+        <a href="./livros.php"><span class="Simbolo">search</span></a>
     </header>
 </body>
 </html>

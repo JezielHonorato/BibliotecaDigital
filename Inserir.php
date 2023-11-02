@@ -74,72 +74,75 @@
     }
 ?>
 
-<?php include("header.php"); ?>
+<?php include("header.php");?> 
         
 <?php
         if(!isset($_SESSION['usuario'])){
-            echo "<body onclick=\"window.location.href='./Login.php'\"> <div class='Cortina'></div>";
+            echo "<body onclick=\"window.location.href='./login.php'\"> <div class='Cortina'></div>";
             echo  '<div class="Erro"><span class="Simbolo Maior">cancel</span> <span>Você precisa estar logado para acessar está página</span> <span class="Simbolo Maior">cancel</span></div>';
+            $user = 1;
         }
         else{
             echo "<body>";
         }
 ?>
-
-    <form method="post" enctype="multipart/form-data" action="Inserir.php" class="Inserir" id="inserir">
-        <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
-        <div class="Flex">
-            <div class="Preencher">
-                <p><label class="Label">Título:</label></p>
-                <input type="text" id="titulo" name="titulo" required class="InserirInput">
+    <div class="Conteudo">
+        <form method="post" enctype="multipart/form-data" action="inserir.php" id="inserir">
+            <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
+            <div class="NomeData">
+                <div class="Preencher">
+                    <p><label class="Label">Título:</label></p>
+                    <input type="text" id="titulo" name="titulo" required class="InserirInput">
+                </div>
+                <div class="Preencher">
+                    <p><label class="Label" for="data">Ano de Publicação:</label></p>
+                    <input type="number" name="data" id="data" class="InserirInput">
+                </div>
             </div>
-            <div class="Preencher">
-                <p><label class="Label" for="data">Ano de Publicação:</label></p>
-                <input type="number" name="data" id="data" class="InserirInput">
-            </div>
-        </div>
 
-        <label class="Label" for="autor">Autor:</label>
-        <div class="Flex">
-            <select class="InserirSelect" id="autor" name="autor" required>
-                <option>Selecione o autor da obra</option>
-                <?php while($autor = $sql_query_autor->fetch_assoc()){
-                    echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
+            <label class="Label" for="autor">Autor:</label>
+            <div class="Flex">
+                <select class="InserirSelect" id="autor" name="autor" required>
+                    <option>Selecione o autor da obra</option>
+                    <?php while($autor = $sql_query_autor->fetch_assoc()){
+                        echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
+                    }
+                    ?>
+                </select>
+                <button class="NovoInserir" onclick="AddAutor()">+</button>
+            </div>
+
+            <label class="Label" for="pais">Nacionalidade:</label>
+            <div class="Flex">
+                <select class="InserirSelect" id="pais" name="pais" required>
+                    <option> Escolha a nacionalidade da obra</option>
+                    <?php while($pais = $sql_query_pais->fetch_assoc()){
+                        echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                    }
+                    ?>
+                </select>
+            <button class="NovoInserir" onclick="AddPais()">+</button>
+            </div>
+
+            <label class="Label" for="categoria">Categoria:</label>
+            <select class="InserirSelect Preencher" id="categoria" name="categoria" required>
+                <option>Escolha o tipo da obra</option>
+                <?php while($categoria = $sql_query_categoria->fetch_assoc()){
+                    echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
                 }
                 ?>
             </select>
-            <button class="NovoInserir" onclick="AddAutor()">+</button>
-        </div>
 
-        <label class="Label" for="pais">Nacionalidade:</label>
-        <div class="Flex">
-            <select class="InserirSelect" id="pais" name="pais" required>
-                <option> Escolha a nacionalidade da obra</option>
-                <?php while($pais = $sql_query_pais->fetch_assoc()){
-                    echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
-                }
-                ?>
-            </select>
-        <button class="NovoInserir" onclick="AddPais()">+</button>
-        </div>
+            <label for="file" class="Label">Selecione o arquivo:</label>
+            <label for="file" class="File">Selecione o arquivo</label>
+            <input class="Invisivel" type="file" name="file" id="file" required accept="application/pdf" >
 
-        <label class="Label" for="categoria">Categoria:</label>
-        <select class="InserirSelect Preencher" id="categoria" name="categoria" required>
-            <option>Escolha o tipo da obra</option>
-            <?php while($categoria = $sql_query_categoria->fetch_assoc()){
-                echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
-            }
-            ?>
-        </select>
-
-        <label for="file" class="Label">Selecione o arquivo:</label>
-        <label for="file" class="File">Selecione o arquivo</label>
-        <input class="Invisivel" type="file" name="file" id="file" required accept="application/pdf" >
-        
-        <button class="BotaoInserir" type="submit" name="submit">Enviar</button>
-    </form>
-
-    <form class="AddAutor" id="add_autor" method="post" action="Inserir.php">
+            <?php if($user != 1){ 
+                echo "<button class='BotaoInserir' type='submit' name='submit'>Enviar</button>";
+            } ?>
+        </form>
+    </div>
+    <form class="AddAutor" id="add_autor" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span></a>
         <div class="Preencher">
             <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
@@ -160,7 +163,7 @@
         <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
     </form>
 
-    <form class="AddPais" id="add_pais" method="post" action="Inserir.php">
+    <form class="AddPais" id="add_pais" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="FecharPais()">close</span></a>
         <div class="Preencher">
             <p><label class="Label" for="novo_pais2r">Nome do Pais:</label></p>
@@ -169,12 +172,7 @@
         <button class="BotaoInserir" type="submit" name="novo_submit_pais">Enviar</button>
     </form>
 
-    <footer class="Rodape">
-        <a onclick="MudarCor()"><span class="Simbolo">dialogs</span></a>
-        <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
-        <a>.</a>
-    </footer>
+<?php include("footer.php"); ?>
+
 </body>
-
-
 </html>

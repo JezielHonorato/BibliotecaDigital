@@ -1,5 +1,6 @@
 <?php
 include ("conexao.php");
+session_start();
 
 
 if (isset($_GET["pesquisar"])) {
@@ -120,7 +121,7 @@ if (isset($_GET["pesquisar"])) {
     $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);    
 
     while ($livro = $sql_query_livro->fetch_assoc()) {
-        $return = "<div class='Flex Pointer'>";
+        $return = "<div class='Livro'>";
         $return.= "<a class='Indice' href='" . mb_convert_encoding($livro["arquivo"], "UTF-8") . "' download='" . mb_convert_encoding($livro["titulo"], "UTF-8") . "'><span class='Simbolo'>download</span></a>";
 
         $return.= "<div class='Titulo' onclick=\"window.open('" . mb_convert_encoding($livro['arquivo'], "UTF-8") . "', '_blank')\"><a>" . mb_convert_encoding($livro["titulo"], "UTF-8") . "</a></div>";
@@ -129,10 +130,10 @@ if (isset($_GET["pesquisar"])) {
 
         $return.= "<div class='Data' onclick=\"window.open('" . mb_convert_encoding($livro['arquivo'], "UTF-8") . "', '_blank')\"><a>" . mb_convert_encoding($livro["publicadodata"], "UTF-8") . "</a></div>";
 
-
         if(isset($_SESSION['usuario'])){
-            $return.= "<a href='Editar.php?id=" . mb_convert_encoding($livro["idlivro"], "UTF-8") . "' class='Editar'> <span class='Simbolo'>edit</span></a>";
+            $return.= "<div class='Editar'><a href='editar.php?id=" . mb_convert_encoding($livro["idlivro"], "UTF-8") . "'> <span class='Simbolo'>edit</span></a></div>";
         }
+
         echo $return .="</div>";
     }
 }

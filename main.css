@@ -1,6 +1,7 @@
-/* Reset */
-
+/** RESET **/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 *{
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
 	padding: 0;
 	border: 0;
@@ -15,22 +16,23 @@
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
 }
+
 body{
     position: relative;
-    min-height: 100vh;
-    background-color: var(--Cfundo);
+    min-height: calc(100vh - var(--THeader));
+    background-color: var(--CorPrimaria);
 }
 
-/* Roots */
+/** ROOTS **/
 :root{
     /* IF cores #2F9E41; #CD191E; #000000;  */
-    --Cfundo: #0B1622;
-    --Cheader: #151F2E;
-    --Ctexto: #9BADBD;
-    --Chover: #FFFFFF;
-    --Cativo: #3DB4F2;
+    --CorPrimaria: #0B1622;
+    --CorSecundaria: #151F2E;
+    --CorTexto: #9BADBD;
+    --CorHover: #FFFFFF;
+    --CorTerciaria: #3DB4F2;
 
-    --Csuccesso: #10C15C;
+    --Csuccesso: #2f3532;
     --Cerro: #ed1c24;
     --Cinfo: #0b22e2;
 
@@ -38,36 +40,35 @@ body{
     --TMargin: 13vh;
 }
 
-
-/* Texto */
-
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
-*{
-    font-family: 'Open Sans', sans-serif;
-}
 a, label, option, ::placeholder, th, button, span{
     font-size: 1rem;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     text-decoration: none;
 }
+.Sombra:hover{
+    /* Sombra para imagens .png, mas cai bem nos icones do google */
+    -webkit-filter: drop-shadow(0px 0px 20px rgba(0 0 0 / 90%)); 
+    filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
+    cursor: pointer;
+}
+
 select{
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     text-decoration: none;
 }
 h1{
     font-size: 1.1rem;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     text-decoration: none;
 }
 .Simbolo{
     font-family: 'Material Symbols Outlined';
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     font-size: 1.5rem;
     cursor: pointer;
 }
 a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
-    color: var(--Chover);
+    color: var(--CorHover);
 }
 
 /* Barra de navegação */
@@ -99,11 +100,12 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     background-color: var(--Cerro);
 }
 .Erro span{
-    color: var(--Chover);
+    color: var(--CorHover);
 }
 .Infor{
     background-color: var(--Cinfo);
 }
+
 .Cortina{
     position: absolute;
     width: 100%;
@@ -112,39 +114,34 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     backdrop-filter: blur(1px);
     z-index: 2;
 }
+
+
+/** HEADER  / header.php **/
 .Header{
-    background: var(--Cheader);
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     position: fixed;
     top: 0;
     width: 100%;
     height: var(--THeader);
-    align-items: center;
-    justify-content: space-around;
+    background: var(--CorSecundaria);
     box-shadow: 0px 1px 20px 0px #000;
+    align-items: center;
+    justify-items: center;
     z-index: 1;
 }
-.Logo{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+
 .Itens{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.Itens a{
-    white-space: nowrap;
-    margin: 10%;
-}
-.Pesquisa{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    justify-items: center;
+    width: 100%;
 }
 
-/* Introdução */
+
+/** INTRODUÇÃO  / index.php **/
 
 .Introducao{
     align-items: center;
@@ -153,7 +150,7 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
 }
 
 .Imagem{
-    background-color: var(--Cfundo);
+    background-color: var(--CorPrimaria);
     border-radius: 100%;
     width: 310px;
     height: 310px;
@@ -162,35 +159,29 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     width: 65%;
 }
 
-/* Pesquisar */
+/** PESQUISA  / Livros.php **/
 
 .Busca{
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    justify-content: center;
-    margin-top: var(--TMargin);
-    margin-bottom: calc(var(--TMargin) - var(--THeader));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
     border-radius: 10px;
     padding: 20px;
-    width: 80%;
-}
-
-.GrupoCampo{
-    align-items: center;
-    justify-content: space-between; 
-    display: flex;
-    width: 100%;
 }
 
 .Campo{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    height: 4rem;
+}   
+.CampoInput{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    background-color: var(--Cheader);
-    border-radius: 5px;
-    width: 22%;
-    padding: 0 1%;
+    background-color: var(--CorSecundaria);
+    border-radius: 10px;
     height: 2rem;
+    padding: 0 5%;
 }
 .CampoR{
     display: block;
@@ -198,23 +189,19 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     border-radius: 5px;
     position: relative;
 }
-.PesquisarLabel{
-    position: absolute;
-    margin-bottom: 4rem;
-}
+
 .Pesquisar{
-    padding: 0.5rem 1rem;
-    background-color: var(--Cheader);
     width: 100%;
-    color: var(--Ctexto);
+    background-color: var(--CorSecundaria);
+    color: var(--CorTexto);
 }
 .Pesquisar::placeholder{
-    color: var(--Ctexto);
+    color: var(--CorTexto);
 }
 
 .Select{
     padding: 0.5rem 1rem;
-    background-color: var(--Cheader);
+    background-color: var(--CorSecundaria);
     border-radius: 5px;
     width: 100%;
 }
@@ -232,7 +219,7 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
 .RangeMaiorValor, .RangeMenorValor, .RangeSepararValor{
     display: flex;
     justify-content: center;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     background-color: transparent;
     width: 2rem;
 }
@@ -241,16 +228,16 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
 }
 .Progresso{
     height: 5px;
-    width: 100%;
+    width: 90%;
     position: absolute;
     border-radius: 5px;
-    background-color: var(--Cativo);
+    background-color: var(--CorTerciaria);
 }
 
 .LinhaDupla input[type=range]{
     position: absolute;
     height: 5px;
-    width: 100%;
+    width: 90%;
     background: none;
     -webkit-appearance: none;
     pointer-events: none;
@@ -260,7 +247,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 17px;
     width: 17px;
     border-radius: 50%;
-    background: var(--Cativo);
+    background: var(--CorTerciaria);
     pointer-events: auto;
     cursor: pointer;
     -webkit-appearance: none;
@@ -269,67 +256,75 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 100%;
     height: 2rem;
     width: 2rem;
-    background-color: var(--Cativo);
+    background-color: var(--CorTerciaria);
 }
 .Submit span{
-    color: var(--Cfundo);
+    color: var(--CorPrimaria);
 }
 
-/* Livros */
+/** LIVROS  / Livros.php **/
 
 .Conteudo{
-    background-color: var(--Cheader);
+    margin-top: var(--TMargin);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2rem;
     width: 80%;
 }
 
+.Livros{
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    grid-gap: 0.5rem;
+}
+.Livro{
+    display: grid;
+    grid-template-columns: 1fr 8fr 4fr 2fr;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    background-color: var(--CorSecundaria);
+}
+
 .Indice, .Titulo, .Autor, .Data, .Editar{
+    text-wrap: balance;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.8rem;
-    border: 2px solid var(--Cfundo);
+    border-right: 2px solid var(--CorPrimaria);
 }
-.Indice{
-    width: 5%;
+.Indice, .Editar{
+    justify-content: center;
 }
-.Titulo{
-    width: 52%;
-}
-.Autor{
-    width: 32%;;
-}
-.Data{
-    width: 11%;
-}
-.Editar{
-    width: 4%;
-}
+
 
 .Editando{
     display: none;
 }
 
-/* Estilo do rodapé */
+/** RODAPÈ  / footer.php **/
+
 .Rodape{
     display: flex;
     position: absolute;
-    background: var(--Cheader);
+    background: var(--CorSecundaria);
     padding: 20px;
     width: 100%;
+    height: var(--THeader);
     bottom: 0;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
+    text-wrap: balance;
+}
+.RodapeTeste{
+    visibility: hidden;
+    background-color: var(--CorSecundaria);
+    height: var(--THeader);
 }
 
-/* inserir novos livros */
+/** INSERIR  / Inserir.php **/
 
-.Inserir{
-    width: 80%;
-    margin: auto;
-    margin-top: var(--TMargin);
-}
 .Excluir{
     width: 80%;
     margin: auto;
@@ -341,37 +336,41 @@ input[type=range]::-webkit-slider-thumb {
 .InserirInput{
     display: block;
     padding: 0.5rem 1rem;
-    background-color: var(--Cheader);
+    background-color: var(--CorSecundaria);
     margin-bottom: 2rem;
     border-radius: 5px;
     width: 90%;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
 }
 .ExcluirInput{
     display: block;
     padding: 0.5rem 1rem;
-    background-color: var(--Cheader);
+    background-color: var(--CorSecundaria);
     border-radius: 5px;
     width: 100%;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
     text-align: center;
 }
 
 .InserirSelect{
     padding: 0.5rem 1rem;
-    background-color: var(--Cheader);
+    background-color: var(--CorSecundaria);
     margin-bottom: 2rem;
     border-radius: 5px;
     width: 95%;
-    color: var(--Ctexto);
+    color: var(--CorTexto);
 }
 .NovoInserir{
     padding: 0.5rem;
-    background-color: var(--Cativo);
+    background-color: var(--CorTerciaria);
     margin-bottom: 2rem;
     border-radius: 5px;
     width: 5%;
-    color: var(--Cheader);
+    color: var(--CorSecundaria);
+}
+.NomeData{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .File{
@@ -379,8 +378,8 @@ input[type=range]::-webkit-slider-thumb {
     font-size: smaller;
     display: block;
     margin-bottom: 2rem;    
-    background-color: var(--Cheader);
-    color: var(--Ctexto);
+    background-color: var(--CorSecundaria);
+    color: var(--CorTexto);
     border-radius: 5px;
     width: 100%;
     padding: 0.7rem;
@@ -388,13 +387,13 @@ input[type=range]::-webkit-slider-thumb {
 
 .BotaoInserir{
     width: 100%;
-    background-color: var(--Cativo);
-    color: var(--Cfundo);
+    background-color: var(--CorTerciaria);
+    color: var(--CorPrimaria);
     border-radius: 5px;
     padding: 0.7rem;
 }
 
-/* NOVO AUTOR E PAIS */ 
+/** INSERIR AUTORES E PAISES  / inserir.php **/
 
 .AddAutor, .AddPais{
     display: none;
@@ -402,7 +401,7 @@ input[type=range]::-webkit-slider-thumb {
     padding: 3rem;
     width: 50%;
     top: 20vh;
-    background-color: var(--Cfundo);
+    background-color: var(--CorPrimaria);
     margin-left: 25%;
     margin-right: 25%;
     border-radius: 5px;
@@ -415,13 +414,12 @@ input[type=range]::-webkit-slider-thumb {
     margin-bottom: 1rem;
 }
 
-/* Login */
+/** LOGIN  / login.php **/
 
 .Login{
     margin-left: auto;
     margin-right: auto;
     margin-top: var(--TMargin);
-    width: 40%;
     height: 30vh;
     padding: 2rem;
 }
@@ -458,4 +456,35 @@ input[type=range]::-webkit-slider-thumb {
 }
 .Vermelho{
     background-color: var(--Cerro);
+}
+
+
+@media screen and (max-width: 1000px){
+    .Header{
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+    .Livro{
+        display: grid;
+        grid-template-columns: 1fr 12fr 6fr;
+    }
+    .Data{
+        display: none;
+    }
+    .Indice, .Titulo, .Autor, .Data, .Editar{
+        padding: 0.5rem;
+    }
+    .Simbolo{
+        font-size: 1rem;
+    }
+    .NovoInserir{
+        width: 10%;
+    }
+    .NomeData{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+    .InserirInput{
+        width: 100%;
+    }
+
 }

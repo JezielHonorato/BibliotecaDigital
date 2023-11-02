@@ -14,7 +14,7 @@
             $user = $sql_query_usuario->fetch_assoc();
             session_start();
             $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
-            header("Location: Index.php");
+            header("Location: index.php");
         }else{
             echo "Falha ao conectar! Usuario ou senha incorretas.";
     }
@@ -23,23 +23,30 @@
 
 <?php include("header.php"); ?>
 
-    <?php if(isset($_SESSION['usuario'])){  ?>
-        <div class="Login">
-            <button onclick="window.location.href='./Sair.php'" class="BotaoInserir">Sair</button>
-        </div>
-    <?php }else{ ?>
-        <div class="Login">
-            <h1 class="h1Login">Login</h1>
-            <form action="" method="post" class="" id="form">
-                <label for="usuario">Usuario:</label>
-                <input id="usuario" class="InserirInput Preencher" name="usuario" type="text" required>
-                <br>
-                <label for="senha">Senha:</label>
-                <input id="senha" class="InserirInput Preencher" name="senha" type="password" required>
+    <div class="Conteudo">
+        <?php if(isset($_SESSION['usuario'])){  ?>
+            <div class="Login">
+                <button onclick="window.location.href='./sair.php'" class="BotaoInserir">Sair</button>
+            </div>
 
-                <button type="submit" class="BotaoInserir">Login</button>
-            </form>
-        </div>
-    <?php }?>
+        <?php }else{ ?>
+            <div class="Login">
+                <h1 class="h1Login">Login</h1>
+                <form action="" method="post" class="" id="form">
+                    <label for="usuario">Usuario:</label>
+                    <input id="usuario" class="InserirInput Preencher" name="usuario" type="text" required>
+                    <br>
+                    <label for="senha">Senha:</label>
+                    <input id="senha" class="InserirInput Preencher" name="senha" type="password" required>
+
+                    <button type="submit" class="BotaoInserir">Login</button>
+                </form>
+            </div>
+        <?php }?>
+        
+    </div>
+
+<?php include("footer.php"); ?>
+
 </body>
 </html>

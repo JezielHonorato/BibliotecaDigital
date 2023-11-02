@@ -130,25 +130,25 @@ function OrdenarT(){
 }
 
 
-
-x = -1
+var cor = true
 function MudarCor(){
-    a = -1;
-    x = x*a
-    if(x>=0){
+    if (cor) {
         document.documentElement.style.setProperty('--Cfundo', '#FFFFFF');
         document.documentElement.style.setProperty('--Cheader', '#49F265');
         document.documentElement.style.setProperty('--Ctexto', '#000000');
         document.documentElement.style.setProperty('--Chover', '#9BADBD');
         document.documentElement.style.setProperty('--Cativo', '#e74c3c');
-    }else{
+        cor = false;
+    } else {
         document.documentElement.style.setProperty('--Cfundo', '#0B1622');
         document.documentElement.style.setProperty('--Cheader', '#151F2E');
         document.documentElement.style.setProperty('--Ctexto', '#9BADBD');
         document.documentElement.style.setProperty('--Cativo', '#3DB4F2');
         document.documentElement.style.setProperty('--Chover', '#FFFFFF');
+        cor = true;
     }
-}
+};
+
 
 
 

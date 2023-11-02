@@ -198,7 +198,7 @@
                     echo "<div class='Autor' onclick=\"window.open('" . $livro['arquivo']. "', '_blank')\"><a>" . $livro['autor'] . "</a></div>";
                     echo "<div class='Data' onclick=\"window.open('" . $livro['arquivo']. "', '_blank')\"><a>" . $livro['publicadodata'] . "</a></div>";
                     if(isset($_SESSION['usuario'])){
-                        echo "<a href='Editar.php?id=$livro[idlivro]' class='Editar'> <span class='Simbolo'>edit</span></a>";
+                        echo "<a href='editar.php?id=$livro[idlivro]' class='Editar'> <span class='Simbolo'>edit</span></a>";
                     }
                     echo "</div>";
                 }

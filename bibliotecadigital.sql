@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/10/2023 às 22:59
+-- Tempo de geração: 02/11/2023 às 23:11
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -140,15 +140,16 @@ INSERT INTO `tbpais` (`idpais`, `pais`) VALUES
 CREATE TABLE `tbusuarios` (
   `id` int(11) NOT NULL,
   `usuario` varchar(25) NOT NULL,
-  `senha` varchar(25) NOT NULL
+  `senha` varchar(25) NOT NULL,
+  `nivel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tbusuarios`
 --
 
-INSERT INTO `tbusuarios` (`id`, `usuario`, `senha`) VALUES
-(1, 'admin', 'admin');
+INSERT INTO `tbusuarios` (`id`, `usuario`, `senha`, `nivel`) VALUES
+(1, 'admin', 'admin', 2);
 
 --
 -- Índices para tabelas despejadas

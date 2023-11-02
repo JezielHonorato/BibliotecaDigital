@@ -77,7 +77,7 @@
             $file = "assets/$titulo.php";
             unlink($file);
             echo "<script>alert('Livro Excluido com sucesso com sucesso!');</script>";
-            header('Location: Livros.php');
+            header('Location: livros.php');
         }
     }
 ?>
@@ -86,7 +86,7 @@
         
 <?php
         if(!isset($_SESSION['usuario'])){
-            echo "<body onclick=\"window.location.href='./Login.php'\"> <div class='Cortina'></div>";
+            echo "<body onclick=\"window.location.href='./  php'\"> <div class='Cortina'></div>";
             echo  '<div class="Erro"><span class="Simbolo Maior">cancel</span> <span>Você precisa estar logado para acessar está página</span> <span class="Simbolo Maior">cancel</span></div>';
         }
         else{
@@ -160,7 +160,7 @@
         <button class="BotaoInserir Vermelho" type="submit">Excluir</button>
     </form>
 
-    <form class="AddAutor" id="add_autor" method="post" action="Inserir.php">
+    <form class="AddAutor" id="add_autor" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span></a>
         <div class="Preencher">
             <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
@@ -181,7 +181,7 @@
         <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
     </form>
 
-    <form class="AddPais" id="add_pais" method="post" action="Inserir.php">
+    <form class="AddPais" id="add_pais" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="FecharPais()">close</span></a>
         <div class="Preencher">
             <p><label class="Label" for="novo_pais2r">Nome do Pais:</label></p>
