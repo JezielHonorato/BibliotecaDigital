@@ -129,7 +129,7 @@ function OrdenarT(){
 
 }
 
-
+/*
 var cor = true
 function MudarCor(){
     if (cor) {
@@ -148,7 +148,7 @@ function MudarCor(){
         cor = true;
     }
 };
-
+*/
 
 
 
@@ -173,7 +173,7 @@ function MudarPeriodo(){
     var Pmenor = (RangeMenor/2023)*100
 
     RangeValor.style.display = "flex"
-    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cheader)" + Pmenor + "% " + Pmenor + "%, var(--Cativo) " + Pmenor + "% " + Pmaior + "%, var(--Cheader) " + Pmaior + "%);"
+    Progresso.style.cssText ="background: linear-gradient(to right, var(--CorSecundaria)" + Pmenor + "% " + Pmenor + "%, var(--CorTerciaria) " + Pmenor + "% " + Pmaior + "%, var(--CorSecundaria) " + Pmaior + "%);"
 
     InputMenor.value = RangeMenor
     InputMaior.value = RangeMaior
