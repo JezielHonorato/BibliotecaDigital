@@ -40,7 +40,7 @@ body{
     --TMargin: 13vh;
 }
 
-a, label, option, ::placeholder, th, button, span{
+a, label, option, ::placeholder, th, button, span, p{
     font-size: 1rem;
     color: var(--CorTexto);
     text-decoration: none;
@@ -143,20 +143,21 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
 
 /** INTRODUÇÃO  / index.php **/
 
-.Introducao{
-    align-items: center;
-    display: flex;
-    margin-top: var(--TMargin);
+.Temas{
+    height: 30vh;
 }
 
-.Imagem{
-    background-color: var(--CorPrimaria);
-    border-radius: 100%;
-    width: 310px;
-    height: 310px;
+.Introducao{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-indent: 1rem;
+    text-align: justify;
+    justify-items: center;
+    align-items: center;
 }
-.Texto{
-    width: 65%;
+.Introducao img{
+    width: auto;
+    height: 100%;
 }
 
 /** PESQUISA  / Livros.php **/
@@ -326,8 +327,6 @@ input[type=range]::-webkit-slider-thumb {
 /** INSERIR  / Inserir.php **/
 
 .Excluir{
-    width: 80%;
-    margin: auto;
     margin-top: 2rem;
 }
 .Label{
@@ -343,7 +342,6 @@ input[type=range]::-webkit-slider-thumb {
     color: var(--CorTexto);
 }
 .ExcluirInput{
-    display: block;
     padding: 0.5rem 1rem;
     background-color: var(--CorSecundaria);
     border-radius: 5px;
@@ -388,6 +386,13 @@ input[type=range]::-webkit-slider-thumb {
 .BotaoInserir{
     width: 100%;
     background-color: var(--CorTerciaria);
+    color: var(--CorPrimaria);
+    border-radius: 5px;
+    padding: 0.7rem;
+}
+.BotaoExcluir{
+    width: 100%;
+    background-color: var(--Cerro);
     color: var(--CorPrimaria);
     border-radius: 5px;
     padding: 0.7rem;
@@ -448,18 +453,18 @@ input[type=range]::-webkit-slider-thumb {
 .Invisivel{
     display: none
 }
-.Transparente{
-    background-color: transparent;
-}
 .Pointer{
     cursor: pointer;
 }
-.Vermelho{
-    background-color: var(--Cerro);
-}
-
 
 @media screen and (max-width: 1000px){
+    .Introducao{
+        display: grid;
+        grid-template-columns: 1fr;
+        height: 70vh;
+        grid-template-rows: 30% 1fr;
+        align-items: start;
+    }
     .Header{
         grid-template-columns: 1fr 3fr 1fr;
     }
@@ -486,5 +491,14 @@ input[type=range]::-webkit-slider-thumb {
     .InserirInput{
         width: 100%;
     }
-
+    .ExcluirInput{
+        height: 4.5rem;
+    }
+    .ExcluirInput::placeholder{
+        position: absolute;
+        top: 5px; 
+        left: 0;
+        text-wrap: balance;
+    }
+    
 }

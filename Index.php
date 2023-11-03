@@ -14,16 +14,18 @@
 
 <?php include("header.php"); ?>
 
-    <div class="Conteudo Transparente">
+    <div class="Conteudo">
+
         <div class="Introducao">
-            <div class="Imagem">
-                <img src="./image/logoM.png" alt="Logo">
-            </div>
+            <img src="./image/logoM.png" alt="Logo">
             <div class="Texto">
                 <h1>Bem-Vindo à Biblioteca Digital: Acesse Livros em Domínio Público de Forma simples e legal!</h1>
                 <br>
-                <a>Seja muito bem-vindo ao à bibliteca digital, um espaço dedicado à leitura, aqui você pode ler e baixar diversos livros em Domínio Público de forma legal. Este site foi criado com muita dedicação, ele representa um portal para o conhecimento e o prazer da leitura, sem infringir direitos autorais, espero que aproveitem.</a>
+                <p>Seja muito bem-vindo ao à bibliteca digital, um espaço dedicado à leitura, aqui você pode ler e baixar diversos livros em Domínio Público de forma legal. Este site foi criado com muita dedicação, ele representa um portal para o conhecimento e o prazer da leitura, sem infringir direitos autorais, espero que aproveitem.</p>
             </div>
+        </div>
+        <div class="Temas">
+            
         </div>
     </div>
 

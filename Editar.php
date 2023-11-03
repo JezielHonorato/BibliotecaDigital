@@ -94,9 +94,10 @@
         }
 ?>
 
-<form method="post" enctype="" action="" class="Inserir" id="inserir">
+<div class="Conteudo">
+    <form method="post" enctype="" action="" id="inserir">
         <h1>Preencha os campos abaixo para adicionar novas obras ao catálogo<br><br></h1>
-        <div class="Flex">
+        <div class="NomeData">
             <div class="Preencher">
                 <p><label class="Label">Título:</label></p>
                 <input type="text" id="titulo" name="titulo" required class="InserirInput" <?php echo "value='$editar[titulo]'" ?>>
@@ -157,8 +158,9 @@
 
     <form action="" method="post" class="Excluir">
         <?php echo "<input type='text' autocomplete='off' placeholder='Digite \"$excluir\" para confirmar a exclusão desta obra' name='excluir' class='ExcluirInput'>" ?>
-        <button class="BotaoInserir Vermelho" type="submit">Excluir</button>
-    </form>
+        <button class="BotaoExcluir" type="submit">Excluir</button>
+    </form> 
+</div>
 
     <form class="AddAutor" id="add_autor" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span></a>
