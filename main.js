@@ -273,3 +273,18 @@ function ApagarUsuario(){
     Lista.style.display = "none"
     CriarApagar.style.display = "none"
 }
+
+
+function MostrarSenha(x){
+    InputSenha = document.getElementById('input_senha_' + x)
+    Span = document.getElementById('span_' + x)
+
+    if(Span.innerHTML == 'visibility_off'){
+        InputSenha.type = 'text'
+        Span.innerHTML = 'visibility'
+    }
+    else{
+        Span.innerHTML = 'visibility_off'
+        InputSenha.type = 'password'
+    }
+}

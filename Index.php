@@ -17,7 +17,7 @@
     <div class="Conteudo">
 
         <div class="Introducao">
-            <img src="./image/logoM.png" alt="Logo">
+            <img src="./image/logo.png" alt="Logo">
             <div class="Texto">
                 <h1>Bem-Vindo à Biblioteca Digital: Acesse Livros em Domínio Público de Forma simples e legal!</h1>
                 <br>

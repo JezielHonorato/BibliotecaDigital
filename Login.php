@@ -2,6 +2,8 @@
     session_start();
     include ("conexao.php");
 
+    $user_atual =  $_SESSION['usuario'][0];
+
     if(isset($_POST['usuario']) || isset($_POST['senha'])){
         $usuario = $conexao->real_escape_string($_POST['usuario']);
         $senha = $conexao->real_escape_string($_POST['senha']);
@@ -42,15 +44,37 @@
     if(isset($_POST['user_name_excluir'])){
         $excluir_senha = $_POST['user_senha_excluir'];
         $excluir_user = $_POST['user_name_excluir']; 
-        $excluir_user_admin =  $_SESSION['usuario'][0];
 
-        $sql_code_confirm = "SELECT * FROM tbusuarios WHERE usuario = '$excluir_user_admin' AND senha = '$excluir_senha'";
+        $sql_code_confirm = "SELECT * FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$excluir_senha'";
         $sql_query_confirm = $conexao->query($sql_code_confirm) or die("ERRO:" . $conexao->error);
 
         $confirmado = $sql_query_confirm->num_rows;
         if($confirmado == 1){
             $conexao->query("DELETE FROM tbusuarios WHERE usuario = '$excluir_user'");
             header("Refresh: 0");
+        }else{
+            echo "<script>alert('Senha incorreta.');</script>";
+        }
+    }
+    
+    if(isset($_POST['trocar_senha'])){
+        $senha_antiga = $_POST['senha_antiga'];
+        $nova_senha = $_POST['nova_senha']; 
+        $nova_senha_nova = $_POST['nova_senha_nova']; 
+
+        $sql_code_confirm_denovo = "SELECT * FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$senha_antiga'";
+        $sql_query_confirm_denovo = $conexao->query($sql_code_confirm_denovo) or die("ERRO:" . $conexao->error);
+
+        $confirmado = $sql_query_confirm_denovo->num_rows;
+        if($confirmado == 1){
+            if($nova_senha == $nova_senha_nova){
+                $conexao->query("UPDATE tbusuarios SET senha = '$nova_senha' WHERE usuario = '$user_atual';");
+                echo  "<script>alert('Senha alterada com sucesso!');</script>";
+            }
+            else{
+                echo "<script>alert('As senhas não batem.');</script>";
+
+            }
         }else{
             echo "<script>alert('Senha incorreta.');</script>";
         }
@@ -75,8 +99,11 @@
 
                 <form action="login.php" method="post" class="Invisivel" id="apagar_usuario">
                     <div class="CriarApagar">
-                        <input type='text' autocomplete='off' required placeholder='Digite o nome do usuário que deseja excluir' name='user_name_excluir' class="UsuarioNome">
-                        <input type='password' required placeholder='Digite a sua senha' name='user_senha_excluir' class="UsuarioNivel">
+                        <input type='text' autocomplete='off' required placeholder='Digite o nome do usuário' name='user_name_excluir' class="UsuarioNome">
+                        <div class="InputSenha">
+                            <input type="password" name="user_senha_excluir" id="input_senha_5" placeholder="Digite a sua senha">
+                            <span class="Simbolo" id="span_5" onclick="MostrarSenha(5)">visibility_off</span>
+                        </div>
                     </div>
                     <button class="ApagarUser" type="submit">Excluir</button>
                 </form> 
@@ -106,10 +133,27 @@
 
             <?php } ?>
 
+            <form action="Login.php" method="post" class="TrocarSenha">
+                <h1 class="h1Login">Alterar a senha</h1>
+                <div class="InputSenha">
+                    <input type="password" name="senha_antiga" id="input_senha_1" placeholder="Digite a sua senha atual">
+                    <span class="Simbolo" id="span_1" onclick="MostrarSenha(1)">visibility_off</span>
+                </div>
+                <div class="InputSenha">
+                    <input type="password" name="nova_senha" id="input_senha_2" placeholder="Digite a nova senha">
+                    <span class="Simbolo" id="span_2" onclick="MostrarSenha(2)">visibility_off</span>
+                </div>
+                <div class="InputSenha">
+                    <input type="password" name="nova_senha_nova" id="input_senha_3" placeholder="Confirme a senha">
+                    <span class="Simbolo" id="span_3" onclick="MostrarSenha(3)">visibility_off</span>
+                </div>
+                <button class="CriarUser" type="submit" name="trocar_senha">Alterar a senha</button>
+            </form>
+
             <div class="Login">
                 <button onclick="window.location.href='./sair.php'" class="BotaoInserir">Sair</button>
             </div>
-
+            
         <?php }else{ ?>
             <div class="Login">
                 <h1 class="h1Login">Login</h1>
@@ -118,8 +162,10 @@
                     <input id="usuario" class="InserirInput Preencher" name="usuario" type="text" required>
                     <br>
                     <label for="senha">Senha:</label>
-                    <input id="senha" class="InserirInput Preencher" name="senha" type="password" required>
-
+                    <div class="InputSenha">
+                        <input type="password" name="senha" id="input_senha_4">
+                        <span class="Simbolo" id="span_4" onclick="MostrarSenha(4)">visibility_off</span>
+                    </div>
                     <button type="submit" class="BotaoInserir">Login</button>
                 </form>
             </div>
