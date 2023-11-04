@@ -2,8 +2,6 @@
     session_start();
     include ("conexao.php");
 
-
-
     $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
     $sql_query_categoria = $conexao->query($sql_code_categoria) or die($conexao->error);
 
@@ -22,6 +20,7 @@
         $autor = $_POST['autor'];
         $pais = $_POST['pais'];
         $categoria = $_POST['categoria'];
+        $usuario = $_SESSION['usuario'][0];
 
         if($file['error']){
             die("Falha ao enviar o arquivo");
@@ -35,7 +34,7 @@
         }else{
             $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo .'.pdf');
             if($finalizado){
-            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.pdf')");
+            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.pdf', '$usuario');");
             echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
             }
         }
