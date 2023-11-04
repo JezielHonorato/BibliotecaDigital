@@ -72,6 +72,7 @@
             }
         }
         $excluir = "EXCLUIR $editar[titulo]";
+        
         if(isset($_POST['excluir']) && $_POST['excluir'] == $excluir){
             $conexao->query("DELETE FROM tblivro WHERE idlivro = $id");
             $file = "assets/$titulo.php";

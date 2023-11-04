@@ -273,7 +273,7 @@ input[type=range]::-webkit-slider-thumb {
     width: 80%;
 }
 
-.Livros{
+.Lista{
     display: grid;
     grid-template-rows: auto;
     grid-auto-rows: auto;
@@ -449,7 +449,38 @@ input[type=range]::-webkit-slider-thumb {
     display: flex;
     justify-content: center;
 }
-
+.Usuario{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    background-color: var(--CorSecundaria);
+}
+.UsuarioNome, .UsuarioNivel{
+    border-right: 2px solid var(--CorPrimaria);
+    padding: 0.5rem;
+}
+.CriarApagar{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    background-color: var(--CorSecundaria);
+    margin-top: 0.5rem;
+}
+.CriarApagar input{
+    background-color: var(--CorSecundaria);
+    color: var(--CorTexto);
+}
+.CriarUser, .ApagarUser{
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--CorSecundaria);
+    padding: 0.5rem;
+    width: 100%;
+}
+.CriarUser{
+    background-color: var(--CorTerciaria);
+}
+.ApagarUser{
+    background-color: var(--Cerro);
+}
 
 @media screen and (max-width: 1000px){
     .Introducao{
@@ -478,7 +509,7 @@ input[type=range]::-webkit-slider-thumb {
     .NovoInserir{
         width: 10%;
     }
-    .NomeData{
+    .NomeData, .CriarApagar{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
     }

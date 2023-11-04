@@ -91,7 +91,7 @@
             <div class="NomeData">
                 <div class="Preencher">
                     <p><label class="Label">Título:</label></p>
-                    <input type="text" id="titulo" name="titulo" required class="InserirInput">
+                    <input type="text" id="titulo" name="titulo" required class="InserirInput" autocomplete="off">
                 </div>
                 <div class="Preencher">
                     <p><label class="Label" for="data">Ano de Publicação:</label></p>
@@ -120,7 +120,7 @@
                     }
                     ?>
                 </select>
-            <button class="NovoInserir" onclick="AddPais()">+</button>
+                <button class="NovoInserir" onclick="AddPais()">+</button>
             </div>
 
             <label class="Label" for="categoria">Categoria:</label>
@@ -141,6 +141,7 @@
             } ?>
         </form>
     </div>
+    
     <form class="AddAutor" id="add_autor" method="post" action="inserir.php">
         <a Class="AddAutorTitulo"><h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span></a>
         <div class="Preencher">

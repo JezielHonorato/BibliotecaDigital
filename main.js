@@ -104,6 +104,7 @@ function OrdenarT(){
         Ordem = 3;
     }
     PesquisarLivro();
+
 }function OrdenarD(){
     var OrdenarTitulo = document.getElementById("ordenar_titulo");
     var OrdenarAutor = document.getElementById("ordenar_autor");
@@ -205,6 +206,7 @@ function MudarPeriodo(){
 }
 
 
+
 function AddPais(){
     var NovoPais = document.getElementById('add_pais');
     var Padrao = document.getElementById('inserir');
@@ -234,6 +236,7 @@ function AddPais(){
     }
 }
 
+
 function Editar(){
     var NovoAutor = document.getElementById('add_autor');
     var NovoPais = document.getElementById('add_pais');
@@ -246,4 +249,27 @@ function Editar(){
         NovoPais.style.display = "none"
         Padrao.style.display = "block"
     }
+}
+
+function CriarUsuario(){
+    var Usuario = document.getElementById('usuario');
+    var CriarUsuario = document.getElementById('criar_usuario');
+    var Lista = document.getElementById('lista');
+    var CriarApagar = document.getElementById('criar_apagar');
+
+    Usuario.innerHTML = "Criar um novo Usuario"
+    CriarUsuario.style.display = "grid"
+    Lista.style.display = "none"
+    CriarApagar.style.display = "none"
+}
+function ApagarUsuario(){
+    var Usuario = document.getElementById('usuario');
+    var ApagarUsuario = document.getElementById('apagar_usuario');
+    var Lista = document.getElementById('lista');
+    var CriarApagar = document.getElementById('criar_apagar');
+
+    Usuario.innerHTML = "Apagar um Usuario"
+    ApagarUsuario.style.display = "grid"
+    Lista.style.display = "none"
+    CriarApagar.style.display = "none"
 }

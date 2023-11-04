@@ -63,7 +63,7 @@
     </div>
 
     
-    <div class="Livros">
+    <div class="Lista">
         <div class="Livro" >
             <div class="Indice"> <h1><span class="Simbolo"> download</span></h1></div>
             <div class="Titulo"> <h1>Titulo</h1> <span onclick="OrdenarT()" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span></div>
@@ -73,7 +73,7 @@
                 <div class="Editar"> <span class='Simbolo'>edit</span></div>
             <?php } ?>
         </div>
-        <div class="Livros" id='resultado' onload="PesquisarLivro()"></div>
+        <div class="Lista" id='resultado' onload="PesquisarLivro()"></div>
     </div>
 
 </div>
