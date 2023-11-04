@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <div id="inicio"></div>
     <header class="Header">
         <div class="Sombra">
             <a href="./index.php"><img src="./image/logo.png" alt="Logo"></a>

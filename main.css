@@ -305,9 +305,25 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /** RODAPÈ  / footer.php **/
-
-.Rodape{
+.Retornar{
     display: flex;
+    background-color: var(--CorTerciaria);
+    border-radius: 100%;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+    animation: appear 1ms ease-in-out;
+    animation-timeline: view();
+}
+
+.Retornar span{
+    color: var(--CorSecundaria);
+}
+.Rodape{
     position: absolute;
     background: var(--CorSecundaria);
     padding: 20px;
@@ -435,28 +451,6 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 
-.Maior{
-    font-size: 2rem;
-}
-.Menor{
-    font-size: 1.4rem;
-}
-.Menor2{
-    font-size: 1rem;
-}
-.Preencher{
-    width: 100%;
-}
-.Flex{
-    display: flex;
-}
-.Invisivel{
-    display: none
-}
-.Pointer{
-    cursor: pointer;
-}
-
 @media screen and (max-width: 1000px){
     .Introducao{
         display: grid;
@@ -501,4 +495,38 @@ input[type=range]::-webkit-slider-thumb {
         text-wrap: balance;
     }
     
+}
+
+.Maior{
+    font-size: 2rem;
+}
+.Menor{
+    font-size: 1.4rem;
+}
+.Menor2{
+    font-size: 1rem;
+}
+.Preencher{
+    width: 100%;
+}
+.Flex{
+    display: flex;
+}
+.Invisivel{
+    display: none
+}
+.Pointer{
+    cursor: pointer;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        translate: 10vw 0;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
 }
