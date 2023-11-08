@@ -221,7 +221,7 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     width: 50%;
     right: 0;
 }
-.RangeMaiorValor, .RangeMenorValor, .RangeSepararValor{
+.InputMaiorValor, .InputMenorValor, .RangeSepararValor{
     text-indent: 0px;
     display: flex;
     align-content: center;

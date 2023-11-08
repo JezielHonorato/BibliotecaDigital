@@ -51,9 +51,9 @@
         <div class="Campo">
             <div class="ValorRange">
                 <a>Periodo:</a> <a class="RangeValor" id="range_valor">
-                    <input type="number" onchange="MudarPeriodoI()" id="range_menor_valor" class="RangeMenorValor"></input>
+                    <input type="number" onchange="MudarPeriodoI(), MudarPeriodo(), PesquisarLivro()" id="input_menor_valor" class="InputMenorValor"></input>
                     <span class="RangeSepararValor">-</span>
-                    <input type="number" onchange="MudarPeriodoI()" id="range_maior_valor" class="RangeMaiorValor"></input>
+                    <input type="number" onchange="MudarPeriodoI(), MudarPeriodo(), PesquisarLivro()" id="input_maior_valor" class="InputMaiorValor"></input>
                 </a>
             </div>
             <div class="CampoInput CampoR">

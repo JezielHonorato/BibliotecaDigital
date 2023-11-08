@@ -30,8 +30,8 @@ function PesquisarLivro(){
     var Pesquisar = document.getElementById("pesquisar").value;
     var Categoria = document.getElementById("categoria").value;
     var Nacionalidade = document.getElementById("nacionalidade").value;
-    var RangeMenor = document.getElementById("range_menor").value;
-    var RangeMaior = document.getElementById("range_maior").value;
+    var RangeMenor = document.getElementById("range_menor_valor").value;
+    var RangeMaior = document.getElementById("range_maior_valor").value;
 
     var result = document.getElementById("resultado");
     var xmlreq = CriaRequest();
@@ -159,8 +159,10 @@ function MudarCor(){
 
 function MudarPeriodo(){
     var RangeValor = document.getElementById('range_valor');
-    var InputMenor = document.getElementById('input_menor_valor');
-    var InputMaior = document.getElementById('input_maior_valor');
+    var InputMenorValor = document.getElementById('input_menor_valor').value;
+    var InputMaiorValor = document.getElementById('input_maior_valor').value;
+    var ValorMaximo = document.getElementById('valor_maximo').value;
+    var ValorMinimo = document.getElementById('valor_minimo').value;
     var RangeMenor = parseInt(document.getElementById('range_menor').value);
     var RangeMaior = parseInt(document.getElementById('range_maior').value);
     var Progresso = document.getElementById('progresso');
@@ -170,23 +172,27 @@ function MudarPeriodo(){
         RangeMenor = RangeMaior
         RangeMaior = RangeExtra
     }
-    var Pmaior = (RangeMaior/2023)*100
-    var Pmenor = (RangeMenor/2023)*100
 
+    var Total = ValorMaximo - ValorMinimo;
+    var Tmenor = ValorMinimo - RangeMenor;
+    var Tmaior = ValorMaximo - RangeMaior;
+    
+    var Pmaior = (Tmenor/Total)*100
+    var Pmenor = (Tmaior/Total)*100
+
+    RangeMenor = InputMenorValor 
+    RangeMaior = InputMaiorValor
     RangeValor.style.display = "flex"
-    Progresso.style.cssText ="background: linear-gradient(to right, var(--CorSecundaria)" + Pmenor + "% " + Pmenor + "%, var(--CorTerciaria) " + Pmenor + "% " + Pmaior + "%, var(--CorSecundaria) " + Pmaior + "%);"
-
-    InputMenor.value = RangeMenor
-    InputMaior.value = RangeMaior
+    Progresso.style.cssText ="background: linear-gradient(to right, var(--Cheader)" + Pmenor + "% " + Pmenor + "%, var(--Cativo) " + Pmenor + "% " + Pmaior + "%, var(--Cheader) " + Pmaior + "%);"
     
 }function MudarPeriodoI(){
     var RangeValor = document.getElementById('range_valor');
     var InputMenorValor = document.getElementById('input_menor_valor').value;
     var InputMaiorValor = document.getElementById('input_maior_valor').value;
-    var RangeMenor = document.getElementById('range_menor');
-    var RangeMaior = document.getElementById('range_maior');
-    var RangeMenorV = parseInt(document.getElementById('range_menor').value);
-    var RangeMaiorV = parseInt(document.getElementById('range_maior').value);
+    var ValorMaximo = document.getElementById('valor_maximo').value;
+    var ValorMinimo = document.getElementById('valor_minimo').value;
+    var RangeMenor = parseInt(document.getElementById('range_menor').value);
+    var RangeMaior = parseInt(document.getElementById('range_maior').value);
     var Progresso = document.getElementById('progresso');
 
     if(RangeMenor > RangeMaior){
@@ -194,14 +200,16 @@ function MudarPeriodo(){
         RangeMenor = RangeMaior
         RangeMaior = RangeExtra
     }
-    RangeMenorV = InputMenorValor 
-    RangeMaiorV = InputMaiorValor
 
-    var Pmaior = (RangeMaiorV/2023)*100
-    var Pmenor = (RangeMenorV/2023)*100
+    var Total = ValorMaximo - ValorMinimo;
+    var Tmenor = ValorMinimo - RangeMenor;
+    var Tmaior = ValorMaximo - RangeMaior;
+    
+    var Pmaior = (Tmenor/Total)*100
+    var Pmenor = (Tmaior/Total)*100
 
-    RangeMenor.value = InputMenorValor 
-    RangeMaior.value = InputMaiorValor
+    RangeMenor = InputMenorValor 
+    RangeMaior = InputMaiorValor
     RangeValor.style.display = "flex"
     Progresso.style.cssText ="background: linear-gradient(to right, var(--Cheader)" + Pmenor + "% " + Pmenor + "%, var(--Cativo) " + Pmenor + "% " + Pmaior + "%, var(--Cheader) " + Pmaior + "%);"
 }
