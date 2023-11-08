@@ -50,7 +50,11 @@
 
         <div class="Campo">
             <div class="ValorRange">
-                <a>Periodo:</a> <a class="RangeValor" id="range_valor"> <input type="number" onchange="MudarPeriodoI()" id="range_menor_valor" class="RangeMenorValor"></input> <span class="RangeSepararValor">-</span> <input type="number" onchange="MudarPeriodoI()"  id="range_maior_valor" class="RangeMaiorValor"></input></a>
+                <a>Periodo:</a> <a class="RangeValor" id="range_valor">
+                    <input type="number" onchange="MudarPeriodoI()" id="range_menor_valor" class="RangeMenorValor"></input>
+                    <span class="RangeSepararValor">-</span>
+                    <input type="number" onchange="MudarPeriodoI()" id="range_maior_valor" class="RangeMaiorValor"></input>
+                </a>
             </div>
             <div class="CampoInput CampoR">
                 <div class="Progresso" id="progresso"></div>

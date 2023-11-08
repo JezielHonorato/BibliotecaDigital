@@ -193,6 +193,7 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
     position: relative;
 }
 
+
 .Pesquisar{
     width: 100%;
     background-color: var(--CorSecundaria);
@@ -215,19 +216,24 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
 }
 .RangeValor{
     display: none;
+    align-content: center;
     justify-content: right;
     width: 50%;
     right: 0;
 }
 .RangeMaiorValor, .RangeMenorValor, .RangeSepararValor{
+    text-indent: 0px;
     display: flex;
+    align-content: center;
+    flex-wrap: wrap;
     justify-content: center;
     color: var(--CorTexto);
     background-color: transparent;
-    width: 2rem;
+    width: 3rem;
 }
 .RangeSepararValor{
-    width: 1rem
+    width: 1rem;
+    justify-content: center;
 }
 .Progresso{
     height: 5px;
