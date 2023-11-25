@@ -1,9 +1,9 @@
 <?php
     session_start();
     include ("conexao.php");
-
-    $user_atual =  $_SESSION['usuario'][0];
-
+    if(isset($_SESSION['usuario'])) {
+        $user_atual = $_SESSION['usuario'][0];
+    }
     if(isset($_POST['usuario']) || isset($_POST['senha'])){
         $usuario = $conexao->real_escape_string($_POST['usuario']);
         $senha = $conexao->real_escape_string($_POST['senha']);

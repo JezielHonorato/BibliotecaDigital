@@ -26,7 +26,6 @@ var Ordem = 1
 
 function PesquisarLivro(){
 
-    // Declaração de Variáveis
     var Pesquisar = document.getElementById("pesquisar").value;
     var Categoria = document.getElementById("categoria").value;
     var Nacionalidade = document.getElementById("nacionalidade").value;
@@ -60,7 +59,8 @@ function PesquisarLivro(){
 
 
 function OrdenarT(){
-    var OrdenarTitulo = document.getElementById("ordenar_titulo");
+    //Ordenar por Titulo
+    var OrdenarTitulo = document.getElementById("ordenar_titulo"); 
     var OrdenarAutor = document.getElementById("ordenar_autor");
     var OrdenarData = document.getElementById("ordenar_data");
 
@@ -83,6 +83,7 @@ function OrdenarT(){
     PesquisarLivro();
 
 }function OrdenarA(){
+    //Ordenar por Autor
     var OrdenarTitulo = document.getElementById("ordenar_titulo");
     var OrdenarAutor = document.getElementById("ordenar_autor");
     var OrdenarData = document.getElementById("ordenar_data");
@@ -106,6 +107,7 @@ function OrdenarT(){
     PesquisarLivro();
 
 }function OrdenarD(){
+    //Ordenar por Data
     var OrdenarTitulo = document.getElementById("ordenar_titulo");
     var OrdenarAutor = document.getElementById("ordenar_autor");
     var OrdenarData = document.getElementById("ordenar_data");
@@ -130,28 +132,24 @@ function OrdenarT(){
 
 }
 
-/*
 var cor = true
 function MudarCor(){
     if (cor) {
-        document.documentElement.style.setProperty('--Cfundo', '#FFFFFF');
-        document.documentElement.style.setProperty('--Cheader', '#49F265');
-        document.documentElement.style.setProperty('--Ctexto', '#000000');
-        document.documentElement.style.setProperty('--Chover', '#9BADBD');
-        document.documentElement.style.setProperty('--Cativo', '#e74c3c');
+        document.documentElement.style.setProperty('--CorPrimaria', '#0B1622');
+        document.documentElement.style.setProperty('--CorSecundaria', '#151F2E');
+        document.documentElement.style.setProperty('--CorTexto', '#9BADBD');
+        document.documentElement.style.setProperty('--CorHover', '#FFFFFF');
+        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
         cor = false;
     } else {
-        document.documentElement.style.setProperty('--Cfundo', '#0B1622');
-        document.documentElement.style.setProperty('--Cheader', '#151F2E');
-        document.documentElement.style.setProperty('--Ctexto', '#9BADBD');
-        document.documentElement.style.setProperty('--Cativo', '#3DB4F2');
-        document.documentElement.style.setProperty('--Chover', '#FFFFFF');
+        document.documentElement.style.setProperty('--CorPrimaria', '#F1F3F7');
+        document.documentElement.style.setProperty('--CorSecundaria', '#FFFFFF');
+        document.documentElement.style.setProperty('--CorTexto', '#105503');
+        document.documentElement.style.setProperty('--CorHover', '#4caf50');
+        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
         cor = true;
     }
 };
-*/
-
-
 
 
 
@@ -164,14 +162,20 @@ function MudarPeriodo(){
     var RangeMenor = parseInt(document.getElementById('range_menor').value);
     var RangeMaior = parseInt(document.getElementById('range_maior').value);
     var Progresso = document.getElementById('progresso');
+    var ValorInicial = document.getElementById('valor_inicial').value;
+    var ValorFinal = document.getElementById('valor_final').value;
 
     if(RangeMenor > RangeMaior){
+        // Para o RangeMaior ser sempre o maior
         RangeExtra = RangeMenor
         RangeMenor = RangeMaior
         RangeMaior = RangeExtra
     }
-    var Pmaior = (RangeMaior/2023)*100
-    var Pmenor = (RangeMenor/2023)*100
+
+    // Transformar em porcentagem
+    var Total = ValorFinal - ValorInicial
+    var Pmaior = ((RangeMaior - ValorInicial)/Total)*100
+    var Pmenor = ((RangeMenor - ValorInicial)/Total)*100
 
     RangeValor.style.display = "flex"
     Progresso.style.cssText ="background: linear-gradient(to right, var(--CorSecundaria)" + Pmenor + "% " + Pmenor + "%, var(--CorTerciaria) " + Pmenor + "% " + Pmaior + "%, var(--CorSecundaria) " + Pmaior + "%);"
@@ -188,17 +192,22 @@ function MudarPeriodo(){
     var RangeMenorV = parseInt(document.getElementById('range_menor').value);
     var RangeMaiorV = parseInt(document.getElementById('range_maior').value);
     var Progresso = document.getElementById('progresso');
+    var ValorInicial = document.getElementById('valor_inicial').value;
+    var ValorFinal = document.getElementById('valor_final').value;
 
     if(RangeMenor > RangeMaior){
         RangeExtra = RangeMenor
         RangeMenor = RangeMaior
         RangeMaior = RangeExtra
     }
+    
     RangeMenorV = InputMenorValor 
     RangeMaiorV = InputMaiorValor
 
-    var Pmaior = (RangeMaiorV/2023)*100
-    var Pmenor = (RangeMenorV/2023)*100
+    // Transformar em porcentagem
+    var Total = ValorFinal - ValorInicial
+    var Pmaior = ((RangeMaior - ValorInicial)/Total)*100
+    var Pmenor = ((RangeMenor - ValorInicial)/Total)*100
 
     RangeMenor.value = InputMenorValor 
     RangeMaior.value = InputMaiorValor
@@ -236,7 +245,6 @@ function AddPais(){
         Padrao.style.display = "block"
     }
 }
-
 
 function Editar(){
     var NovoAutor = document.getElementById('add_autor');

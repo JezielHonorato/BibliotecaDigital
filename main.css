@@ -24,12 +24,19 @@ body{
 }
 
 /** ROOTS **/
-:root{
-    /* IF cores #2F9E41; #CD191E; #000000;  */
+
+/*
     --CorPrimaria: #0B1622;
     --CorSecundaria: #151F2E;
     --CorTexto: #9BADBD;
     --CorHover: #FFFFFF;
+    --CorTerciaria: #3DB4F2;
+*/
+:root{    
+    --CorPrimaria: #F1F3F7;
+    --CorSecundaria: #FFFFFF;
+    --CorTexto: #105503 ;
+    --CorHover: #4caf50;
     --CorTerciaria: #3DB4F2;
 
     --Csuccesso: #2f3532;
@@ -332,6 +339,8 @@ input[type=range]::-webkit-slider-thumb {
     color: var(--CorSecundaria);
 }
 .Rodape{
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
     position: absolute;
     background: var(--CorSecundaria);
     padding: 20px;
@@ -339,6 +348,7 @@ input[type=range]::-webkit-slider-thumb {
     height: var(--THeader);
     bottom: 0;
     justify-content: center;
+    align-items: center;
     text-align: center;
     text-wrap: balance;
 }

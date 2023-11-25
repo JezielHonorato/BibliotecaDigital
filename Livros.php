@@ -8,9 +8,18 @@
     $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
     $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
 
+    $sql_code_minmax_data = "SELECT MIN(publicadodata) AS menor_valor, MAX(publicadodata) AS maior_valor FROM tblivro;";
+    $sql_query_minmax_data = $conexao->query($sql_code_minmax_data) or die($conexao->error);
+
+    $data = $sql_query_minmax_data->fetch_assoc();
+    $menor_valor = $data["menor_valor"];
+    $maior_valor = $data["maior_valor"];
 ?>
 
 <?php include("header.php"); ?>
+<input type="number" class="Invisivel" value="<?php echo $menor_valor ?>" id="valor_inicial">
+<input type="number" class="Invisivel" value="<?php echo $maior_valor ?>" id="valor_final">
+
 <div class="Conteudo">
     <div class="Busca">
         <div class="Campo">
@@ -58,9 +67,9 @@
             </div>
             <div class="CampoInput CampoR">
                 <div class="Progresso" id="progresso"></div>
-                <span class="LinhaDupla">
-                    <input type="range" min="0" max="2023" value="0" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
-                    <input type="range" min="0" max="2023" value="2023" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
+                <span class="LinhaDupla">                    
+                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $menor_valor ?>" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
+                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $maior_valor ?>" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
                 </span>
             </div>
         </div>
