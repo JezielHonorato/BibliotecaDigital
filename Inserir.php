@@ -26,7 +26,7 @@
             die("Falha ao enviar o arquivo");
         };
 
-        $consulta = $conexao->query("SELECT * FROM tblivro WHERE titulo = '$titulo' AND idautor = $autor");
+        $consulta = $conexao->query("SELECT * FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor");
         $linha = $consulta->num_rows;
 
         if($linha >= 1){
@@ -34,7 +34,7 @@
         }else{
             $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo .'.pdf');
             if($finalizado){
-            $conexao->query("INSERT INTO tblivro (titulo, publicadodata, idautor, idpais, idcategoria, arquivo, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, './assets/$titulo.pdf', '$usuario');");
+            $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');");
             echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
             }
         }
@@ -51,7 +51,7 @@
         if($linha2 >= 1){
             echo  "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
         }else{
-            $conexao->query("INSERT INTO tbautor (autor, idpais) VALUES('$novo_autor', $novo_pais)");
+            $conexao->query("INSERT INTO tbautor (autor, idPais) VALUES('$novo_autor', $novo_pais)");
             echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
             header("Refresh: 0");
         }
@@ -104,7 +104,7 @@
                 <select class="InserirSelect" id="autor" name="autor" required>
                     <option>Selecione o autor da obra</option>
                     <?php while($autor = $sql_query_autor->fetch_assoc()){
-                        echo "<option value='" . $autor['idautor'] . "'>" . $autor['autor'] . "</option>";
+                        echo "<option value='" . $autor['idAutor'] . "'>" . $autor['autor'] . "</option>";
                     }
                     ?>
                 </select>
@@ -116,7 +116,7 @@
                 <select class="InserirSelect" id="pais" name="pais" required>
                     <option> Escolha a nacionalidade da obra</option>
                     <?php while($pais = $sql_query_pais->fetch_assoc()){
-                        echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                        echo "<option value='" . $pais['idPais'] . "'>" . $pais['pais'] . "</option>";
                     }
                     ?>
                 </select>
@@ -127,7 +127,7 @@
             <select class="InserirSelect Preencher" id="categoria" name="categoria" required>
                 <option>Escolha o tipo da obra</option>
                 <?php while($categoria = $sql_query_categoria->fetch_assoc()){
-                    echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
+                    echo "<option value='" . $categoria['idCategoria'] . "'>" . $categoria['categoria'] . "</option>";
                 }
                 ?>
             </select>
@@ -154,7 +154,7 @@
             <select class="InserirSelect" id="novo_pais" name="novo_pais" required>
                 <option> Escolha a nacionalidade do autor</option>
                 <?php while($pais_2 = $sql_query_pais_2->fetch_assoc()){
-                    echo "<option value='" . $pais_2['idpais'] . "'>" . $pais_2['pais'] . "</option>";
+                    echo "<option value='" . $pais_2['idPais'] . "'>" . $pais_2['pais'] . "</option>";
                 }
                 ?>
             </select>

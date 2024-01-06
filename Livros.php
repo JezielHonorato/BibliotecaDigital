@@ -8,7 +8,7 @@
     $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
     $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
 
-    $sql_code_minmax_data = "SELECT MIN(publicadodata) AS menor_valor, MAX(publicadodata) AS maior_valor FROM tblivro;";
+    $sql_code_minmax_data = "SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro;";
     $sql_query_minmax_data = $conexao->query($sql_code_minmax_data) or die($conexao->error);
 
     $data = $sql_query_minmax_data->fetch_assoc();
@@ -50,7 +50,7 @@
                 <label for="nacionalidade" class="Simbolo">expand_more</label>
                 <select class="Select" id="nacionalidade" name="nacionalidade" onchange="PesquisarLivro()">
                     <?php while($pais = $sql_query_pais->fetch_assoc()){
-                        echo "<option value='" . $pais['idpais'] . "'>" . $pais['pais'] . "</option>";
+                        echo "<option value='" . $pais['idPais'] . "'>" . $pais['pais'] . "</option>";
                     }
                     ?>
                 </select>

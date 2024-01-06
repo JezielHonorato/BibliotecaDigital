@@ -8,7 +8,7 @@
     $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
     $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
 
-    $sql_code_livro = "SELECT l.idlivro, l.titulo, a.autor, l.idautor, l.publicadodata, l.arquivo FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
+    $sql_code_livro = "SELECT idLivro, titulo, autor, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
     $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);
 ?>
 
