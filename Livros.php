@@ -79,9 +79,9 @@
     <div class="Lista">
         <div class="Livro" >
             <div class="Indice"> <h1><span class="Simbolo"> download</span></h1></div>
-            <div class="Titulo"> <h1>Titulo</h1> <span onclick="Ordenar('ordenar_titulo')" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span></div>
-            <div class="Autor">  <h1>Autor</h1>  <span onclick="Ordenar('ordenar_autor')"  id="ordenar_autor"  class="Simbolo Menor2">swap_vert</span></div>
-            <div class="Data">   <h1>Data</h1>   <span onclick="Ordenar('ordenar_data')"   id="ordenar_data"   class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Titulo"> <h1>Titulo</h1> <span onclick="OrdenarT()" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Autor"> <h1>Autor</h1> <span onclick="OrdenarA()" id="ordenar_autor" class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Data"> <h1>Data</h1> <span onclick="OrdenarD()" id="ordenar_data" class="Simbolo Menor2">swap_vert</span></div>
             <?php if(isset($_SESSION['usuario'])){ ?>
                 <div class="Editar"> <span class='Simbolo'>edit</span></div>
             <?php } ?>

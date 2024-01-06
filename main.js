@@ -107,26 +107,77 @@ document.getElementById('input_menor_valor').addEventListener('click', mudarPeri
 document.getElementById('input_maior_valor').addEventListener('click', mudarPeriodo);
 
 
-function Ordenar(id) { //Função para os simbolos de Ordenar
-    const elementos = ['ordenar_titulo', 'ordenar_autor', 'ordenar_data'];
-    const elementoClicado = document.getElementById(id);
+function OrdenarT(){
+    var OrdenarTitulo = document.getElementById("ordenar_titulo");
+    //Ordenar por Titulo
+    var OrdenarTitulo = document.getElementById("ordenar_titulo"); 
+    var OrdenarAutor = document.getElementById("ordenar_autor");
+    var OrdenarData = document.getElementById("ordenar_data");
 
-    elementos.forEach((elementoID) => {
-    const elemento = document.getElementById(elementoID);
-    elemento.innerHTML = (elemento === elementoClicado)
-        ? proximoTexto(elemento.innerHTML)
-        : 'swap_vert';
-    });
-
-    Ordem = elementos.indexOf(id) + 1;
+    if(OrdenarTitulo.innerHTML == "swap_vert"){
+        OrdenarTitulo.innerHTML = "expand_more";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 1;
+    }else if(OrdenarTitulo.innerHTML == "expand_more"){
+        OrdenarTitulo.innerHTML = "expand_less";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 2;
+    }else if(OrdenarTitulo.innerHTML == "expand_less"){
+        OrdenarTitulo.innerHTML = "expand_more";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 1;
+    }
     PesquisarLivro();
 
-}function proximoTexto(textoAtual) {
-    return textoAtual === 'swap_vert'
-    ? 'expand_more'
-    : textoAtual === 'expand_more'
-    ? 'expand_less'
-    : 'expand_more';
+}function OrdenarA(){
+    //Ordenar por Autor
+    var OrdenarTitulo = document.getElementById("ordenar_titulo");
+    var OrdenarAutor = document.getElementById("ordenar_autor");
+    var OrdenarData = document.getElementById("ordenar_data");
+    if(OrdenarAutor.innerHTML == "swap_vert"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "expand_more";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 3;
+    }else if(OrdenarAutor.innerHTML == "expand_more"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "expand_less";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 4;
+    }else if(OrdenarAutor.innerHTML == "expand_less"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "expand_more";
+        OrdenarData.innerHTML = "swap_vert";
+        Ordem = 3;
+    }
+    PesquisarLivro();
+
+}function OrdenarD(){
+    //Ordenar por Data
+    var OrdenarTitulo = document.getElementById("ordenar_titulo");
+    var OrdenarAutor = document.getElementById("ordenar_autor");
+    var OrdenarData = document.getElementById("ordenar_data");
+    if(OrdenarData.innerHTML == "swap_vert"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "expand_more";
+        Ordem = 5;
+    }else if(OrdenarData.innerHTML == "expand_more"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "expand_less";
+        Ordem = 6;
+    }else if(OrdenarData.innerHTML == "expand_less"){
+        OrdenarTitulo.innerHTML = "swap_vert";
+        OrdenarAutor.innerHTML = "swap_vert";
+        OrdenarData.innerHTML = "expand_more";
+        Ordem = 5;
+    }
+    PesquisarLivro();
+
 }
 
 function AddPais(){
