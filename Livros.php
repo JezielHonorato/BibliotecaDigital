@@ -26,7 +26,7 @@
             <label for="pesquisar">Pesquisar:</label>
             <div class="CampoInput">
                 <label for="pesquisar" class="Simbolo Menor">search</label>
-                <input type="search" class="Pesquisar" id="pesquisar" name="pesquisar" autocomplete="off" onchange="PesquisarLivro()">
+                <input type="search" class="Pesquisar" id="pesquisar" name="pesquisar" autocomplete="off" onchange="pesquisarLivro()">
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             <label for="categoria">Categoria:</label>
             <div class="CampoInput">
                 <label class="Simbolo">expand_more</label>
-                <select class="Select" id="categoria" name="categoria" onchange="PesquisarLivro()">
+                <select class="Select" id="categoria" name="categoria" onchange="pesquisarLivro()">
                     <option></option>
                     <?php while($categoria = $sql_query_categoria->fetch_assoc()){
                         echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
@@ -48,7 +48,7 @@
             <label for="nacionalidade">Pais:</label>
             <div class="CampoInput">
                 <label for="nacionalidade" class="Simbolo">expand_more</label>
-                <select class="Select" id="nacionalidade" name="nacionalidade" onchange="PesquisarLivro()">
+                <select class="Select" id="nacionalidade" name="nacionalidade" onchange="pesquisarLivro()">
                     <?php while($pais = $sql_query_pais->fetch_assoc()){
                         echo "<option value='" . $pais['idPais'] . "'>" . $pais['pais'] . "</option>";
                     }
@@ -68,8 +68,8 @@
             <div class="CampoInput CampoR">
                 <div class="Progresso" id="progresso"></div>
                 <span class="LinhaDupla">                    
-                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $menor_valor ?>" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
-                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $maior_valor ?>" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()" onclick="PesquisarLivro()">
+                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $menor_valor ?>" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()" onclick="pesquisarLivro()">
+                    <input type="range" min="<?php echo $menor_valor ?>" max="<?php echo $maior_valor ?>" value="<?php echo $maior_valor ?>" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()" onclick="pesquisarLivro()">
                 </span>
             </div>
         </div>
@@ -87,7 +87,7 @@
                 <div class="Editar"> <span class='Simbolo'>edit</span></div>
             <?php } ?>
         </div>
-        <div class="Lista" id='resultado' onload="PesquisarLivro()"></div>
+        <div class="Lista" id='resultado' onload="pesquisarLivro()"></div>
     </div>
 
 </div>
