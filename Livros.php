@@ -73,15 +73,16 @@
                 </span>
             </div>
         </div>
+        <input class="Invisivel" type="text" id="ordem" value="ORDER BY titulo ASC">
     </div>
 
     
     <div class="Lista">
         <div class="Livro" >
             <div class="Indice"> <h1><span class="Simbolo"> download</span></h1></div>
-            <div class="Titulo"> <h1>Titulo</h1> <span onclick="OrdenarT()" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span></div>
-            <div class="Autor"> <h1>Autor</h1> <span onclick="OrdenarA()" id="ordenar_autor" class="Simbolo Menor2">swap_vert</span></div>
-            <div class="Data"> <h1>Data</h1> <span onclick="OrdenarD()" id="ordenar_data" class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Titulo"> <h1>Titulo</h1> <span onclick="Ordenar('titulo')" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Autor"> <h1>Autor</h1> <span onclick="Ordenar('autor')" id="ordenar_autor" class="Simbolo Menor2">swap_vert</span></div>
+            <div class="Data"> <h1>Data</h1> <span onclick="Ordenar('data')" id="ordenar_data" class="Simbolo Menor2">swap_vert</span></div>
             <?php if(isset($_SESSION['usuario'])){ ?>
                 <div class="Editar"> <span class='Simbolo'>edit</span></div>
             <?php } ?>

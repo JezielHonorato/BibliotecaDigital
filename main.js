@@ -21,10 +21,10 @@ function CriaRequest() {
         return request;
 }
 
-document.getElementById("resultado").onload = PesquisarLivro()
+document.getElementById("resultado").onload = pesquisarLivro()
 var Ordem = 1
 
-function PesquisarLivro(){
+function pesquisarLivro(){
 
     var Pesquisar = document.getElementById("pesquisar").value;
     var Categoria = document.getElementById("categoria").value;
@@ -99,85 +99,27 @@ function mudarPeriodo() { //Função para o Range duplo
 
     document.getElementById('progresso').style.cssText = `background: linear-gradient(to right, var(--CorPrimaria) ${pMenor}% ${pMenor}%, var(--CorTerciaria) ${pMenor}% ${pMaior}%, var(--CorPrimaria) ${pMaior}%);`;
 
-    PesquisarLivro();
+    pesquisarLivro();
 }
 document.getElementById('range_menor').addEventListener('input', mudarPeriodo);
 document.getElementById('range_maior').addEventListener('input', mudarPeriodo);
 document.getElementById('input_menor_valor').addEventListener('click', mudarPeriodo);
 document.getElementById('input_maior_valor').addEventListener('click', mudarPeriodo);
 
-
-function OrdenarT(){
-    var OrdenarTitulo = document.getElementById("ordenar_titulo");
-    //Ordenar por Titulo
-    var OrdenarTitulo = document.getElementById("ordenar_titulo"); 
-    var OrdenarAutor = document.getElementById("ordenar_autor");
-    var OrdenarData = document.getElementById("ordenar_data");
-
-    if(OrdenarTitulo.innerHTML == "swap_vert"){
-        OrdenarTitulo.innerHTML = "expand_more";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 1;
-    }else if(OrdenarTitulo.innerHTML == "expand_more"){
-        OrdenarTitulo.innerHTML = "expand_less";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 2;
-    }else if(OrdenarTitulo.innerHTML == "expand_less"){
-        OrdenarTitulo.innerHTML = "expand_more";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 1;
+function Ordenar(id) { //Função para os simbolos de Ordenar
+    const elementos = ['ordenar_titulo', 'ordenar_autor', 'ordenar_data'];
+    const elementoClicado = document.getElementById(`ordenar_${id}`);
+    const ordenar = document.getElementById('ordem')
+    let ordem = '';
+    for (item of elementos){
+        const elemento = document.getElementById(item);
+        elemento.innerHTML = (elemento === elementoClicado) ? proximoTexto(elemento.innerHTML) : 'swap_vert';
+        ordem = elemento.innerHTML == 'expand_more' ? `ORDER BY ${id} ASC` : elemento.innerHTML == 'expand_less' ? `ORDER BY ${id} DESC` : ordem;
     }
-    PesquisarLivro();
-
-}function OrdenarA(){
-    //Ordenar por Autor
-    var OrdenarTitulo = document.getElementById("ordenar_titulo");
-    var OrdenarAutor = document.getElementById("ordenar_autor");
-    var OrdenarData = document.getElementById("ordenar_data");
-    if(OrdenarAutor.innerHTML == "swap_vert"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "expand_more";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 3;
-    }else if(OrdenarAutor.innerHTML == "expand_more"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "expand_less";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 4;
-    }else if(OrdenarAutor.innerHTML == "expand_less"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "expand_more";
-        OrdenarData.innerHTML = "swap_vert";
-        Ordem = 3;
-    }
-    PesquisarLivro();
-
-}function OrdenarD(){
-    //Ordenar por Data
-    var OrdenarTitulo = document.getElementById("ordenar_titulo");
-    var OrdenarAutor = document.getElementById("ordenar_autor");
-    var OrdenarData = document.getElementById("ordenar_data");
-    if(OrdenarData.innerHTML == "swap_vert"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "expand_more";
-        Ordem = 5;
-    }else if(OrdenarData.innerHTML == "expand_more"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "expand_less";
-        Ordem = 6;
-    }else if(OrdenarData.innerHTML == "expand_less"){
-        OrdenarTitulo.innerHTML = "swap_vert";
-        OrdenarAutor.innerHTML = "swap_vert";
-        OrdenarData.innerHTML = "expand_more";
-        Ordem = 5;
-    }
-    PesquisarLivro();
-
+    ordenar.value = ordem;
+    pesquisarLivro();
+}function proximoTexto(textoAtual) {
+    return textoAtual === 'swap_vert' ? 'expand_more' : textoAtual === 'expand_more' ? 'expand_less' : 'expand_more';
 }
 
 function AddPais(){

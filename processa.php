@@ -5,24 +5,6 @@ session_start();
 
 if (isset($_GET["pesquisar"])) {
     $pesquisa = ucwords(mb_strtolower($_GET['pesquisar']));
-
-    if (isset($_GET["ordem"])) {
-        $ordem = $_GET['ordem'];
-
-        if($ordem == 2){
-            $orde = "l.titulo DESC";
-        }else if($ordem == 3){
-            $orde = "a.autor ASC";
-        }else if($ordem == 4){
-            $orde = "a.autor DESC";
-        }else if($ordem == 5){
-            $orde = "l.data ASC";
-        }else if($ordem == 6){
-            $orde = "l.data DESC";
-        }else{
-            $orde = "l.titulo ASC";
-        }
-    }
     if(!empty($_GET['categoria'])){
         $categoriav = $_GET['categoria'];
     } 
@@ -33,6 +15,7 @@ if (isset($_GET["pesquisar"])) {
         $range_menor = $_GET['range_menor'];
         $range_maior = $_GET['range_maior'];
     } 
+    $ordem = $_GET['ordem'];
 
 
     if(!empty($_GET['pesquisar'])){
@@ -42,18 +25,18 @@ if (isset($_GET["pesquisar"])) {
             if(!empty($_GET['nacionalidade'])){
 
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.idPais = $nacionalidadev $ordem";
                 }
             }
             else{
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idCategoria = $categoriav OR a.autor LIKE '%$pesquisa%' AND l.idCategoria = $categoriav $ordem";
                 }
             }
         }
@@ -61,18 +44,18 @@ if (isset($_GET["pesquisar"])) {
             if(!empty($_GET['nacionalidade'])){
 
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev OR a.autor LIKE '%$pesquisa%' AND l.idPais = $nacionalidadev $ordem";
                 }
             }
             else{
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' AND l.data BETWEEN $range_menor AND $range_maior OR a.autor LIKE '%$pesquisa%' AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' OR a.autor LIKE '%$pesquisa%' ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.titulo LIKE '%$pesquisa%' OR a.autor LIKE '%$pesquisa%' $ordem";
                 }
             }
         }
@@ -83,18 +66,18 @@ if (isset($_GET["pesquisar"])) {
             if(!empty($_GET['nacionalidade'])){
 
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.idPais = $nacionalidadev ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.idPais = $nacionalidadev $ordem";
                 }
             }
             else{
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idCategoria = $categoriav $ordem";
                 }
             }
         }
@@ -102,18 +85,18 @@ if (isset($_GET["pesquisar"])) {
             if(!empty($_GET['nacionalidade'])){
 
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idPais = $nacionalidadev AND l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idPais = $nacionalidadev ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.idPais = $nacionalidadev $ordem";
                 }
             }
             else{
                 if(!empty($_GET['range_menor']) || !empty($_GET['range_maior'])){
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.data BETWEEN $range_menor AND $range_maior ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor WHERE l.data BETWEEN $range_menor AND $range_maior $ordem";
                 }
                 else{
-                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor ORDER BY $orde";
+                    $sql_code_livro = "SELECT * FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor $ordem";
                 }
             }
         }
