@@ -13,7 +13,7 @@
     $pesquisa ? $condicoes[] = "(titulo LIKE '%$pesquisa%' OR autor LIKE '%$pesquisa%')" : "";
     $categoriav ? $condicoes[] = "idCategoria = $categoriav" : "";
     $pais ? $condicoes[] = "idPais = $pais" : "";
-    $condicoes[] = "l.data BETWEEN $range_menor AND $range_maior";
+    $condicoes[] = "data BETWEEN $range_menor AND $range_maior";
 
     $sql_code_livro = "SELECT idLivro, titulo, autor, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor";
 
