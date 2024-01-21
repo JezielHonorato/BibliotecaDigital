@@ -26,18 +26,19 @@ var Ordem = 1
 
 function pesquisarLivro(){
 
-    var Pesquisar = document.getElementById("pesquisar").value;
-    var Categoria = document.getElementById("categoria").value;
-    var Nacionalidade = document.getElementById("nacionalidade").value;
-    var RangeMenor = document.getElementById("range_menor").value;
-    var RangeMaior = document.getElementById("range_maior").value;
+    var pesquisar = document.getElementById("pesquisar").value;
+    var categoria = document.getElementById("categoria").value;
+    var pais = document.getElementById("pais").value;
+    var rangeMenor = document.getElementById("range_menor").value;
+    var rangeMaior = document.getElementById("range_maior").value;
+    var ordem = document.getElementById("ordem").value;
 
     var result = document.getElementById("resultado");
     var xmlreq = CriaRequest();
 
     // Iniciar uma requisição
 
-    xmlreq.open("GET", "processa.php?pesquisar=" + Pesquisar + "&categoria=" + Categoria + "&nacionalidade=" + Nacionalidade + "&range_menor=" + RangeMenor + "&range_maior=" + RangeMaior + "&ordem=" + Ordem, true );
+    xmlreq.open("GET", "processa.php?pesquisar=" + pesquisar + "&categoria=" + categoria + "&pais=" + pais + "&range_menor=" + rangeMenor + "&range_maior=" + rangeMaior + "&ordem=" + ordem, true );
 
     // Atribui uma função para ser executada sempre que houver uma mudança de ado
     xmlreq.onreadystatechange = function(){

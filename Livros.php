@@ -45,10 +45,10 @@
         </div>
 
         <div class="Campo">
-            <label for="nacionalidade">Pais:</label>
+            <label for="pais">Pais:</label>
             <div class="CampoInput">
-                <label for="nacionalidade" class="Simbolo">expand_more</label>
-                <select class="Select" id="nacionalidade" name="nacionalidade" onchange="pesquisarLivro()">
+                <label for="pais" class="Simbolo">expand_more</label>
+                <select class="Select" id="pais" name="pais" onchange="pesquisarLivro()">
                     <?php while($pais = $sql_query_pais->fetch_assoc()){
                         echo "<option value='" . $pais['idPais'] . "'>" . $pais['pais'] . "</option>";
                     }
