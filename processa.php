@@ -31,7 +31,7 @@
             <div class='Autor' onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['autor']}</a></div>
             <div class='Data' onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['data']}</a></div>";
         if (isset($_SESSION['usuario'])) {
-            $html .= "<div class='Editar'><a href='editar.php?id={$livro['idlivro']}'><span class='Simbolo'>edit</span></a></div>";
+            $html .= "<div class='Editar'><a href='editar.php?id={$livro['idLivro']}'><span class='Simbolo'>edit</span></a></div>";
         }
         $html .= "</div>";
         echo $html;
