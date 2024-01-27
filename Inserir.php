@@ -34,8 +34,8 @@
         }else{
             $finalizado = move_uploaded_file($file["tmp_name"], $pasta . $titulo .'.pdf');
             if($finalizado){
-            $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');");
-            echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
+                $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');");
+                echo  "<script>alert('Livro cadastrado com sucesso!');</script>";
             }
         }
 
