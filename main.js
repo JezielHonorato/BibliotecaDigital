@@ -58,28 +58,6 @@ function pesquisarLivro(){
     xmlreq.send(null);
 }
 
-
-var cor = true
-function MudarCor(){
-    if (cor) {
-        document.documentElement.style.setProperty('--CorPrimaria', '#0B1622');
-        document.documentElement.style.setProperty('--CorSecundaria', '#151F2E');
-        document.documentElement.style.setProperty('--CorTexto', '#9BADBD');
-        document.documentElement.style.setProperty('--CorHover', '#FFFFFF');
-        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
-        cor = false;
-    } else {
-        document.documentElement.style.setProperty('--CorPrimaria', '#F1F3F7');
-        document.documentElement.style.setProperty('--CorSecundaria', '#FFFFFF');
-        document.documentElement.style.setProperty('--CorTexto', '#105503');
-        document.documentElement.style.setProperty('--CorHover', '#4caf50');
-        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
-        cor = true;
-    }
-};
-
-
-
 function mudarPeriodo() { //Função para o Range duplo
     let rangeMenorV = parseInt(document.getElementById('range_menor').value);
     let rangeMaiorV = parseInt(document.getElementById('range_maior').value);
@@ -189,17 +167,30 @@ function ApagarUsuario(){
     CriarApagar.style.display = "none"
 }
 
+function MostrarSenha(x) {
+    const inputSenha = document.getElementById('input_senha_' + x);
+    const span = document.getElementById('span_' + x);
 
-function MostrarSenha(x){
-    InputSenha = document.getElementById('input_senha_' + x)
-    Span = document.getElementById('span_' + x)
-
-    if(Span.innerHTML == 'visibility_off'){
-        InputSenha.type = 'text'
-        Span.innerHTML = 'visibility'
-    }
-    else{
-        Span.innerHTML = 'visibility_off'
-        InputSenha.type = 'password'
-    }
+    inputSenha.type = span.innerHTML === 'visibility_off' ? 'text' : 'password';
+    span.innerHTML = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
 }
+
+var cor = true
+function MudarCor(){
+    if (cor) {
+        document.documentElement.style.setProperty('--CorPrimaria', '#0B1622');
+        document.documentElement.style.setProperty('--CorSecundaria', '#151F2E');
+        document.documentElement.style.setProperty('--CorTexto', '#9BADBD');
+        document.documentElement.style.setProperty('--CorHover', '#FFFFFF');
+        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
+        cor = false;
+    } else {
+        document.documentElement.style.setProperty('--CorPrimaria', '#F1F3F7');
+        document.documentElement.style.setProperty('--CorSecundaria', '#FFFFFF');
+        document.documentElement.style.setProperty('--CorTexto', '#105503');
+        document.documentElement.style.setProperty('--CorHover', '#4caf50');
+        document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
+        cor = true;
+    }
+};
+
