@@ -48,37 +48,37 @@
     header('Location: livros.php');
   }
 
-if(isset($_POST['novo_submit_autor'])){
-    $novo_autor = ucwords(mb_strtolower($_POST['novo_autor']));
-    $novo_pais = $_POST['novo_pais'];
+  if(isset($_POST['novo_submit_autor'])){
+      $novo_autor = ucwords(mb_strtolower($_POST['novo_autor']));
+      $novo_pais = $_POST['novo_pais'];
 
-    $consulta2 = $conexao->query("SELECT * FROM tbautor WHERE autor = '$novo_autor'");
-    $linha2 = $consulta2->num_rows;
+      $consulta2 = $conexao->query("SELECT * FROM tbautor WHERE autor = '$novo_autor'");
+      $linha2 = $consulta2->num_rows;
 
-    if($linha2 >= 1){
-        echo  "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
-    }else{
-        $conexao->query("INSERT INTO tbautor (autor, idPais) VALUES('$novo_autor', $novo_pais)");
-        echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
-        header("Refresh: 0");
-    }
-}
+      if($linha2 >= 1){
+          echo  "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
+      }else{
+          $conexao->query("INSERT INTO tbautor (autor, idPais) VALUES('$novo_autor', $novo_pais)");
+          echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
+          header("Refresh: 0");
+      }
+  }
 
-if(isset($_POST['novo_submit_pais'])){
-    $novo_pais2 = ucwords(mb_strtolower($_POST['novo_pais2']));
+  if(isset($_POST['novo_submit_pais'])){
+      $novo_pais2 = ucwords(mb_strtolower($_POST['novo_pais2']));
 
-    $consulta3 = $conexao->query("SELECT * FROM tbpais WHERE pais = '$novo_pais2'");
-    $linha3 = $consulta3->num_rows;
+      $consulta3 = $conexao->query("SELECT * FROM tbpais WHERE pais = '$novo_pais2'");
+      $linha3 = $consulta3->num_rows;
 
-    if($linha3 >= 1){
-        echo  "<script>alert('Um Pais com o mesmo nome já existe cadastrado no sistema!');</script>";
-    }else{
-        $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais2')");
-        echo  "<script>alert('Pais cadastrado com sucesso!');</script>";
-        header("Refresh: 0");
-    }
-}
-  
+      if($linha3 >= 1){
+          echo  "<script>alert('Um Pais com o mesmo nome já existe cadastrado no sistema!');</script>";
+      }else{
+          $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais2')");
+          echo  "<script>alert('Pais cadastrado com sucesso!');</script>";
+          header("Refresh: 0");
+      }
+  }
+    
   isset($_SESSION['usuario']) ? $user = true : $user = false;
   isset($_GET['id']) ? $id = $_GET['id'] : $id = false;
 
@@ -105,7 +105,7 @@ if(isset($_POST['novo_submit_pais'])){
 ?>
 
 <div class="Conteudo">
-  <form method="post" enctype="multipart/form-data" action="cadastrar.php" id="inserir">
+  <form method="post" enctype="multipart/form-data" action="cadastrar.phpp" id="inserir">
     <?php if($id) {?>
       <h1> Editar obra <br><br></h1>
     <?php } else {?>
@@ -181,11 +181,11 @@ if(isset($_POST['novo_submit_pais'])){
     <?php if ($user) {
       echo "<button class='BotaoInserir' type='submit' name='submit'>Enviar</button>";
     }} ?>
-    </form>
+  </form>
 </div>
 
-<form class="AddAutor" id="add_autor" method="post" action="inserir.php">
-  <a Class="AddAutorTitulo">
+<form class="AddAutor" id="add_autor" method="post" action="cadastrar.php">
+  <a class="AddAutorTitulo">
     <h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span>
   </a>
   <div class="Preencher"> 
@@ -207,7 +207,7 @@ if(isset($_POST['novo_submit_pais'])){
   <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
 </form>
 
-<form class="AddPais" id="add_pais" method="post" action="inserir.php">
+<form class="AddPais" id="add_pais" method="post" action="cadastrar.php">
   <a Class="AddAutorTitulo">
     <h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="FecharPais()">close</span>
   </a>
