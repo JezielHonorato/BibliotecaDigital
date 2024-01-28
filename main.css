@@ -448,12 +448,14 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .NovoInserir {
+  display: flex;
   padding: 0.5rem;
   background-color: var(--CorTerciaria);
   margin-bottom: 2rem;
   border-radius: 5px;
   width: 5%;
   color: var(--CorSecundaria);
+  justify-content: center;
 }
 
 .NomeData {

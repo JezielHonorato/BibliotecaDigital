@@ -2,8 +2,19 @@
   session_start();
   include("conexao.php");
 
-  isset($_SESSION['usuario']) ? $user = true : $user = false;
-  isset($_GET['id']) ? $id = $_GET['id'] : $id = false;
+  isset($_POST['titulo'])     ? $titulo     = ucwords(mb_strtolower($_POST['titulo']))     : $titulo     = false;
+  isset($_POST['novo_autor']) ? $novo_autor = ucwords(mb_strtolower($_POST['novo_autor'])) : $novo_autor = false;
+  isset($_POST['novo_pais'])  ? $novo_pais  = ucwords(mb_strtolower($_POST['novo_pais']))  : $novo_pais  = false;
+  isset($_SESSION['usuario']) ? $user       = true                                         : $user       = false;
+  isset($_GET['id'])          ? $id         = $_GET['id']                                  : $id         = false;
+  isset($_POST['id'])         ? $id_livro   = $_POST['id']                                 : $id_livro   = false;
+  isset($_POST['data'] )      ? $data       = $_POST['data']                               : $data       = false;
+  isset($_POST['autor'])      ? $autor      = $_POST['autor']                              : $autor      = false;
+  isset($_POST['pais'])       ? $pais       = $_POST['pais']                               : $pais       = false;
+  isset($_POST['categoria'])  ? $categoria  = $_POST['categoria']                          : $categoria  = false;
+  isset($_POST['excluir'])    ? $excluir    = $_POST['excluir']                            : $excluir    = false;
+  isset($_FILES['file'])      ? $file       = $_FILES['file']                              : $file       = false;
+  $usuario = $_SESSION['usuario'][0];
 
   function editar($campo) {
     $id = $GLOBALS['id'];
@@ -17,42 +28,24 @@
     }
   }
 
-  $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
-  $sql_query_categoria = $conexao->query($sql_code_categoria) or die($conexao->error);
-
-  $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
-  $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
-  $sql_query_pais_2 = $conexao->query($sql_code_pais) or die($conexao->error);
-
-  $sql_code_autor = "SELECT * FROM tbautor ORDER BY autor ASC";
-  $sql_query_autor = $conexao->query($sql_code_autor) or die($conexao->error);
-
-  isset($_FILES['file'])     ? $file =  $_FILES['file']                           : $file      = false;
-  isset($_POST['id'])        ? $id_livro = $_POST['id']                           : $id_livro  = false;
-  isset($_POST['titulo'])    ? $titulo = ucwords(mb_strtolower($_POST['titulo'])) : $titulo    = false;
-  isset($_POST['data'] )     ? $data = $_POST['data']                             : $data      = false;
-  isset($_POST['autor'])     ? $autor = $_POST['autor']                           : $autor     = false;
-  isset($_POST['pais'])      ? $pais = $_POST['pais']                             : $pais      = false;
-  isset($_POST['categoria']) ? $categoria = $_POST['categoria']                   : $categoria = false;
-  isset($_POST['excluir'])   ? $excluir = $_POST['excluir']                       : $excluir   = false;
-  $usuario = $_SESSION['usuario'][0];
+  $sql_categoria = $conexao->query("SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC") or die($conexao->error);
+  $sql_autor     = $conexao->query("SELECT idAutor, autor FROM tbautor ORDER BY autor ASC") or die($conexao->error);
+  $sql_pais      = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
 
   if ($file) {
     if ($file['error']) {
       die("Falha ao enviar o arquivo");
     }
+    $consulta = $conexao->query("SELECT idLivro FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor")->num_rows;
 
-    $consulta = $conexao->query("SELECT * FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor");
-    $linha = $consulta->num_rows;
-
-    if ($linha >= 1) { 
+    if ($consulta >= 1) { 
       echo  "<script>alert('Um livro com um mesmo Título e Autor já existe cadastrado no sistema!');</script>";
     } else {
       $finalizado = move_uploaded_file($file["tmp_name"], "assets/$titulo.pdf");
       if ($finalizado) {
-          $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');" or die($conexao->error));
-          echo "<script>alert('Livro cadastrado com sucesso!');</script>";
-          header("Location: livros.php");
+        $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');") or die($conexao->error);
+        echo "<script>alert('Livro cadastrado com sucesso!');</script>";
+        header("Location: livros.php");
   } } }
 
   else if ($excluir) {
@@ -71,31 +64,26 @@
     header("Location: livros.php");
   }
 
-  if(isset($_POST['novo_submit_autor'])){
-    $novo_autor = ucwords(mb_strtolower($_POST['novo_autor']));
-    $novo_pais  = $_POST['novo_pais'];
-    $consulta2 = $conexao->query("SELECT * FROM tbautor WHERE autor = '$novo_autor'");
-    $linha2    = $consulta2->num_rows;
+  if($novo_autor){
+    $consulta2 = $conexao->query("SELECT idAutor FROM tbautor WHERE autor = '$novo_autor'")->num_rows;
 
-    if($linha2 >= 1){
-      echo  "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
+    if($consulta2 >= 1){
+      echo "<script>alert('Um Autor com o mesmo nome já existe cadastrado no sistema!');</script>";
     }else{
-      $conexao->query("INSERT INTO tbautor (autor, idPais) VALUES('$novo_autor', $novo_pais)");
-      echo  "<script>alert('Autor cadastrado com sucesso!');</script>";
+      $conexao->query("INSERT INTO tbautor (autor) VALUES('$novo_autor')") or die($conexao->error);
+      echo "<script>alert('Autor cadastrado com sucesso!');</script>";
       header("Refresh: 0");
     }
   }
 
-  if(isset($_POST['novo_submit_pais'])){
-    $novo_pais2 = ucwords(mb_strtolower($_POST['novo_pais2']));
-    $consulta3 = $conexao->query("SELECT * FROM tbpais WHERE pais = '$novo_pais2'");
-    $linha3    = $consulta3->num_rows;
+  if($novo_pais){
+    $consulta3 = $conexao->query("SELECT idPais FROM tbpais WHERE pais = '$novo_pais'")->num_rows;
 
-    if($linha3 >= 1){
-      echo  "<script>alert('Um Pais com o mesmo nome já existe cadastrado no sistema!');</script>";
+    if($consulta3 >= 1){
+      echo "<script>alert('Um Pais com o mesmo nome já existe cadastrado no sistema!');</script>";
     }else{
-      $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais2')");
-      echo  "<script>alert('Pais cadastrado com sucesso!');</script>";
+      $conexao->query("INSERT INTO tbpais (pais) VALUES('$novo_pais')") or die($conexao->error);
+      echo "<script>alert('Pais cadastrado com sucesso!');</script>";
       header("Refresh: 0");
   } }
 
@@ -110,7 +98,7 @@
 ?>
 
 <div class="Conteudo">
-  <form method="post" enctype="multipart/form-data" action="" id="inserir">
+  <form method="post" enctype="multipart/form-data" id="inserir">
     <?php if($id) {?>
       <input type="text" hidden id="id" name="id" value="<?= editar('idLivro') ?>">
       <h1> Editar obra <br><br></h1>
@@ -137,11 +125,11 @@
         } else {?>
           <option>Selecione o autor da obra</option>
         <?php }
-        while ($autor = $sql_query_autor->fetch_assoc()) {
+        while ($autor = $sql_autor->fetch_assoc()) {
           echo "<option value='". $autor['idAutor'] . "'>" . $autor['autor'] ."</option>";
         } ?>
       </select>
-      <button class="NovoInserir" onclick="AddAutor()">+</button>
+      <a class="NovoInserir" onclick="AddAutor()">+</a>
     </div>
 
     <label class="Label" for="pais">Nacionalidade:</label>
@@ -152,11 +140,11 @@
         } else {?>
           <option> Escolha a nacionalidade da obra</option>
         <?php }
-        while ($pais = $sql_query_pais->fetch_assoc()) {
+        while ($pais = $sql_pais->fetch_assoc()) {
           echo "<option value='". $pais['idPais'] . "'>" . $pais['pais'] ."</option>";
         } ?>
       </select>
-      <button class="NovoInserir" onclick="AddPais()">+</button>
+      <a class="NovoInserir" onclick="AddPais()">+</a>
     </div>
 
     <label class="Label" for="categoria">Categoria:</label>
@@ -166,7 +154,7 @@
       } else {?>
         <option>Escolha o tipo da obra</option>
       <?php }
-        while ($categoria = $sql_query_categoria->fetch_assoc()) {
+        while ($categoria = $sql_categoria->fetch_assoc()) {
         echo "<option value='". $categoria['idCategoria'] . "'>" . $categoria['categoria'] ."</option>";
       } ?>
     </select>
@@ -179,7 +167,6 @@
           <button class="BotaoExcluir" type="submit">Excluir</button>
       </form> 
     <?php } else { ?>
-
       <label for="file" class="Label">Selecione o arquivo:</label>
       <label for="file" class="File">Selecione o arquivo</label>
       <input class="Invisivel" type="file" name="file" id="file" required accept="application/pdf">
@@ -190,7 +177,7 @@
   </form>
 </div>
 
-<form class="AddAutor" id="add_autor" method="post" action="cadastrar.php">
+<form class="AddAutor" id="add_autor" method="post">
   <a class="AddAutorTitulo">
     <h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span>
   </a>
@@ -198,27 +185,16 @@
     <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
     <input type="text" id="novo_autor" name="novo_autor" required class="InserirInput Preencher">
   </div>
-
-  <label class="Label" for="pais">Nacionalidade:</label>
-  <div class="Flex">
-    <select class="InserirSelect" id="novo_pais" name="novo_pais" required>
-      <option> Escolha a nacionalidade do autor</option>
-      <?php while ($pais1 = $sql_query_pais_2->fetch_assoc()) {
-        echo "<option value='" . $pais1['idPais'] . "'>" . $pais1['pais'] . "</option>";
-      } ?>
-    </select>
-    <button class="NovoInserir" onclick="AddPais()">+</button>
-  </div>
   <button class="BotaoInserir" type="submit" name="novo_submit_autor">Enviar</button>
 </form>
 
-<form class="AddPais" id="add_pais" method="post" action="cadastrar.php">
+<form class="AddPais" id="add_pais" method="post">
   <a Class="AddAutorTitulo">
     <h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="FecharPais()">close</span>
   </a>
   <div class="Preencher">
-    <p><label class="Label" for="novo_pais2r">Nome do Pais:</label></p>
-    <input type="text" id="novo_pais" name="novo_pais2" required class="InserirInput Preencher">
+    <p><label class="Label" for="novo_paisr">Nome do Pais:</label></p>
+    <input type="text" id="novo_pais" name="novo_pais" required class="InserirInput Preencher">
   </div>
   <button class="BotaoInserir" type="submit" name="novo_submit_pais">Enviar</button>
 </form>
