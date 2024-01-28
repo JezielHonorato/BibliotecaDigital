@@ -1,26 +1,30 @@
 /** RESET **/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-*{
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-	padding: 0;
-	border: 0;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    appearance: none;
-    outline: none;
-}
-::-webkit-scrollbar{
-    display: none;
-}
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
 }
 
-body{
-    position: relative;
-    min-height: calc(100vh - var(--THeader));
-    background-color: var(--CorPrimaria);
+::-webkit-scrollbar {
+  display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+body {
+  position: relative;
+  min-height: calc(100vh - var(--THeader));
+  background-color: var(--CorPrimaria);
 }
 
 /** ROOTS **/
@@ -32,52 +36,71 @@ body{
     --CorHover: #FFFFFF;
     --CorTerciaria: #3DB4F2;
 */
-:root{    
-    --CorPrimaria: #F1F3F7;
-    --CorSecundaria: #FFFFFF;
-    --CorTexto: #105503 ;
-    --CorHover: #4caf50;
-    --CorTerciaria: #3DB4F2;
+:root {
+  --CorPrimaria: #F1F3F7;
+  --CorSecundaria: #FFFFFF;
+  --CorTexto: #105503;
+  --CorHover: #4caf50;
+  --CorTerciaria: #3DB4F2;
 
-    --Csuccesso: #2f3532;
-    --Cerro: #ed1c24;
-    --Cinfo: #0b22e2;
+  --Csuccesso: #2f3532;
+  --Cerro: #ed1c24;
+  --Cinfo: #0b22e2;
 
-    --THeader: 10vh;
-    --TMargin: 13vh;
-}
-input{
-    text-indent: 1rem;
-}
-a, label, option, ::placeholder, th, button, span, p, input{
-    font-size: 1rem;
-    color: var(--CorTexto);
-    text-decoration: none;
-}
-.Sombra:hover{
-    /* Sombra para imagens .png, mas cai bem nos icones do google */
-    -webkit-filter: drop-shadow(0px 0px 20px rgba(0 0 0 / 90%)); 
-    filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
-    cursor: pointer;
+  --THeader: 10vh;
+  --TMargin: 13vh;
 }
 
-select{
-    color: var(--CorTexto);
-    text-decoration: none;
+input {
+  text-indent: 1rem;
 }
-h1{
-    font-size: 1.1rem;
-    color: var(--CorTexto);
-    text-decoration: none;
+
+a,
+label,
+option,
+::placeholder,
+th,
+button,
+span,
+p,
+input {
+  font-size: 1rem;
+  color: var(--CorTexto);
+  text-decoration: none;
 }
-.Simbolo{
-    font-family: 'Material Symbols Outlined';
-    color: var(--CorTexto);
-    font-size: 1.5rem;
-    cursor: pointer;
+
+.Sombra:hover {
+  /* Sombra para imagens .png, mas cai bem nos icones do google */
+  -webkit-filter: drop-shadow(0px 0px 20px rgba(0 0 0 / 90%));
+  filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
+  cursor: pointer;
 }
-a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
-    color: var(--CorHover);
+
+select {
+  color: var(--CorTexto);
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 1.1rem;
+  color: var(--CorTexto);
+  text-decoration: none;
+}
+
+.Simbolo {
+  font-family: 'Material Symbols Outlined';
+  color: var(--CorTexto);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+a:hover,
+label:hover,
+.Simbolo:hover,
+.th:hover,
+button:hover,
+span:hover {
+  color: var(--CorHover);
 }
 
 /* Barra de navegação */
@@ -89,520 +112,589 @@ a:hover, label:hover, .Simbolo:hover, .th:hover, button:hover, span:hover{
         <div class="Simbolo"><span class="Simbolo">info</span> <span id="info"></span></div>
     </div>
 */
-.Sucesso, .Erro, .Infor{
-    position: fixed;
-    display: flex;
-    top: 0;
-    width: 100%;
-    height: 5rem;
-    padding: 1rem;
-    align-items: center;
-    justify-content: space-around;
-    box-shadow: 0px 1px 20px 0px #000;
-    z-index: 3;
+.Sucesso,
+.Erro,
+.Infor {
+  position: fixed;
+  display: flex;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0px 1px 20px 0px #000;
+  z-index: 3;
 }
 
-.Sucesso{
-    background-color: var(--Csuccesso);
-}
-.Erro{
-    background-color: var(--Cerro);
-}
-.Erro span{
-    color: var(--CorHover);
-}
-.Infor{
-    background-color: var(--Cinfo);
+.Sucesso {
+  background-color: var(--Csuccesso);
 }
 
-.Cortina{
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    background-color: transparent;
-    backdrop-filter: blur(1px);
-    z-index: 2;
+.Erro {
+  background-color: var(--Cerro);
+}
+
+.Erro span {
+  color: var(--CorHover);
+}
+
+.Infor {
+  background-color: var(--Cinfo);
+}
+
+.Cortina {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  backdrop-filter: blur(1px);
+  z-index: 2;
 }
 
 
 /** HEADER  / header.php **/
-.Header{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: var(--THeader);
-    background: var(--CorSecundaria);
-    box-shadow: 0px 1px 20px 0px #000;
-    align-items: center;
-    justify-items: center;
-    z-index: 1;
+.Header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--THeader);
+  background: var(--CorSecundaria);
+  box-shadow: 0px 1px 20px 0px #000;
+  align-items: center;
+  justify-items: center;
+  z-index: 1;
 }
 
-.Itens{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    justify-items: center;
-    width: 100%;
+.Itens {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  justify-items: center;
+  width: 100%;
 }
 
 
 /** INTRODUÇÃO  / index.php **/
 
-.Temas{
-    height: 30vh;
+.Temas {
+  height: 30vh;
 }
 
-.Introducao{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    text-indent: 1rem;
-    text-align: justify;
-    justify-items: center;
-    align-items: center;
+.Introducao {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-indent: 1rem;
+  text-align: justify;
+  justify-items: center;
+  align-items: center;
 }
-.Introducao img{
-    width: auto;
-    height: 100%;
+
+.Introducao img {
+  width: auto;
+  height: 100%;
 }
 
 /** PESQUISA  / Livros.php **/
 
-.Busca{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 1rem;
-    border-radius: 10px;
-    padding: 20px;
+.Busca {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  border-radius: 10px;
+  padding: 20px;
 }
 
-.Campo{
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    height: 4rem;
-}   
-.CampoInput{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--CorSecundaria);
-    border-radius: 10px;
-    height: 2rem;
-    padding: 0 5%;
+.Campo {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  height: 4rem;
 }
-.CampoR{
-    display: block;
-    background-color: transparent;
-    border-radius: 5px;
-    position: relative;
+
+.CampoInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--CorSecundaria);
+  border-radius: 10px;
+  height: 2rem;
+  padding: 0 5%;
+}
+
+.CampoR {
+  display: block;
+  background-color: transparent;
+  border-radius: 5px;
+  position: relative;
 }
 
 
-.Pesquisar{
-    width: 100%;
-    background-color: var(--CorSecundaria);
-    color: var(--CorTexto);
-}
-.Pesquisar::placeholder{
-    color: var(--CorTexto);
+.Pesquisar {
+  width: 100%;
+  background-color: var(--CorSecundaria);
+  color: var(--CorTexto);
 }
 
-.Select{
-    padding: 0.5rem 1rem;
-    background-color: var(--CorSecundaria);
-    border-radius: 5px;
-    width: 100%;
+.Pesquisar::placeholder {
+  color: var(--CorTexto);
 }
 
-.ValorRange{
-    display: flex;
-    justify-content: space-between;
-}
-.RangeValor{
-    display: none;
-    align-content: center;
-    justify-content: right;
-    width: 50%;
-    right: 0;
-}
-.InputMaiorValor, .InputMenorValor, .RangeSepararValor{
-    text-indent: 0px;
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: var(--CorTexto);
-    background-color: transparent;
-    width: 3rem;
-}
-.RangeSepararValor{
-    width: 1rem;
-    justify-content: center;
-}
-.Progresso{
-    height: 5px;
-    width: 90%;
-    position: absolute;
-    border-radius: 5px;
-    background-color: var(--CorTerciaria);
+.Select {
+  padding: 0.5rem 1rem;
+  background-color: var(--CorSecundaria);
+  border-radius: 5px;
+  width: 100%;
 }
 
-.LinhaDupla input[type=range]{
-    position: absolute;
-    height: 5px;
-    width: 90%;
-    background: none;
-    -webkit-appearance: none;
-    pointer-events: none;
-    appearance: none;
+.ValorRange {
+  display: flex;
+  justify-content: space-between;
 }
+
+.RangeValor {
+  display: none;
+  align-content: center;
+  justify-content: right;
+  width: 50%;
+  right: 0;
+}
+
+.InputMaiorValor,
+.InputMenorValor,
+.RangeSepararValor {
+  text-indent: 0px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: var(--CorTexto);
+  background-color: transparent;
+  width: 3rem;
+}
+
+.RangeSepararValor {
+  width: 1rem;
+  justify-content: center;
+}
+
+.Progresso {
+  height: 5px;
+  width: 90%;
+  position: absolute;
+  border-radius: 5px;
+  background-color: var(--CorTerciaria);
+}
+
+.LinhaDupla input[type=range] {
+  position: absolute;
+  height: 5px;
+  width: 90%;
+  background: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+  appearance: none;
+}
+
 input[type=range]::-webkit-slider-thumb {
-    height: 17px;
-    width: 17px;
-    border-radius: 50%;
-    background: var(--CorTerciaria);
-    pointer-events: auto;
-    cursor: pointer;
-    -webkit-appearance: none;
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background: var(--CorTerciaria);
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
-.Submit{
-    border-radius: 100%;
-    height: 2rem;
-    width: 2rem;
-    background-color: var(--CorTerciaria);
+
+.Submit {
+  border-radius: 100%;
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--CorTerciaria);
 }
-.Submit span{
-    color: var(--CorPrimaria);
+
+.Submit span {
+  color: var(--CorPrimaria);
 }
 
 /** LIVROS  / Livros.php **/
 
-.Conteudo{
-    margin-top: var(--TMargin);
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    width: 80%;
+.Conteudo {
+  margin-top: var(--TMargin);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  width: 80%;
 }
 
-.Lista{
-    display: grid;
-    grid-template-rows: auto;
-    grid-auto-rows: auto;
-    grid-gap: 0.5rem;
-}
-.Livro{
-    display: grid;
-    grid-template-columns: 1fr 8fr 4fr 2fr;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    background-color: var(--CorSecundaria);
+.Lista {
+  display: grid;
+  grid-template-rows: auto;
+  grid-auto-rows: auto;
+  grid-gap: 0.5rem;
 }
 
-.Indice, .Titulo, .Autor, .Data, .Editar{
-    text-wrap: balance;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem;
-    border-right: 2px solid var(--CorPrimaria);
+.Livro {
+  display: grid;
+  grid-template-columns: 1fr 8fr 4fr 2fr;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  background-color: var(--CorSecundaria);
 }
-.Indice, .Editar{
-    justify-content: center;
+
+.Indice,
+.Titulo,
+.Autor,
+.Data,
+.Editar {
+  text-wrap: balance;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  border-right: 2px solid var(--CorPrimaria);
+}
+
+.Indice,
+.Editar {
+  justify-content: center;
 }
 
 
-.Editando{
-    display: none;
+.Editando {
+  display: none;
 }
 
 /** RODAPÈ  / footer.php **/
-.Retornar{
-    display: flex;
-    background-color: var(--CorTerciaria);
-    border-radius: 100%;
-    align-items: center;
-    height: 2rem;
-    width: 2rem;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1;
-    animation: appear 1ms ease-in-out;
-    animation-timeline: view();
+.Retornar {
+  display: flex;
+  background-color: var(--CorTerciaria);
+  border-radius: 100%;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+  animation: appear 1ms ease-in-out;
+  animation-timeline: view();
 }
 
-.Retornar span{
-    color: var(--CorSecundaria);
+.Retornar span {
+  color: var(--CorSecundaria);
 }
-.Rodape{
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    position: absolute;
-    background: var(--CorSecundaria);
-    padding: 20px;
-    width: 100%;
-    height: var(--THeader);
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    text-wrap: balance;
+
+.Rodape {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  position: absolute;
+  background: var(--CorSecundaria);
+  padding: 20px;
+  width: 100%;
+  height: var(--THeader);
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-wrap: balance;
 }
-.RodapeTeste{
-    visibility: hidden;
-    background-color: var(--CorSecundaria);
-    height: var(--THeader);
+
+.RodapeTeste {
+  visibility: hidden;
+  background-color: var(--CorSecundaria);
+  height: var(--THeader);
 }
 
 /** INSERIR  / Inserir.php **/
 
-.Excluir{
-    margin-top: 2rem;
-}
-.Label{
-    margin: 0.5rem;
-}
-.InserirInput{
-    text-indent: 1rem;
-    display: block;
-    padding: 0.5rem;
-    background-color: var(--CorSecundaria);
-    margin-bottom: 2rem;
-    border-radius: 5px;
-    width: 90%;
-    color: var(--CorTexto);
-}
-.ExcluirInput{
-    padding: 0.5rem 1rem;
-    background-color: var(--CorSecundaria);
-    border-radius: 5px;
-    width: 100%;
-    color: var(--CorTexto);
-    text-align: center;
+.Excluir {
+  margin-top: 2rem;
 }
 
-.InserirSelect{
-    padding: 0.5rem 1rem;
-    background-color: var(--CorSecundaria);
-    margin-bottom: 2rem;
-    border-radius: 5px;
-    width: 95%;
-    color: var(--CorTexto);
-}
-.NovoInserir{
-    padding: 0.5rem;
-    background-color: var(--CorTerciaria);
-    margin-bottom: 2rem;
-    border-radius: 5px;
-    width: 5%;
-    color: var(--CorSecundaria);
-}
-.NomeData{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.Label {
+  margin: 0.5rem;
 }
 
-.File{
-    margin: 0px;
-    font-size: smaller;
-    display: block;
-    margin-bottom: 2rem;    
-    background-color: var(--CorSecundaria);
-    color: var(--CorTexto);
-    border-radius: 5px;
-    width: 100%;
-    padding: 0.7rem;
+.InserirInput {
+  text-indent: 1rem;
+  display: block;
+  padding: 0.5rem;
+  background-color: var(--CorSecundaria);
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  width: 90%;
+  color: var(--CorTexto);
 }
 
-.BotaoInserir{
-    width: 100%;
-    background-color: var(--CorTerciaria);
-    color: var(--CorPrimaria);
-    margin-top: 2rem;
-    border-radius: 5px;
-    padding: 0.7rem;
+.ExcluirInput {
+  padding: 0.5rem 1rem;
+  background-color: var(--CorSecundaria);
+  border-radius: 5px;
+  width: 100%;
+  color: var(--CorTexto);
+  text-align: center;
 }
-.BotaoExcluir{
-    width: 100%;
-    background-color: var(--Cerro);
-    color: var(--CorPrimaria);
-    border-radius: 5px;
-    padding: 0.7rem;
+
+.InserirSelect {
+  padding: 0.5rem 1rem;
+  background-color: var(--CorSecundaria);
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  width: 95%;
+  color: var(--CorTexto);
+}
+
+.NovoInserir {
+  padding: 0.5rem;
+  background-color: var(--CorTerciaria);
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  width: 5%;
+  color: var(--CorSecundaria);
+}
+
+.NomeData {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.File {
+  margin: 0px;
+  font-size: smaller;
+  display: block;
+  margin-bottom: 2rem;
+  background-color: var(--CorSecundaria);
+  color: var(--CorTexto);
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.7rem;
+}
+
+.BotaoInserir {
+  width: 100%;
+  background-color: var(--CorTerciaria);
+  color: var(--CorPrimaria);
+  margin-top: 2rem;
+  border-radius: 5px;
+  padding: 0.7rem;
+}
+
+.BotaoExcluir {
+  width: 100%;
+  background-color: var(--Cerro);
+  color: var(--CorPrimaria);
+  border-radius: 5px;
+  padding: 0.7rem;
 }
 
 /** INSERIR AUTORES E PAISES  / inserir.php **/
 
-.AddAutor, .AddPais{
-    display: none;
-    position: absolute;
-    padding: 3rem;
-    width: 50%;
-    top: 20vh;
-    background-color: var(--CorPrimaria);
-    margin-left: 25%;
-    margin-right: 25%;
-    border-radius: 5px;
-    box-shadow: 0px 1px 200px 50px #000;
+.AddAutor,
+.AddPais {
+  display: none;
+  position: absolute;
+  padding: 3rem;
+  width: 50%;
+  top: 20vh;
+  background-color: var(--CorPrimaria);
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 5px;
+  box-shadow: 0px 1px 200px 50px #000;
 }
-.AddAutorTitulo{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1rem;
+
+.AddAutorTitulo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 /** LOGIN  / login.php **/
 
-.Login{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: var(--TMargin);
-    height: 30vh;
-    padding: 2rem;
+.Login {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--TMargin);
+  height: 30vh;
+  padding: 2rem;
 }
-.h1Login{
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
+
+.h1Login {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
-.Usuario{
+
+.Usuario {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  background-color: var(--CorSecundaria);
+}
+
+.UsuarioNome,
+.UsuarioNivel {
+  border: 1px solid var(--CorPrimaria);
+  border-right: 2px solid var(--CorPrimaria);
+  padding: 0.5rem;
+}
+
+.CriarApagar {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  background-color: var(--CorSecundaria);
+  margin-top: 0.5rem;
+}
+
+.CriarApagar input {
+  background-color: var(--CorSecundaria);
+  color: var(--CorTexto);
+}
+
+.CriarUser,
+.ApagarUser {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--CorSecundaria);
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.CriarUser {
+  background-color: var(--CorTerciaria);
+}
+
+.ApagarUser {
+  background-color: var(--Cerro);
+}
+
+.TrocarSenha {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 0.5rem;
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.InputSenha input {
+  padding: 0.5rem;
+  text-indent: 1rem;
+  width: 90%;
+  background-color: var(--CorSecundaria);
+}
+
+.InputSenha {
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+  background-color: var(--CorSecundaria);
+}
+
+.inputSenha span {
+  width: 10%;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .Introducao {
     display: grid;
-    grid-template-columns: 4fr 1fr;
-    background-color: var(--CorSecundaria);
-}
-.UsuarioNome, .UsuarioNivel{
-    border: 1px solid var(--CorPrimaria);
-    border-right: 2px solid var(--CorPrimaria);
-    padding: 0.5rem;
-}
-.CriarApagar{
+    grid-template-columns: 1fr;
+    height: 70vh;
+    grid-template-rows: 30% 1fr;
+    align-items: start;
+  }
+
+  .Header {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  .Livro {
     display: grid;
-    grid-template-columns: 4fr 1fr;
-    background-color: var(--CorSecundaria);
-    margin-top: 0.5rem;
-}
-.CriarApagar input{
-    background-color: var(--CorSecundaria);
-    color: var(--CorTexto);
-}
-.CriarUser, .ApagarUser{
-    cursor: pointer;
-    font-weight: bold;
-    color: var(--CorSecundaria);
+    grid-template-columns: 1fr 12fr 6fr;
+  }
+
+  .Data {
+    display: none;
+  }
+
+  .Indice,
+  .Titulo,
+  .Autor,
+  .Data,
+  .Editar {
     padding: 0.5rem;
-    width: 100%;
-}
-.CriarUser{
-    background-color: var(--CorTerciaria);
-}
-.ApagarUser{
-    background-color: var(--Cerro);
-}
-.TrocarSenha{
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    grid-gap: 0.5rem;
-    width: 100%;
-    margin-top: 5rem;
-}
-.InputSenha input{
-    padding: 0.5rem;
-    text-indent: 1rem;
-    width: 90%;
-    background-color: var(--CorSecundaria);
-}
-.InputSenha{
-    border-radius: 5px;
-    align-items: center;
-    display: flex;
-    background-color: var(--CorSecundaria);
-}
-.inputSenha span{
-    width: 10%;
-}
+  }
 
-
-@media screen and (max-width: 1000px){
-    .Introducao{
-        display: grid;
-        grid-template-columns: 1fr;
-        height: 70vh;
-        grid-template-rows: 30% 1fr;
-        align-items: start;
-    }
-
-    .Header{
-        grid-template-columns: 1fr 3fr 1fr;
-    }
-    .Livro{
-        display: grid;
-        grid-template-columns: 1fr 12fr 6fr;
-    }
-    .Data{
-        display: none;
-    }
-    .Indice, .Titulo, .Autor, .Data, .Editar{
-        padding: 0.5rem;
-    }
-    .Simbolo{
-        font-size: 1rem;
-    }
-    .NovoInserir{
-        width: 10%;
-    }
-    .NomeData, .CriarApagar{
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, 1fr);
-    }
-    .InserirInput{
-        width: 100%;
-    }
-    .ExcluirInput{
-        height: 4.5rem;
-    }
-    .ExcluirInput::placeholder{
-        position: absolute;
-        top: 5px; 
-        left: 0;
-        text-wrap: balance;
-    }
-    
-}
-
-.Maior{
-    font-size: 2rem;
-}
-.Menor{
-    font-size: 1.4rem;
-}
-.Menor2{
+  .Simbolo {
     font-size: 1rem;
-}
-.Preencher{
+  }
+
+  .NovoInserir {
+    width: 10%;
+  }
+
+  .NomeData,
+  .CriarApagar {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .InserirInput {
     width: 100%;
+  }
+
+  .ExcluirInput {
+    height: 4.5rem;
+  }
+
+  .ExcluirInput::placeholder {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    text-wrap: balance;
+  }
+
 }
-.Flex{
-    display: flex;
+
+.Maior {
+  font-size: 2rem;
 }
-.Invisivel{
-    display: none
+
+.Menor {
+  font-size: 1.4rem;
 }
-.Pointer{
-    cursor: pointer;
+
+.Menor2 {
+  font-size: 1rem;
+}
+
+.Preencher {
+  width: 100%;
+}
+
+.Flex {
+  display: flex;
+}
+
+.Invisivel {
+  display: none
+}
+
+.Pointer {
+  cursor: pointer;
 }
 
 @keyframes appear {
-    from {
-        opacity: 0;
-        translate: 10vw 0;
-    }
+  from {
+    opacity: 0;
+    translate: 10vw 0;
+  }
 
-    to {
-        opacity: 1;
-        translate: 0 0;
-    }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }

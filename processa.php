@@ -24,9 +24,9 @@
     $titulo = $livro['titulo'];
     $html = "<div class='Livro'>
               <a class='Indice' href='assets/$titulo.pdf' download='$titulo'><span class='Simbolo'>download</span></a>
-              <div class='Titulo onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>$titulo</a></div>
-              <div class='Autor' onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['autor']}</a></div>
-              <div class='Data'  onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['data']}</a></div>";
+              <div class='Titulo' onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>$titulo</a></div>
+              <div class='Autor'  onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['autor']}</a></div>
+              <div class='Data'   onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['data']}</a></div>";
     if (isset($_SESSION['usuario'])) {
       $html .= "<div class='Editar'><a href='editar.php?id={$livro['idLivro']}'><span class='Simbolo'>edit</span></a></div>";
     }
