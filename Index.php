@@ -1,21 +1,9 @@
 <?php
   session_start();
-  include("conexao.php");
-
-  $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
-  $sql_query_categoria = $conexao->query($sql_code_categoria) or die($conexao->error);
-
-  $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
-  $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
-
-  $sql_code_livro = "SELECT idLivro, titulo, autor, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idautor = l.idautor";
-  $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);
+  include("header.php");
 ?>
 
-<?php include("header.php"); ?>
-
 <div class="Conteudo">
-
   <div class="Introducao">
     <img src="./image/logo.png" alt="Logo">
     <div class="Texto">
@@ -29,5 +17,4 @@
 <?php include("footer.php"); ?>
 
 </body>
-
 </html>
