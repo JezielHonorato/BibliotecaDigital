@@ -117,20 +117,15 @@
         </div>
         <?php while ($lista_usuario = $sql_query_usuario->fetch_assoc()) {
           echo "<div class='Usuario'>";
-          echo "<div class='UsuarioNome'><a>" . $lista_usuario['usuario'] . "</a></div>";
-          echo "<div class='UsuarioNivel'><a>" . $lista_usuario['nivel'] . "</a></div>";
+          echo "<div class='UsuarioNome'><a>". $lista_usuario['usuario'] ."</a></div>";
+          echo "<div class='UsuarioNivel'><a>". $lista_usuario['nivel'] ."</a></div>";
           echo "</div>";
         } ?>
       </div>
 
       <div class="CriarApagar" id="criar_apagar">
-        <div>
-          <button class="CriarUser UsuarioNome" onclick="CriarUsuario()">Criar um novo usuário</button>
-        </div>
-
-        <div>
-          <button class="UsuarioNivel ApagarUser" onclick="ApagarUsuario()">Apagar usuário</button>
-        </div>
+        <div><button class="CriarUser UsuarioNome" onclick="CriarUsuario()">Criar um novo usuário</button></div>
+        <div><button class="UsuarioNivel ApagarUser" onclick="ApagarUsuario()">Apagar usuário</button></div>
       </div>
 
     <?php } ?>

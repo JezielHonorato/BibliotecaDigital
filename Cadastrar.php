@@ -60,7 +60,7 @@
 
   else if($titulo && $id_livro){
     $conexao->query("UPDATE tblivro SET titulo = '$titulo', data = $data, idAutor = $autor, idPais = $pais, idCategoria = $categoria WHERE idLivro = $id_livro") or die($conexao->error);
-    echo  "<script>alert('Livro Editado com sucesso!');</script>";
+    echo "<script>alert('Livro Editado com sucesso!');</script>";
     header("Location: livros.php");
   }
 
