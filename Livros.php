@@ -2,16 +2,11 @@
   session_start();
   include("conexao.php");
 
-  $sql_code_categoria = "SELECT * FROM tbcategoria ORDER BY categoria ASC";
-  $sql_query_categoria = $conexao->query($sql_code_categoria) or die($conexao->error);
+  $sql_categoria = $conexao->query("SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC") or die($conexao->error);
+  $sql_pais = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
+  $sql_minmax_datas = $conexao->query("SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro") or die($conexao->error);
 
-  $sql_code_pais = "SELECT * FROM tbpais ORDER BY pais ASC";
-  $sql_query_pais = $conexao->query($sql_code_pais) or die($conexao->error);
-
-  $sql_code_minmax_data = "SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro;";
-  $sql_query_minmax_data = $conexao->query($sql_code_minmax_data) or die($conexao->error);
-
-  $data = $sql_query_minmax_data->fetch_assoc();
+  $data = $sql_minmax_datas->fetch_assoc();
   $menor_valor = $data["menor_valor"];
   $maior_valor = $data["maior_valor"];
 ?>
@@ -26,7 +21,7 @@
       <label for="pesquisar">Pesquisar:</label>
       <div class="CampoInput">
         <label for="pesquisar" class="Simbolo Menor">search</label>
-        <input type="search" class="Pesquisar" id="pesquisar" name="pesquisar" autocomplete="off" onchange="pesquisarLivro()">
+        <input type="search" class="Pesquisar" id="pesquisar" name="pesquisar" onchange="pesquisarLivro()">
       </div>
     </div>
 
@@ -36,7 +31,7 @@
         <label class="Simbolo">expand_more</label>
         <select class="Select" id="categoria" name="categoria" onchange="pesquisarLivro()">
           <option></option>
-          <?php while ($categoria = $sql_query_categoria->fetch_assoc()) {
+          <?php while ($categoria = $sql_categoria->fetch_assoc()) {
             echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
           }
           ?>
@@ -49,7 +44,7 @@
       <div class="CampoInput">
         <label for="pais" class="Simbolo">expand_more</label>
         <select class="Select" id="pais" name="pais" onchange="pesquisarLivro()">
-          <?php while ($pais = $sql_query_pais->fetch_assoc()) {
+          <?php while ($pais = $sql_pais->fetch_assoc()) {
             echo "<option value='" . $pais['idPais'] . "'>" . $pais['pais'] . "</option>";
           }
           ?>

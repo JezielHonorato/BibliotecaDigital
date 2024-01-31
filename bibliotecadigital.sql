@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02/11/2023 às 23:11
+-- Tempo de geração: 31/01/2024 às 01:44
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -28,23 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbautor` (
-  `idautor` int(11) NOT NULL,
-  `autor` varchar(50) NOT NULL,
-  `idpais` int(11) DEFAULT NULL
+  `idAutor` int(11) NOT NULL,
+  `autor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tbautor`
 --
 
-INSERT INTO `tbautor` (`idautor`, `autor`, `idpais`) VALUES
-(1, 'Machado de Assis', 3),
-(2, 'Franz Kafka', 17),
-(3, '', NULL),
-(4, 'Dante Alighieri', 18),
-(5, 'Lima Barreto', 3),
-(6, 'Aluísio Azevedo', 3),
-(7, 'José De Alencar', 3);
+INSERT INTO `tbautor` (`idAutor`, `autor`) VALUES
+(1, 'Machado de Assis'),
+(2, 'Franz Kafka'),
+(3, ''),
+(4, 'Dante Alighieri'),
+(5, 'Lima Barreto'),
+(6, 'Aluísio Azevedo'),
+(7, 'José De Alencar'),
+(8, 'Olavo Bilac'),
+(9, 'Raul Pompeia');
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ INSERT INTO `tbautor` (`idautor`, `autor`, `idpais`) VALUES
 --
 
 CREATE TABLE `tbcategoria` (
-  `idcategoria` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL,
   `categoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -61,7 +62,7 @@ CREATE TABLE `tbcategoria` (
 -- Despejando dados para a tabela `tbcategoria`
 --
 
-INSERT INTO `tbcategoria` (`idcategoria`, `categoria`) VALUES
+INSERT INTO `tbcategoria` (`idCategoria`, `categoria`) VALUES
 (1, 'Biografia'),
 (2, 'Conto'),
 (3, 'Crônica'),
@@ -77,28 +78,35 @@ INSERT INTO `tbcategoria` (`idcategoria`, `categoria`) VALUES
 --
 
 CREATE TABLE `tblivro` (
-  `idlivro` int(11) NOT NULL,
+  `idLivro` int(11) NOT NULL,
   `titulo` varchar(50) NOT NULL,
-  `publicadodata` int(11) DEFAULT NULL,
-  `idautor` int(11) DEFAULT NULL,
-  `idcategoria` int(11) DEFAULT NULL,
-  `idpais` int(11) DEFAULT NULL,
-  `arquivo` varchar(50) DEFAULT NULL
+  `data` int(11) DEFAULT NULL,
+  `idAutor` int(11) DEFAULT NULL,
+  `idCategoria` int(11) DEFAULT NULL,
+  `idPais` int(11) DEFAULT NULL,
+  `usuario` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tblivro`
 --
 
-INSERT INTO `tblivro` (`idlivro`, `titulo`, `publicadodata`, `idautor`, `idcategoria`, `idpais`, `arquivo`) VALUES
-(1, 'Crisálidas', 1964, 1, 5, 3, './assets/Crisálidas.pdf'),
-(2, 'Dom Casmurro', 1899, 1, 6, 3, './assets/Dom Casmurro.pdf'),
-(3, 'Helena', 1876, 1, 6, 3, './assets/Helena.pdf'),
-(4, 'Memórias Póstumas De Brás Cubas', 1881, 1, 6, 3, './assets/Memórias Póstumas De Brás Cubas.pdf'),
-(5, 'A Divina Comédia', 1472, 4, 5, 18, './assets/A Divina Comédia.pdf'),
-(6, 'O Cortiço', 1890, 6, 6, 3, './assets/O Cortiço.pdf'),
-(7, 'A Mortalha De Alzira', 1892, 6, 6, 3, './assets/A Mortalha De Alzira.pdf'),
-(8, 'Iracema', 1892, 7, 6, 3, './assets/Iracema.pdf');
+INSERT INTO `tblivro` (`idLivro`, `titulo`, `data`, `idAutor`, `idCategoria`, `idPais`, `usuario`) VALUES
+(1, 'Crisálidas', 1964, 1, 5, 3, 'Jeziel Honorato'),
+(2, 'Dom Casmurro', 1899, 1, 6, 3, 'Jeziel Honorato'),
+(3, 'Helena', 1876, 1, 6, 3, 'Jeziel Honorato'),
+(4, 'Memórias Póstumas De Brás Cubas', 1881, 1, 6, 3, 'Jeziel Honorato'),
+(6, 'O Cortiço', 1890, 6, 6, 3, 'Jeziel Honorato'),
+(8, 'Iracema', 1892, 7, 6, 3, 'Jeziel Honorato'),
+(9, 'Triste Fim De Policarpo Quaresma', 1915, 5, 6, 3, 'Jeziel Honorato'),
+(10, 'Diario Intimo', 1953, 5, 6, 3, 'admin'),
+(13, 'Senhora', 1874, 7, 6, 3, 'admin'),
+(14, 'Diva', 1864, 7, 6, 3, 'admin'),
+(15, 'Os Deuses De Casaca', 1865, 1, 7, 3, 'admin'),
+(16, 'Papéis Avulsos', 1882, 1, 2, 3, 'admin'),
+(17, 'O Ateneu', 1888, 9, 6, 3, 'Jeziel Honorato'),
+(18, 'A Divina Comédia', 1314, 4, 5, 18, 'Jeziel Honorato'),
+(19, 'Espumas Flutuantes', 1870, 9, 5, 3, 'Jeziel Honorato');
 
 -- --------------------------------------------------------
 
@@ -107,7 +115,7 @@ INSERT INTO `tblivro` (`idlivro`, `titulo`, `publicadodata`, `idautor`, `idcateg
 --
 
 CREATE TABLE `tbpais` (
-  `idpais` int(11) NOT NULL,
+  `idPais` int(11) NOT NULL,
   `pais` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -115,8 +123,8 @@ CREATE TABLE `tbpais` (
 -- Despejando dados para a tabela `tbpais`
 --
 
-INSERT INTO `tbpais` (`idpais`, `pais`) VALUES
-(0, NULL),
+INSERT INTO `tbpais` (`idPais`, `pais`) VALUES
+(0, ''),
 (1, 'Alemanha'),
 (2, 'Austrália'),
 (3, 'Brasil'),
@@ -128,7 +136,7 @@ INSERT INTO `tbpais` (`idpais`, `pais`) VALUES
 (9, 'Portugal'),
 (10, 'Rússia'),
 (14, 'Noruega'),
-(17, 'Tchéquia'),
+(17, 'República Tcheca'),
 (18, 'Itália');
 
 -- --------------------------------------------------------
@@ -149,7 +157,8 @@ CREATE TABLE `tbusuarios` (
 --
 
 INSERT INTO `tbusuarios` (`id`, `usuario`, `senha`, `nivel`) VALUES
-(1, 'admin', 'admin', 2);
+(1, 'Jeziel Honorato', 'Aleatória', 3),
+(6, 'estagiario', 'estagiario', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -159,29 +168,28 @@ INSERT INTO `tbusuarios` (`id`, `usuario`, `senha`, `nivel`) VALUES
 -- Índices de tabela `tbautor`
 --
 ALTER TABLE `tbautor`
-  ADD PRIMARY KEY (`idautor`),
-  ADD KEY `idpais` (`idpais`);
+  ADD PRIMARY KEY (`idAutor`);
 
 --
 -- Índices de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  ADD PRIMARY KEY (`idcategoria`);
+  ADD PRIMARY KEY (`idCategoria`);
 
 --
 -- Índices de tabela `tblivro`
 --
 ALTER TABLE `tblivro`
-  ADD PRIMARY KEY (`idlivro`),
-  ADD KEY `idautor` (`idautor`),
-  ADD KEY `idcategoria` (`idcategoria`),
-  ADD KEY `idpais` (`idpais`);
+  ADD PRIMARY KEY (`idLivro`),
+  ADD KEY `idautor` (`idAutor`),
+  ADD KEY `idcategoria` (`idCategoria`),
+  ADD KEY `idpais` (`idPais`);
 
 --
 -- Índices de tabela `tbpais`
 --
 ALTER TABLE `tbpais`
-  ADD PRIMARY KEY (`idpais`);
+  ADD PRIMARY KEY (`idPais`);
 
 --
 -- Índices de tabela `tbusuarios`
@@ -197,31 +205,31 @@ ALTER TABLE `tbusuarios`
 -- AUTO_INCREMENT de tabela `tbautor`
 --
 ALTER TABLE `tbautor`
-  MODIFY `idautor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT de tabela `tblivro`
 --
 ALTER TABLE `tblivro`
-  MODIFY `idlivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idLivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `tbpais`
 --
 ALTER TABLE `tbpais`
-  MODIFY `idpais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarios`
 --
 ALTER TABLE `tbusuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para tabelas despejadas
