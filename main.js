@@ -1,4 +1,4 @@
-function CriaRequest() {
+function criaRequest() {
   try {
     request = new XMLHttpRequest();
   } catch (IEAtual) {
@@ -15,25 +15,21 @@ function CriaRequest() {
     }
   }
 
-  if (!request)
-    alert("Seu Navegador não suporta Ajax!");
-  else
-    return request;
+  !request ? alert("Seu Navegador não suporta Ajax!") : request;
 }
 
 document.getElementById("resultado").onload = pesquisarLivro()
-var Ordem = 1
 
 function pesquisarLivro() {
-  var pesquisar = document.getElementById("pesquisar").value;
-  var categoria = document.getElementById("categoria").value;
-  var pais = document.getElementById("pais").value;
+  var pesquisar  = document.getElementById("pesquisar").value;
+  var categoria  = document.getElementById("categoria").value;
+  var pais       = document.getElementById("pais").value;
   var rangeMenor = document.getElementById("range_menor").value;
   var rangeMaior = document.getElementById("range_maior").value;
-  var ordem = document.getElementById("ordem").value;
+  var ordem      = document.getElementById("ordem").value;
 
   var result = document.getElementById("resultado");
-  var xmlreq = CriaRequest();
+  var xmlreq = criaRequest();
 
   xmlreq.open("GET", "processa.php?pesquisar=" + pesquisar + "&categoria=" + categoria + "&pais=" + pais + "&range_menor=" + rangeMenor + "&range_maior=" + rangeMaior + "&ordem=" + ordem, true);
   xmlreq.onreadystatechange = function () {
@@ -53,12 +49,10 @@ function mudarPeriodo() { //Função para o Range duplo
   let rangeMenorV = parseInt(document.getElementById('range_menor').value);
   let rangeMaiorV = parseInt(document.getElementById('range_maior').value);
 
-  if (rangeMenorV > rangeMaiorV) {
-    [rangeMenorV, rangeMaiorV] = [rangeMaiorV, rangeMenorV];
-  }
+  (rangeMenorV > rangeMaiorV) ? [rangeMenorV, rangeMaiorV] = [rangeMaiorV, rangeMenorV] : '';
 
-  document.getElementById('range_menor').value = rangeMenorV;
-  document.getElementById('range_maior').value = rangeMaiorV;
+  document.getElementById('input_menor_valor').innerHTML = rangeMenorV;
+  document.getElementById('input_maior_valor').innerHTML = rangeMaiorV;
 
   const inputRangeMenor = document.getElementById('range_menor');
   const inputRangeMaior = document.getElementById('range_maior');
@@ -76,7 +70,7 @@ document.getElementById('range_maior').addEventListener('input', mudarPeriodo);
 document.getElementById('input_menor_valor').addEventListener('click', mudarPeriodo);
 document.getElementById('input_maior_valor').addEventListener('click', mudarPeriodo);
 
-function Ordenar(id) { //Função para os simbolos de Ordenar
+function ordenar(id) { //Função para os simbolos de Ordenar
   const elementos = ['ordenar_titulo', 'ordenar_autor', 'ordenar_data'];
   const elementoClicado = document.getElementById(`ordenar_${id}`);
   const ordenar = document.getElementById('ordem')
@@ -97,17 +91,17 @@ function AddPais() {
   var Padrao = document.getElementById('inserir');
   NovoPais.style.display = "block"
   Padrao.style.display = "none"
-} function AddAutor() {
+} function addAutor() {
   var NovoAutor = document.getElementById('add_autor');
   var Padrao = document.getElementById('inserir');
   NovoAutor.style.display = "block"
   Padrao.style.display = "none"
-} function FecharAutor() {
+} function fecharAutor() {
   var NovoAutor = document.getElementById('add_autor');
   var Padrao = document.getElementById('inserir');
   NovoAutor.style.display = "none"
   Padrao.style.display = "block"
-} function FecharPais() {
+} function fecharPais() {
   var NovoAutor = document.getElementById('add_autor');
   var NovoPais = document.getElementById('add_pais');
   var Padrao = document.getElementById('inserir');
@@ -121,7 +115,7 @@ function AddPais() {
   }
 }
 
-function Editar() {
+function editar() {
   var NovoAutor = document.getElementById('add_autor');
   var NovoPais = document.getElementById('add_pais');
   var Padrao = document.getElementById('inserir');
@@ -135,7 +129,7 @@ function Editar() {
   }
 }
 
-function CriarUsuario() {
+function criarUsuario() {
   var Usuario = document.getElementById('usuario');
   var CriarUsuario = document.getElementById('criar_usuario');
   var Lista = document.getElementById('lista');
@@ -146,7 +140,7 @@ function CriarUsuario() {
   Lista.style.display = "none"
   CriarApagar.style.display = "none"
 }
-function ApagarUsuario() {
+function apagarUsuario() {
   var Usuario = document.getElementById('usuario');
   var ApagarUsuario = document.getElementById('apagar_usuario');
   var Lista = document.getElementById('lista');
@@ -158,7 +152,7 @@ function ApagarUsuario() {
   CriarApagar.style.display = "none"
 }
 
-function MostrarSenha(x) {
+function mostrarSenha(x) {
   const inputSenha = document.getElementById('input_senha_' + x);
   const span = document.getElementById('span_' + x);
 
@@ -167,7 +161,7 @@ function MostrarSenha(x) {
 }
 
 var cor = true
-function MudarCor() {
+function mudarCor() {
   if (cor) {
     document.documentElement.style.setProperty('--CorPrimaria', '#0B1622');
     document.documentElement.style.setProperty('--CorSecundaria', '#151F2E');
@@ -184,4 +178,3 @@ function MudarCor() {
     cor = true;
   }
 };
-

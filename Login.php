@@ -1,19 +1,17 @@
 <?php
   session_start();
   include("conexao.php");
-  if (isset($_SESSION['usuario'])) {
-    $user_atual = $_SESSION['usuario'][0];
-  }
+  $user_atual = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : '';
+
   if (isset($_POST['usuario']) || isset($_POST['senha'])) {
     $usuario = $conexao->real_escape_string($_POST['usuario']);
     $senha = $conexao->real_escape_string($_POST['senha']);
 
-    $sql_code_login = "SELECT * FROM tbusuarios WHERE usuario = '$usuario' AND senha = '$senha'";
-    $sql_query_login = $conexao->query($sql_code_login) or die("ERRO:" . $conexao->error);
+    $sql_login = $conexao->query("SELECT usuario, nivel FROM tbusuarios WHERE usuario = '$usuario' AND senha = '$senha'") or die("ERRO:" . $conexao->error);
 
-    $quantidade = $sql_query_login->num_rows;
+    $quantidade = $sql_login->num_rows;
     if ($quantidade == 1) {
-      $user = $sql_query_login->fetch_assoc();
+      $user = $sql_login->fetch_assoc();
       session_start();
       $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
       header("Location: index.php");
@@ -22,14 +20,13 @@
     }
   }
 
-  $sql_code_usuario = "SELECT * FROM tbusuarios ORDER BY usuario ASC";
-  $sql_query_usuario = $conexao->query($sql_code_usuario) or die($conexao->error);
+  $sql_usuarios = $conexao->query("SELECT usuario, nivel FROM tbusuarios ORDER BY usuario ASC") or die($conexao->error);
 
   if (isset($_POST['submit_criar_user'])) {
     $user_name = $_POST['user_name'];
     $user_nivel = $_POST['user_nivel'];
 
-    $user_exist = $conexao->query("SELECT * FROM tbusuarios WHERE usuario = '$user_name'");
+    $user_exist = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'");
     $user_exist_linha = $user_exist->num_rows;
 
     if ($user_exist_linha >= 1) {
@@ -45,10 +42,9 @@
     $excluir_senha = $_POST['user_senha_excluir'];
     $excluir_user = $_POST['user_name_excluir'];
 
-    $sql_code_confirm = "SELECT * FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$excluir_senha'";
-    $sql_query_confirm = $conexao->query($sql_code_confirm) or die("ERRO:" . $conexao->error);
+    $sql_confirmar = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$excluir_senha'") or die("ERRO:" . $conexao->error);
 
-    $confirmado = $sql_query_confirm->num_rows;
+    $confirmado = $sql_confirmar->num_rows;
     if ($confirmado == 1) {
       $conexao->query("DELETE FROM tbusuarios WHERE usuario = '$excluir_user'");
       header("Refresh: 0");
@@ -62,10 +58,9 @@
     $nova_senha = $_POST['nova_senha'];
     $nova_senha_nova = $_POST['nova_senha_nova'];
 
-    $sql_code_confirm_denovo = "SELECT * FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$senha_antiga'";
-    $sql_query_confirm_denovo = $conexao->query($sql_code_confirm_denovo) or die("ERRO:" . $conexao->error);
+    $sql_confirmar_denovo = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_atual' AND senha = '$senha_antiga'") or die("ERRO:" . $conexao->error);
 
-    $confirmado = $sql_query_confirm_denovo->num_rows;
+    $confirmado = $sql_confirmar_denovo->num_rows;
     if ($confirmado == 1) {
       if ($nova_senha == $nova_senha_nova) {
         $conexao->query("UPDATE tbusuarios SET senha = '$nova_senha' WHERE usuario = '$user_atual';");
@@ -100,8 +95,7 @@
           <input type='text' autocomplete='off' required placeholder='Digite o nome do usuário' name='user_name_excluir' class="UsuarioNome">
           <div class="InputSenha">
             <input type="password" name="user_senha_excluir" id="input_senha_5" placeholder="Digite a sua senha">
-            <span class="Simbolo" id="span_5" onclick="MostrarSenha(5)">visibility_off</span>
-          </div>
+            <span class="Simbolo" id="span_5" onclick="mostrarSenha(5)">visibility_off</span> </div>
         </div>
         <button class="ApagarUser" type="submit">Excluir</button>
       </form>
@@ -115,7 +109,7 @@
             <h1>Classe</h1>
           </div>
         </div>
-        <?php while ($lista_usuario = $sql_query_usuario->fetch_assoc()) {
+        <?php while ($lista_usuario = $sql_usuarios->fetch_assoc()) {
           echo "<div class='Usuario'>";
           echo "<div class='UsuarioNome'><a>". $lista_usuario['usuario'] ."</a></div>";
           echo "<div class='UsuarioNivel'><a>". $lista_usuario['nivel'] ."</a></div>";
@@ -124,8 +118,8 @@
       </div>
 
       <div class="CriarApagar" id="criar_apagar">
-        <div><button class="CriarUser UsuarioNome" onclick="CriarUsuario()">Criar um novo usuário</button></div>
-        <div><button class="UsuarioNivel ApagarUser" onclick="ApagarUsuario()">Apagar usuário</button></div>
+        <div><button class="CriarUser UsuarioNome" onclick="criarUsuario()">Criar um novo usuário</button></div>
+        <div><button class="UsuarioNivel ApagarUser" onclick="apagarUsuario()">Apagar usuário</button></div>
       </div>
 
     <?php } ?>
@@ -134,16 +128,13 @@
       <h1 class="h1Login">Alterar a senha</h1>
       <div class="InputSenha">
         <input type="password" name="senha_antiga" id="input_senha_1" placeholder="Digite a sua senha atual">
-        <span class="Simbolo" id="span_1" onclick="MostrarSenha(1)">visibility_off</span>
-      </div>
+        <span class="Simbolo" id="span_1" onclick="mostrarSenha(1)">visibility_off</span> </div>
       <div class="InputSenha">
         <input type="password" name="nova_senha" id="input_senha_2" placeholder="Digite a nova senha">
-        <span class="Simbolo" id="span_2" onclick="MostrarSenha(2)">visibility_off</span>
-      </div>
+        <span class="Simbolo" id="span_2" onclick="mostrarSenha(2)">visibility_off</span> </div>
       <div class="InputSenha">
         <input type="password" name="nova_senha_nova" id="input_senha_3" placeholder="Confirme a senha">
-        <span class="Simbolo" id="span_3" onclick="MostrarSenha(3)">visibility_off</span>
-      </div>
+        <span class="Simbolo" id="span_3" onclick="mostrarSenha(3)">visibility_off</span> </div>
       <button class="CriarUser" type="submit" name="trocar_senha">Alterar a senha</button>
     </form>
 
@@ -161,8 +152,7 @@
         <label for="senha">Senha:</label>
         <div class="InputSenha">
           <input type="password" name="senha" id="input_senha_4">
-          <span class="Simbolo" id="span_4" onclick="MostrarSenha(4)">visibility_off</span>
-        </div>
+          <span class="Simbolo" id="span_4" onclick="mostrarSenha(4)">visibility_off</span> </div>
         <button type="submit" class="BotaoInserir">Login</button>
       </form>
     </div>

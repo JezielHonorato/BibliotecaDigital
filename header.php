@@ -23,9 +23,9 @@
       <a href="./index.php">Home</a>
       <a href="./livros.php">Livros</a>
       <?php if (isset($_SESSION['usuario'])) {
-        echo "<a href='./inserir.php'>Inserir</a>";
+        echo "<a href='./cadastrar.php'>Cadastrar</a>";
       } ?>
-      <a href="./Login.php">Login</a>
+      <a href="./login.php">Login</a>
     </div>
     <a href="./livros.php"><span class="Simbolo">search</span></a>
   </header>

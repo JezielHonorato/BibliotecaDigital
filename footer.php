@@ -2,6 +2,6 @@
 
 <footer class="RodapeTeste"></footer>
 <footer class="Rodape">
-  <span class="Simbolo Menor" onclick="MudarCor()"> palette </span>
+  <span class="Simbolo Menor" onclick="mudarCor()"> palette </span>
   <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
 </footer>

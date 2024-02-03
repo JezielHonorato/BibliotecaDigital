@@ -2,26 +2,25 @@
   session_start();
   include("conexao.php");
 
-  isset($_POST['titulo'])     ? $titulo     = ucwords(mb_strtolower($_POST['titulo']))     : $titulo     = false;
-  isset($_POST['novo_autor']) ? $novo_autor = ucwords(mb_strtolower($_POST['novo_autor'])) : $novo_autor = false;
-  isset($_POST['novo_pais'])  ? $novo_pais  = ucwords(mb_strtolower($_POST['novo_pais']))  : $novo_pais  = false;
-  isset($_SESSION['usuario']) ? $user       = true                                         : $user       = false;
-  isset($_GET['id'])          ? $id         = $_GET['id']                                  : $id         = false;
-  isset($_POST['id'])         ? $id_livro   = $_POST['id']                                 : $id_livro   = false;
-  isset($_POST['data'] )      ? $data       = $_POST['data']                               : $data       = false;
-  isset($_POST['autor'])      ? $autor      = $_POST['autor']                              : $autor      = false;
-  isset($_POST['pais'])       ? $pais       = $_POST['pais']                               : $pais       = false;
-  isset($_POST['categoria'])  ? $categoria  = $_POST['categoria']                          : $categoria  = false;
-  isset($_POST['excluir'])    ? $excluir    = $_POST['excluir']                            : $excluir    = false;
-  isset($_FILES['file'])      ? $file       = $_FILES['file']                              : $file       = false;
-  $usuario = $_SESSION['usuario'][0];
+  $titulo     = isset($_POST['titulo'])     ? ucwords(mb_strtolower($_POST['titulo']))     : false;
+  $novo_autor = isset($_POST['novo_autor']) ? ucwords(mb_strtolower($_POST['novo_autor'])) : false;
+  $novo_pais  = isset($_POST['novo_pais'])  ? ucwords(mb_strtolower($_POST['novo_pais']))  : false;
+  $file       = isset($_FILES['file'])      ? $_FILES['file']     : false;
+  $id_livro   = isset($_POST['id'])         ? $_POST['id']        : false;
+  $data       = isset($_POST['data'])       ? $_POST['data']      : false;
+  $autor      = isset($_POST['autor'])      ? $_POST['autor']     : false;
+  $pais       = isset($_POST['pais'])       ? $_POST['pais']      : false;
+  $categoria  = isset($_POST['categoria'])  ? $_POST['categoria'] : false;
+  $excluir    = isset($_POST['excluir'])    ? $_POST['excluir']   : false;
+  $id         = isset($_GET['id'])          ? $_GET['id']         : false;
+  $user       = isset($_SESSION['usuario']) ? true : false;
+  $usuario    = $_SESSION['usuario'][0];
 
   function editar($campo) {
     $id = $GLOBALS['id'];
     if ($id) {
-      $sql_code_livro = "SELECT idLivro, titulo, autor, l.idAutor, categoria, l.idCategoria, pais, l.idPais, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor INNER JOIN tbcategoria AS c ON c.idCategoria = l.idCategoria INNER JOIN tbpais AS p ON p.idPais = l.idPais WHERE idLivro = $id";
-      $sql_query_livro = $GLOBALS['conexao']->query($sql_code_livro) or die($sql_code_livro);
-      $livro = $sql_query_livro->fetch_assoc();
+      $sql_livro = $GLOBALS['conexao']->query("SELECT idLivro, titulo, autor, l.idAutor, categoria, l.idCategoria, pais, l.idPais, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor INNER JOIN tbcategoria AS c ON c.idCategoria = l.idCategoria INNER JOIN tbpais AS p ON p.idPais = l.idPais WHERE idLivro = $id");
+      $livro = $sql_livro->fetch_assoc();
       return $livro["$campo"];
     } else {
       return $id;
@@ -33,9 +32,7 @@
   $sql_pais      = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
 
   if ($file) {
-    if ($file['error']) {
-      die("Falha ao enviar o arquivo");
-    }
+    $file['error'] ? die("Falha ao enviar o arquivo") : '';
     $consulta = $conexao->query("SELECT idLivro FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor")->num_rows;
 
     if ($consulta >= 1) { 
@@ -129,7 +126,7 @@
           echo "<option value='". $autor['idAutor'] . "'>" . $autor['autor'] ."</option>";
         } ?>
       </select>
-      <a class="NovoInserir" onclick="AddAutor()">+</a>
+      <a class="NovoInserir" onclick="addAutor()">+</a>
     </div>
 
     <label class="Label" for="pais">Nacionalidade:</label>
@@ -144,7 +141,7 @@
           echo "<option value='". $pais['idPais'] . "'>" . $pais['pais'] ."</option>";
         } ?>
       </select>
-      <a class="NovoInserir" onclick="AddPais()">+</a>
+      <a class="NovoInserir" onclick="addPais()">+</a>
     </div>
 
     <label class="Label" for="categoria">Categoria:</label>
@@ -179,7 +176,7 @@
 
 <form class="AddAutor" id="add_autor" method="post">
   <a class="AddAutorTitulo">
-    <h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="FecharAutor()">close</span>
+    <h1>Adicionar um novo Autor</h1> <span class="Simbolo" onclick="fecharAutor()">close</span>
   </a>
   <div class="Preencher"> 
     <p><label class="Label" for="novo_autor">Nome do Autor:</label></p>
@@ -190,7 +187,7 @@
 
 <form class="AddPais" id="add_pais" method="post">
   <a Class="AddAutorTitulo">
-    <h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="FecharPais()">close</span>
+    <h1>Adicionar um novo Pais</h1> <span class="Simbolo" onclick="fecharPais()">close</span>
   </a>
   <div class="Preencher">
     <p><label class="Label" for="novo_paisr">Nome do Pais:</label></p>

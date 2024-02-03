@@ -2,18 +2,16 @@
   session_start();
   include("conexao.php");
 
-  $sql_categoria = $conexao->query("SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC") or die($conexao->error);
   $sql_pais = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
-  $sql_minmax_datas = $conexao->query("SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro") or die($conexao->error);
+  $sql_datas = $conexao->query("SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro") or die($conexao->error);
+  $sql_categoria = $conexao->query("SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC") or die($conexao->error);
 
-  $data = $sql_minmax_datas->fetch_assoc();
+  $data = $sql_datas->fetch_assoc();
   $menor_valor = $data["menor_valor"];
   $maior_valor = $data["maior_valor"];
 ?>
 
 <?php include("header.php"); ?>
-<input type="number" class="Invisivel" value="<?= $menor_valor ?>" id="valor_inicial">
-<input type="number" class="Invisivel" value="<?= $maior_valor ?>" id="valor_final">
 
 <div class="Conteudo">
   <div class="Busca">
@@ -32,7 +30,7 @@
         <select class="Select" id="categoria" name="categoria" onchange="pesquisarLivro()">
           <option></option>
           <?php while ($categoria = $sql_categoria->fetch_assoc()) {
-            echo "<option value='" . $categoria['idcategoria'] . "'>" . $categoria['categoria'] . "</option>";
+            echo "<option value='" . $categoria['idCategoria'] . "'>" . $categoria['categoria'] . "</option>";
           }
           ?>
         </select>
@@ -55,16 +53,16 @@
     <div class="Campo">
       <div class="ValorRange">
         <a>Periodo:</a> <a class="RangeValor" id="range_valor">
-          <input type="number" id="input_menor_valor" class="InputMenorValor"></input>
+          <a id="input_menor_valor" class="InputMenorValor"></a>
           <span class="RangeSepararValor">-</span>
-          <input type="number" id="input_maior_valor" class="InputMaiorValor"></input>
+          <a id="input_maior_valor" class="InputMaiorValor"></a>
         </a>
       </div>
       <div class="CampoInput CampoR">
         <div class="Progresso" id="progresso"></div>
         <span class="LinhaDupla">
-          <input type="range" min="<?= $menor_valor ?>" max="<?= $maior_valor ?>" value="<?= $menor_valor ?>" id="range_menor" name="range_menor" class="Periodo" onchange="MudarPeriodo()" onclick="pesquisarLivro()">
-          <input type="range" min="<?= $menor_valor ?>" max="<?= $maior_valor ?>" value="<?= $maior_valor ?>" id="range_maior" name="range_maior" class="Periodo" onchange="MudarPeriodo()" onclick="pesquisarLivro()">
+          <input type="range" min="<?= $menor_valor ?>" max="<?= $maior_valor ?>" value="<?= $menor_valor ?>" id="range_menor" name="range_menor" class="Periodo" onchange="mudarPeriodo()" onclick="pesquisarLivro()">
+          <input type="range" min="<?= $menor_valor ?>" max="<?= $maior_valor ?>" value="<?= $maior_valor ?>" id="range_maior" name="range_maior" class="Periodo" onchange="mudarPeriodo()" onclick="pesquisarLivro()">
         </span>
       </div>
     </div>
@@ -77,9 +75,9 @@
       <div class="Indice">
         <h1> <span class="Simbolo"> download</span> </h1>
       </div>
-      <div class="Titulo"> <h1>Titulo</h1> <span onclick="Ordenar('titulo')" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span> </div>
-      <div class="Autor">  <h1>Autor</h1>  <span onclick="Ordenar('autor')"  id="ordenar_autor"  class="Simbolo Menor2">swap_vert</span> </div>
-      <div class="Data">   <h1>Data</h1>   <span onclick="Ordenar('data')"   id="ordenar_data"   class="Simbolo Menor2">swap_vert</span> </div>
+      <div class="Titulo"> <h1>Titulo</h1> <span onclick="ordenar('titulo')" id="ordenar_titulo" class="Simbolo Menor2">swap_vert</span> </div>
+      <div class="Autor">  <h1>Autor</h1>  <span onclick="ordenar('autor')"  id="ordenar_autor"  class="Simbolo Menor2">swap_vert</span> </div>
+      <div class="Data">   <h1>Data</h1>   <span onclick="ordenar('data')"   id="ordenar_data"   class="Simbolo Menor2">swap_vert</span> </div>
       <?php if (isset($_SESSION['usuario'])) { ?>
         <div class="Editar"> <span class='Simbolo'>edit</span></div>
       <?php } ?>
