@@ -26,7 +26,7 @@
     <div class="Campo">
       <label for="categoria">Categoria:</label>
       <div class="CampoInput">
-        <label class="Simbolo">expand_more</label>
+        <label for="categoria" class="Simbolo">expand_more</label>
         <select class="Select" id="categoria" name="categoria" onchange="pesquisarLivro()">
           <option></option>
           <?php while ($categoria = $sql_categoria->fetch_assoc()) {

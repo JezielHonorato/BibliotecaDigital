@@ -4,7 +4,7 @@
 
   $pesquisa    = isset($_GET["pesquisar"]) ? $_GET['pesquisar'] : '';
   $categoria   = isset($_GET['categoria']) ? $_GET['categoria'] : '';
-  $pais        = isset($_GET['nacionalidade']) ? $_GET['nacionalidade'] : '';
+  $pais        = isset($_GET['pais']) ? $_GET['pais'] : '';
   $range_menor = $_GET['range_menor'];
   $range_maior = $_GET['range_maior'];
   $ordem       = $_GET['ordem'];

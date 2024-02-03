@@ -121,7 +121,6 @@
         <div><button class="CriarUser UsuarioNome" onclick="criarUsuario()">Criar um novo usuário</button></div>
         <div><button class="UsuarioNivel ApagarUser" onclick="apagarUsuario()">Apagar usuário</button></div>
       </div>
-
     <?php } ?>
 
     <form action="Login.php" method="post" class="TrocarSenha">

@@ -15,7 +15,7 @@ function criaRequest() {
     }
   }
 
-  !request ? alert("Seu Navegador não suporta Ajax!") : request;
+  return request ? request : alert("Seu Navegador não suporta Ajax!");
 }
 
 document.getElementById("resultado").onload = pesquisarLivro()
@@ -33,13 +33,7 @@ function pesquisarLivro() {
 
   xmlreq.open("GET", "processa.php?pesquisar=" + pesquisar + "&categoria=" + categoria + "&pais=" + pais + "&range_menor=" + rangeMenor + "&range_maior=" + rangeMaior + "&ordem=" + ordem, true);
   xmlreq.onreadystatechange = function () {
-    if (xmlreq.readyState == 4) {
-      if (xmlreq.status == 200) {
-        result.innerHTML = xmlreq.responseText;
-      } else {
-        result.innerHTML = "Erro: " + xmlreq.statusText;
-      }
-    }
+    (xmlreq.readyState == 4) ? (xmlreq.status == 200) ? result.innerHTML = xmlreq.responseText : result.innerHTML = "Erro: " + xmlreq.statusText : '';
   };
 
   xmlreq.send(null);
