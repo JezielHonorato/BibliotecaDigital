@@ -5,16 +5,15 @@
   $titulo     = isset($_POST['titulo'])     ? ucwords(mb_strtolower($_POST['titulo']))     : false;
   $novo_autor = isset($_POST['novo_autor']) ? ucwords(mb_strtolower($_POST['novo_autor'])) : false;
   $novo_pais  = isset($_POST['novo_pais'])  ? ucwords(mb_strtolower($_POST['novo_pais']))  : false;
-  $file       = isset($_FILES['file'])      ? $_FILES['file']     : false;
-  $id_livro   = isset($_POST['id'])         ? $_POST['id']        : false;
-  $data       = isset($_POST['data'])       ? $_POST['data']      : false;
-  $autor      = isset($_POST['autor'])      ? $_POST['autor']     : false;
-  $pais       = isset($_POST['pais'])       ? $_POST['pais']      : false;
-  $categoria  = isset($_POST['categoria'])  ? $_POST['categoria'] : false;
-  $excluir    = isset($_POST['excluir'])    ? $_POST['excluir']   : false;
-  $id         = isset($_GET['id'])          ? $_GET['id']         : false;
-  $user       = isset($_SESSION['usuario']) ? true : false;
-  $usuario    = $_SESSION['usuario'][0];
+  $user       = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
+  $file       = isset($_FILES['file'])      ? $_FILES['file']         : false;
+  $id_livro   = isset($_POST['id'])         ? $_POST['id']            : false;
+  $data       = isset($_POST['data'])       ? $_POST['data']          : false;
+  $autor      = isset($_POST['autor'])      ? $_POST['autor']         : false;
+  $pais       = isset($_POST['pais'])       ? $_POST['pais']          : false;
+  $categoria  = isset($_POST['categoria'])  ? $_POST['categoria']     : false;
+  $excluir    = isset($_POST['excluir'])    ? $_POST['excluir']       : false;
+  $id         = isset($_GET['id'])          ? $_GET['id']             : false;
 
   function editar($campo) {
     $id = $GLOBALS['id'];
@@ -40,7 +39,7 @@
     } else {
       $finalizado = move_uploaded_file($file["tmp_name"], "assets/$titulo.pdf");
       if ($finalizado) {
-        $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$usuario');") or die($conexao->error);
+        $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$user');") or die($conexao->error);
         echo "<script>alert('Livro cadastrado com sucesso!');</script>";
         header("Location: livros.php");
   } } }
@@ -86,15 +85,12 @@
 
   include("header.php"); 
 
-  if ($user) {
-    echo "<body>";
+  if (!$user) {
+    echo "<body onclick=\"window.location.href='./login.php'\"> </body>";
   } else {
-    echo "<body onclick=\"window.location.href='./login.php'\"> <div class='Cortina'></div>";
-    echo "<div class='Erro'><span class='Simbolo Maior'>cancel</span> <span>Você precisa estar logado para acessar está página</span> <span class='Simbolo Maior'>cancel</span></div>";
-  }
 ?>
 
-<div class="Conteudo">
+<main>
   <form method="post" enctype="multipart/form-data" id="inserir">
     <?php if($id) {?>
       <input type="text" hidden id="id" name="id" value="<?= editar('idLivro') ?>">
@@ -172,7 +168,7 @@
         echo "<button class='BotaoInserir' type='submit' name='submit'>Enviar</button>";
     } } ?>
   </form>
-</div>
+</main>
 
 <form class="AddAutor" id="add_autor" method="post">
   <a class="AddAutorTitulo">
@@ -196,7 +192,7 @@
   <button class="BotaoInserir" type="submit" name="novo_submit_pais">Enviar</button>
 </form>
 
-<?php include("footer.php"); ?>
+<?php } include("footer.php") ; ?>
 
 </body>
 </html>

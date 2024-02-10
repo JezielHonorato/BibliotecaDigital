@@ -22,15 +22,15 @@
 
   while ($livro = $sql_query_livro->fetch_assoc()) {
     $titulo = $livro['titulo'];
-    $html = "<div class='Livro'>
-              <a class='Indice' href='assets/$titulo.pdf' download='$titulo'><span class='Simbolo'>download</span></a>
-              <div class='Titulo' onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>$titulo</a></div>
-              <div class='Autor'  onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['autor']}</a></div>
-              <div class='Data'   onclick=\"window.open('assets/$titulo.pdf', '_blank')\"><a>{$livro['data']}</a></div>";
-    if (isset($_SESSION['usuario'])) {
-      $html .= "<div class='Editar'><a href='cadastrar.php?id={$livro['idLivro']}'><span class='Simbolo'>edit</span></a></div>";
-    }
-    $html .= "</div>";
+    $html  ="<tr>";
+    $html .="<td><a href='assets/$titulo.pdf' download='$titulo'><i> download</i></a></td>";
+    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">$titulo</a></td>";
+    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">{$livro['autor']}</a></td>";
+    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">{$livro['data']}</a></td>";;
+    if(isset($_SESSION['usuario'])){
+      $html .= "<td><a href='cadastrar.php?id={$livro['idLivro']}'><i>edit</i></a></td>";
+    };
+    $html .= "</tr>";
     echo $html;
   }
 ?>

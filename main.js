@@ -28,7 +28,7 @@ function pesquisarLivro() {
   var rangeMaior = document.getElementById("range_maior").value;
   var ordem      = document.getElementById("ordem").value;
 
-  var result = document.getElementById("resultado");
+  var result = document.getElementById("resultado_consulta");
   var xmlreq = criaRequest();
 
   xmlreq.open("GET", "processa.php?pesquisar=" + pesquisar + "&categoria=" + categoria + "&pais=" + pais + "&range_menor=" + rangeMenor + "&range_maior=" + rangeMaior + "&ordem=" + ordem, true);
@@ -55,7 +55,7 @@ function mudarPeriodo() { //Função para o Range duplo
   const pMaior = ((rangeMaiorV - inputRangeMenor.min) / total) * 100;
   const pMenor = ((rangeMenorV - inputRangeMenor.min) / total) * 100;
 
-  document.getElementById('progresso').style.cssText = `background: linear-gradient(to right, var(--CorPrimaria) ${pMenor}% ${pMenor}%, var(--CorTerciaria) ${pMenor}% ${pMaior}%, var(--CorPrimaria) ${pMaior}%);`;
+  document.getElementById('linha_progresso').style.cssText = `background: linear-gradient(to right, var(--cor-primaria) ${pMenor}% ${pMenor}%, var(--cor-terciaria) ${pMenor}% ${pMaior}%, var(--cor-primaria) ${pMaior}%);`;
 
   pesquisarLivro();
 }
@@ -80,7 +80,7 @@ function ordenar(id) { //Função para os simbolos de Ordenar
   return textoAtual === 'swap_vert' ? 'expand_more' : textoAtual === 'expand_more' ? 'expand_less' : 'expand_more';
 }
 
-function AddPais() {
+function addPais() {
   var NovoPais = document.getElementById('add_pais');
   var Padrao = document.getElementById('inserir');
   NovoPais.style.display = "block"
@@ -157,18 +157,18 @@ function mostrarSenha(x) {
 var cor = true
 function mudarCor() {
   if (cor) {
-    document.documentElement.style.setProperty('--CorPrimaria', '#0B1622');
-    document.documentElement.style.setProperty('--CorSecundaria', '#151F2E');
-    document.documentElement.style.setProperty('--CorTexto', '#9BADBD');
-    document.documentElement.style.setProperty('--CorHover', '#FFFFFF');
-    document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
+    document.documentElement.style.setProperty('--cor-primaria', '#0B1622');
+    document.documentElement.style.setProperty('--cor-secundaria', '#151F2E');
+    document.documentElement.style.setProperty('--cor-texto', '#9BADBD');
+    document.documentElement.style.setProperty('--cor-hover', '#FFFFFF');
+    document.documentElement.style.setProperty('--cor-terciaria', '#3DB4F2');
     cor = false;
   } else {
-    document.documentElement.style.setProperty('--CorPrimaria', '#F1F3F7');
-    document.documentElement.style.setProperty('--CorSecundaria', '#FFFFFF');
-    document.documentElement.style.setProperty('--CorTexto', '#105503');
-    document.documentElement.style.setProperty('--CorHover', '#4caf50');
-    document.documentElement.style.setProperty('--CorTerciaria', '#3DB4F2');
+    document.documentElement.style.setProperty('--cor-primaria', '#F1F3F7');
+    document.documentElement.style.setProperty('--cor-secundaria', '#FFFFFF');
+    document.documentElement.style.setProperty('--cor-texto', '#105503');
+    document.documentElement.style.setProperty('--cor-hover', '#4caf50');
+    document.documentElement.style.setProperty('--cor-terciaria', '#3DB4F2');
     cor = true;
   }
 };

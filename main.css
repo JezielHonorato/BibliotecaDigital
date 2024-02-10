@@ -23,152 +23,83 @@ input[type=number]::-webkit-outer-spin-button {
 
 body {
   position: relative;
-  min-height: calc(100vh - var(--THeader));
-  background-color: var(--CorPrimaria);
+  min-height: calc(100vh - var(--tamanho-header));
+  padding-bottom: var(--tamanho-header);
+  background-color: var(--cor-primaria);
 }
 
 /** ROOTS **/
 
 /*
-    --CorPrimaria: #0B1622;
-    --CorSecundaria: #151F2E;
-    --CorTexto: #9BADBD;
-    --CorHover: #FFFFFF;
-    --CorTerciaria: #3DB4F2;
+    --cor-primaria: #0B1622;
+    --cor-secundaria: #151F2E;
+    --cor-texto: #9BADBD;
+    --cor-hover: #FFFFFF;
+    --cor-terciaria: #3DB4F2;
 */
 :root {
-  --CorPrimaria: #F1F3F7;
-  --CorSecundaria: #FFFFFF;
-  --CorTexto: #105503;
-  --CorHover: #4caf50;
-  --CorTerciaria: #3DB4F2;
+  --cor-primaria: #F1F3F7;
+  --cor-secundaria: #FFFFFF;
+  --cor-texto: #105503;
+  --cor-hover: #4caf50;
+  --cor-terciaria: #3DB4F2;
 
-  --Csuccesso: #2f3532;
-  --Cerro: #ed1c24;
-  --Cinfo: #0b22e2;
-
-  --THeader: 10vh;
-  --TMargin: 13vh;
+  --tamanho-header: 10vh;
+  --tamanho-margin-header: 13vh;
 }
 
 input {
   text-indent: 1rem;
+  width: 100%;
+  height: 2rem;
+  border-radius: 5px;
 }
 
-a,
-label,
-option,
-::placeholder,
-th,
-button,
-span,
-p,
-input {
-  font-size: 1rem;
-  color: var(--CorTexto);
+a, label, option, ::placeholder, th, td, button, span, p, input, select, h1, h2, h3 {
+  color: var(--cor-texto);
   text-decoration: none;
 }
 
-.Sombra:hover {
-  /* Sombra para imagens .png, mas cai bem nos icones do google */
+i:hover {
   -webkit-filter: drop-shadow(0px 0px 20px rgba(0 0 0 / 90%));
   filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
   cursor: pointer;
 }
 
-select {
-  color: var(--CorTexto);
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 1.1rem;
-  color: var(--CorTexto);
-  text-decoration: none;
-}
-
-.Simbolo {
+i {
+  font-weight: normal;
+  font-style: normal;
   font-family: 'Material Symbols Outlined';
-  color: var(--CorTexto);
+  color: var(--cor-texto);
   font-size: 1.5rem;
   cursor: pointer;
 }
 
 a:hover,
 label:hover,
-.Simbolo:hover,
+i:hover,
 .th:hover,
 button:hover,
 span:hover {
-  color: var(--CorHover);
+  color: var(--cor-hover);
 }
-
-/* Barra de navegação */
-
-/*
-    <div>
-        <div class="Sucesso"><span class="Done">done</span> <span id="done"></span></div>
-        <div class="Erro"><span class="Simbolo">close</span> <span id="close"></span></div>
-        <div class="Simbolo"><span class="Simbolo">info</span> <span id="info"></span></div>
-    </div>
-*/
-.Sucesso,
-.Erro,
-.Infor {
-  position: fixed;
-  display: flex;
-  top: 0;
-  width: 100%;
-  height: 5rem;
-  padding: 1rem;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: 0px 1px 20px 0px #000;
-  z-index: 3;
-}
-
-.Sucesso {
-  background-color: var(--Csuccesso);
-}
-
-.Erro {
-  background-color: var(--Cerro);
-}
-
-.Erro span {
-  color: var(--CorHover);
-}
-
-.Infor {
-  background-color: var(--Cinfo);
-}
-
-.Cortina {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background-color: transparent;
-  backdrop-filter: blur(1px);
-  z-index: 2;
-}
-
 
 /** HEADER  / header.php **/
-.Header {
+header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   position: fixed;
   top: 0;
   width: 100%;
-  height: var(--THeader);
-  background: var(--CorSecundaria);
+  height: var(--tamanho-header);
+  background: var(--cor-secundaria);
   box-shadow: 0px 1px 20px 0px #000;
   align-items: center;
   justify-items: center;
   z-index: 1;
 }
 
-.Itens {
+nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: column;
@@ -177,30 +108,33 @@ span:hover {
   width: 100%;
 }
 
-
-/** INTRODUÇÃO  / index.php **/
-
-.Temas {
-  height: 30vh;
+.logo-header:hover {
+  -webkit-filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 80%));
+  filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 80%));
+  cursor: pointer;
 }
 
-.Introducao {
+/** INDEX / index.php */
+
+.index-title {
+  font-size: large;
+  display: flex;
+  justify-content: center;
+}
+.site-introduction {
+  margin-top: var(--tamanho-header);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  text-indent: 1rem;
-  text-align: justify;
-  justify-items: center;
+  grid-template-columns: 1fr 2fr;
   align-items: center;
+  justify-items: center;
+}
+.introduction-logo {
+  height: 20vh;
 }
 
-.Introducao img {
-  width: auto;
-  height: 100%;
-}
+/** PESQUISA  / livros.php **/
 
-/** PESQUISA  / Livros.php **/
-
-.Busca {
+.pesquisa-livros {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
@@ -208,86 +142,73 @@ span:hover {
   padding: 20px;
 }
 
-.Campo {
+.campos-pesquisa {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   height: 4rem;
 }
 
-.CampoInput {
+.campos-input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   border-radius: 10px;
-  height: 2rem;
   padding: 0 5%;
-}
+} 
 
-.CampoR {
+.campo-range {
   display: block;
   background-color: transparent;
   border-radius: 5px;
   position: relative;
 }
 
-
-.Pesquisar {
+.pesquisar {
   width: 100%;
-  background-color: var(--CorSecundaria);
-  color: var(--CorTexto);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-texto);
 }
 
-.Pesquisar::placeholder {
-  color: var(--CorTexto);
-}
-
-.Select {
+.select-campos {
   padding: 0.5rem 1rem;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   border-radius: 5px;
   width: 100%;
 }
 
-.ValorRange {
+.range-value-input {
   display: flex;
   justify-content: space-between;
 }
 
-.RangeValor {
+.valores-input {
   align-content: center;
   justify-content: right;
   width: 50%;
   right: 0;
 }
 
-.InputMaiorValor,
-.InputMenorValor,
-.RangeSepararValor {
+.valor_input {
   text-indent: 0px;
   display: flex;
   align-content: center;
   flex-wrap: wrap;
   justify-content: center;
-  color: var(--CorTexto);
+  color: var(--cor-texto);
   background-color: transparent;
   width: 3rem;
 }
 
-.RangeSepararValor {
-  width: 1rem;
-  justify-content: center;
-}
-
-.Progresso {
+.linha-progresso {
   height: 5px;
   width: 90%;
   position: absolute;
   border-radius: 5px;
-  background-color: var(--CorTerciaria);
+  background-color: var(--cor-terciaria);
 }
 
-.LinhaDupla input[type=range] {
+.range-duplo input[type=range] {
   position: absolute;
   height: 5px;
   width: 90%;
@@ -301,80 +222,71 @@ input[type=range]::-webkit-slider-thumb {
   height: 17px;
   width: 17px;
   border-radius: 50%;
-  background: var(--CorTerciaria);
+  background: var(--cor-terciaria);
   pointer-events: auto;
   cursor: pointer;
   -webkit-appearance: none;
 }
 
-.Submit {
-  border-radius: 100%;
-  height: 2rem;
-  width: 2rem;
-  background-color: var(--CorTerciaria);
-}
+/** LIVROS  / livros.php **/
 
-.Submit span {
-  color: var(--CorPrimaria);
-}
-
-/** LIVROS  / Livros.php **/
-
-.Conteudo {
-  margin-top: var(--TMargin);
+main {
   margin-left: auto;
   margin-right: auto;
+  margin-top: var(--tamanho-margin-header);
   margin-bottom: 2rem;
   width: 80%;
 }
 
-.Lista {
-  display: grid;
-  grid-template-rows: auto;
-  grid-auto-rows: auto;
-  grid-gap: 0.5rem;
+.tabela-livros {
+  border-collapse:separate;;
+  width: 100%;
 }
 
-.Livro {
+tr {
   display: grid;
   grid-template-columns: 1fr 8fr 4fr 2fr;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  background-color: var(--CorSecundaria);
+  grid-gap: 0.2rem;
 }
 
-.Indice,
-.Titulo,
-.Autor,
-.Data,
-.Editar {
-  text-wrap: balance;
+tbody tr:hover {
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  cursor: pointer;
+}
+
+table tr td:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(1), table tr td:nth-child(5) {
+  justify-content: center
+}
+
+td, th {
   display: flex;
-  justify-content: space-between;
+  background-color: var(--cor-secundaria);
+  text-wrap: balance;
+  height: 3rem;
   align-items: center;
   padding: 0.8rem;
-  border-right: 2px solid var(--CorPrimaria);
+  margin-top: 0.2rem;
 }
 
-.Indice,
-.Editar {
-  justify-content: center;
-}
-
-
-.Editando {
-  display: none;
+th {
+  display: flex;
+  justify-content: space-between;
 }
 
 /** RODAPÈ  / footer.php **/
-.Retornar {
+.retornar-inicio {
   display: flex;
-  background-color: var(--CorTerciaria);
+  position: fixed;
+  cursor: pointer;
   border-radius: 100%;
   align-items: center;
+  justify-content: center;
+  background-color: var(--cor-terciaria);
   height: 2rem;
   width: 2rem;
-  position: fixed;
   bottom: 10px;
   right: 10px;
   z-index: 1;
@@ -382,18 +294,18 @@ input[type=range]::-webkit-slider-thumb {
   animation-timeline: view();
 }
 
-.Retornar span {
-  color: var(--CorSecundaria);
+.retornar-inicio i {
+  color: var(--cor-secundaria);
 }
 
-.Rodape {
+footer {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
   position: absolute;
-  background: var(--CorSecundaria);
+  grid-template-columns: 1fr 5fr 1fr;
+  background: var(--cor-secundaria);
   padding: 20px;
   width: 100%;
-  height: var(--THeader);
+  height: var(--tamanho-header);
   bottom: 0;
   justify-content: center;
   align-items: center;
@@ -401,13 +313,7 @@ input[type=range]::-webkit-slider-thumb {
   text-wrap: balance;
 }
 
-.RodapeTeste {
-  visibility: hidden;
-  background-color: var(--CorSecundaria);
-  height: var(--THeader);
-}
-
-/** INSERIR  / Inserir.php **/
+/** CADASTRO / cadastrar.php **/
 
 .Excluir {
   margin-top: 2rem;
@@ -421,39 +327,39 @@ input[type=range]::-webkit-slider-thumb {
   text-indent: 1rem;
   display: block;
   padding: 0.5rem;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   margin-bottom: 2rem;
   border-radius: 5px;
   width: 90%;
-  color: var(--CorTexto);
+  color: var(--cor-texto);
 }
 
 .ExcluirInput {
   padding: 0.5rem 1rem;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   border-radius: 5px;
   width: 100%;
-  color: var(--CorTexto);
+  color: var(--cor-texto);
   text-align: center;
 }
 
 .InserirSelect {
   padding: 0.5rem 1rem;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   margin-bottom: 2rem;
   border-radius: 5px;
   width: 95%;
-  color: var(--CorTexto);
+  color: var(--cor-texto);
 }
 
 .NovoInserir {
   display: flex;
   padding: 0.5rem;
-  background-color: var(--CorTerciaria);
+  background-color: var(--cor-terciaria);
   margin-bottom: 2rem;
   border-radius: 5px;
   width: 5%;
-  color: var(--CorSecundaria);
+  color: var(--cor-secundaria);
   justify-content: center;
 }
 
@@ -467,17 +373,17 @@ input[type=range]::-webkit-slider-thumb {
   font-size: smaller;
   display: block;
   margin-bottom: 2rem;
-  background-color: var(--CorSecundaria);
-  color: var(--CorTexto);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-texto);
   border-radius: 5px;
   width: 100%;
   padding: 0.7rem;
 }
 
-.BotaoInserir {
+.botao-submit {
   width: 100%;
-  background-color: var(--CorTerciaria);
-  color: var(--CorPrimaria);
+  background-color: var(--cor-terciaria);
+  color: var(--cor-primaria);
   margin-top: 2rem;
   border-radius: 5px;
   padding: 0.7rem;
@@ -486,12 +392,12 @@ input[type=range]::-webkit-slider-thumb {
 .BotaoExcluir {
   width: 100%;
   background-color: var(--Cerro);
-  color: var(--CorPrimaria);
+  color: var(--cor-primaria);
   border-radius: 5px;
   padding: 0.7rem;
 }
 
-/** INSERIR AUTORES E PAISES  / inserir.php **/
+/** INSERIR AUTORES E PAISES  / cadastro.php **/
 
 .AddAutor,
 .AddPais {
@@ -500,7 +406,7 @@ input[type=range]::-webkit-slider-thumb {
   padding: 3rem;
   width: 50%;
   top: 20vh;
-  background-color: var(--CorPrimaria);
+  background-color: var(--cor-primaria);
   margin-left: 25%;
   margin-right: 25%;
   border-radius: 5px;
@@ -515,57 +421,59 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /** LOGIN  / login.php **/
-
-.Login {
+.login {
   margin-left: auto;
   margin-right: auto;
-  margin-top: var(--TMargin);
-  height: 30vh;
-  padding: 2rem;
+  width: 50%;
 }
 
-.h1Login {
+.input-login {
   padding: 0.5rem;
-  display: flex;
-  justify-content: center;
+}
+.input-senha {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  background-color: var(--cor-secundaria);
+  align-items: center;
+  justify-items: center;
 }
 
 .Usuario {
   display: grid;
   grid-template-columns: 4fr 1fr;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
 }
 
 .UsuarioNome,
 .UsuarioNivel {
-  border: 1px solid var(--CorPrimaria);
-  border-right: 2px solid var(--CorPrimaria);
+  border: 1px solid var(--cor-primaria);
+  border-right: 2px solid var(--cor-primaria);
   padding: 0.5rem;
 }
 
 .CriarApagar {
   display: grid;
   grid-template-columns: 4fr 1fr;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
   margin-top: 0.5rem;
 }
 
 .CriarApagar input {
-  background-color: var(--CorSecundaria);
-  color: var(--CorTexto);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-texto);
 }
 
 .CriarUser,
 .ApagarUser {
   cursor: pointer;
   font-weight: bold;
-  color: var(--CorSecundaria);
+  color: var(--cor-secundaria);
   padding: 0.5rem;
   width: 100%;
 }
 
 .CriarUser {
-  background-color: var(--CorTerciaria);
+  background-color: var(--cor-terciaria);
 }
 
 .ApagarUser {
@@ -584,14 +492,14 @@ input[type=range]::-webkit-slider-thumb {
   padding: 0.5rem;
   text-indent: 1rem;
   width: 90%;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
 }
 
 .InputSenha {
   border-radius: 5px;
   align-items: center;
   display: flex;
-  background-color: var(--CorSecundaria);
+  background-color: var(--cor-secundaria);
 }
 
 .inputSenha span {
@@ -600,37 +508,9 @@ input[type=range]::-webkit-slider-thumb {
 
 
 @media screen and (max-width: 1000px) {
-  .Introducao {
-    display: grid;
-    grid-template-columns: 1fr;
-    height: 70vh;
-    grid-template-rows: 30% 1fr;
-    align-items: start;
-  }
 
-  .Header {
-    grid-template-columns: 1fr 3fr 1fr;
-  }
-
-  .Livro {
-    display: grid;
-    grid-template-columns: 1fr 12fr 6fr;
-  }
-
-  .Data {
+  table tr td:nth-child(4), table tr th:nth-child(4) {
     display: none;
-  }
-
-  .Indice,
-  .Titulo,
-  .Autor,
-  .Data,
-  .Editar {
-    padding: 0.5rem;
-  }
-
-  .Simbolo {
-    font-size: 1rem;
   }
 
   .NovoInserir {
