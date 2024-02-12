@@ -67,18 +67,18 @@
   </form>
 
   <table class='tabela-livros'>
-    <thead>
+    <thead class='thead-livros'>
       <tr>
         <th><i> download</i></th>
-        <th>Título <i onclick="ordenar('titulo')" id='ordenar_titulo'>swap_vert</i></th>
-        <th>Autor  <i onclick="ordenar('autor')"  id='ordenar_autor' >swap_vert</i></th>
-        <th>Data   <i onclick="ordenar('data')"   id='ordenar_data'  >swap_vert</i></th>
+        <th>Título <i onclick="ordenarLivros('titulo')" id='ordenar_titulo'>swap_vert</i></th>
+        <th>Autor  <i onclick="ordenarLivros('autor')"  id='ordenar_autor' >swap_vert</i></th>
+        <th>Data   <i onclick="ordenarLivros('data')"   id='ordenar_data'  >swap_vert</i></th>
         <?php if(isset($_SESSION['usuario'])){
           echo '<th> <i>edit</i></th>';
         } ?>
       </tr>
     </thead>
-    <tbody id='resultado_consulta'>
+    <tbody id='resultado_consulta' class='tbody-livros'>
     </tbody>
   </table>
 </main>

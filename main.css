@@ -43,6 +43,7 @@ body {
   --cor-texto: #105503;
   --cor-hover: #4caf50;
   --cor-terciaria: #3DB4F2;
+  --cor-alert: #cc3300;
 
   --tamanho-header: 10vh;
   --tamanho-margin-header: 13vh;
@@ -61,7 +62,7 @@ a, label, option, ::placeholder, th, td, button, span, p, input, select, h1, h2,
 }
 
 i:hover {
-  -webkit-filter: drop-shadow(0px 0px 20px rgba(0 0 0 / 90%));
+  -webkit-filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
   filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
   cursor: pointer;
 }
@@ -175,6 +176,7 @@ nav {
   background-color: var(--cor-secundaria);
   border-radius: 5px;
   width: 100%;
+  cursor: pointer;
 }
 
 .range-value-input {
@@ -239,11 +241,11 @@ main {
 }
 
 .tabela-livros {
-  border-collapse:separate;;
+  border-collapse:separate;
   width: 100%;
 }
 
-tr {
+.tabela-livros tr {
   display: grid;
   grid-template-columns: 1fr 8fr 4fr 2fr;
   grid-auto-flow: column;
@@ -251,17 +253,20 @@ tr {
   grid-gap: 0.2rem;
 }
 
-tbody tr:hover {
+.tbody-livros tr:hover {
   -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
   filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
   cursor: pointer;
 }
 
-table tr td:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(1), table tr td:nth-child(5) {
+.tabela-livros tr th:nth-child(1),
+.tabela-livros tr td:nth-child(1),
+.tabela-livros tr th:nth-child(5),
+.tabela-livros tr td:nth-child(5) {
   justify-content: center
 }
 
-td, th {
+.tbody-livros td, .thead-livros th {
   display: flex;
   background-color: var(--cor-secundaria);
   text-wrap: balance;
@@ -271,7 +276,7 @@ td, th {
   margin-top: 0.2rem;
 }
 
-th {
+.thead-livros th {
   display: flex;
   justify-content: space-between;
 }
@@ -315,121 +320,53 @@ footer {
 
 /** CADASTRO / cadastrar.php **/
 
-.Excluir {
-  margin-top: 2rem;
-}
-
-.Label {
-  margin: 0.5rem;
-}
-
-.InserirInput {
-  text-indent: 1rem;
-  display: block;
-  padding: 0.5rem;
-  background-color: var(--cor-secundaria);
-  margin-bottom: 2rem;
-  border-radius: 5px;
-  width: 90%;
-  color: var(--cor-texto);
-}
-
-.ExcluirInput {
-  padding: 0.5rem 1rem;
-  background-color: var(--cor-secundaria);
-  border-radius: 5px;
-  width: 100%;
-  color: var(--cor-texto);
-  text-align: center;
-}
-
-.InserirSelect {
-  padding: 0.5rem 1rem;
-  background-color: var(--cor-secundaria);
-  margin-bottom: 2rem;
-  border-radius: 5px;
-  width: 95%;
-  color: var(--cor-texto);
-}
-
-.NovoInserir {
-  display: flex;
-  padding: 0.5rem;
-  background-color: var(--cor-terciaria);
-  margin-bottom: 2rem;
-  border-radius: 5px;
-  width: 5%;
-  color: var(--cor-secundaria);
-  justify-content: center;
-}
-
-.NomeData {
+.livros-cadastro {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-gap: 1rem;
 }
 
-.File {
-  margin: 0px;
-  font-size: smaller;
-  display: block;
-  margin-bottom: 2rem;
-  background-color: var(--cor-secundaria);
-  color: var(--cor-texto);
-  border-radius: 5px;
-  width: 100%;
-  padding: 0.7rem;
+.cadastro-titulo-data {
+  display: grid;
+  grid-template-columns: 49% 49%;
+  justify-content: space-between;
 }
 
 .botao-submit {
   width: 100%;
   background-color: var(--cor-terciaria);
   color: var(--cor-primaria);
-  margin-top: 2rem;
   border-radius: 5px;
   padding: 0.7rem;
+  cursor: pointer;
 }
 
-.BotaoExcluir {
-  width: 100%;
-  background-color: var(--Cerro);
-  color: var(--cor-primaria);
-  border-radius: 5px;
-  padding: 0.7rem;
-}
-
-/** INSERIR AUTORES E PAISES  / cadastro.php **/
-
-.AddAutor,
-.AddPais {
-  display: none;
-  position: absolute;
-  padding: 3rem;
-  width: 50%;
-  top: 20vh;
-  background-color: var(--cor-primaria);
-  margin-left: 25%;
-  margin-right: 25%;
-  border-radius: 5px;
-  box-shadow: 0px 1px 200px 50px #000;
-}
-
-.AddAutorTitulo {
+.cadastro-label-file {
   display: flex;
-  justify-content: space-between;
+  height: 3rem;
   width: 100%;
-  margin-bottom: 1rem;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cor-secundaria);
+  cursor: pointer;
+}
+.cadastro-label-file:hover {
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+}
+.cadastro-label-file:active {
+  background-color: var(--cor-hover);
 }
 
 /** LOGIN  / login.php **/
 .login {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30vh;
   width: 50%;
 }
 
-.input-login {
-  padding: 0.5rem;
-}
 .input-senha {
   display: grid;
   grid-template-columns: 10fr 1fr;
@@ -438,74 +375,69 @@ footer {
   justify-items: center;
 }
 
-.Usuario {
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  background-color: var(--cor-secundaria);
-}
-
-.UsuarioNome,
-.UsuarioNivel {
-  border: 1px solid var(--cor-primaria);
-  border-right: 2px solid var(--cor-primaria);
-  padding: 0.5rem;
-}
-
-.CriarApagar {
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  background-color: var(--cor-secundaria);
-  margin-top: 0.5rem;
-}
-
-.CriarApagar input {
-  background-color: var(--cor-secundaria);
-  color: var(--cor-texto);
-}
-
-.CriarUser,
-.ApagarUser {
-  cursor: pointer;
-  font-weight: bold;
-  color: var(--cor-secundaria);
-  padding: 0.5rem;
+.tabela-usuarios {
+  margin-bottom: 5rem;
+  border-collapse: separate;
   width: 100%;
 }
 
-.CriarUser {
-  background-color: var(--cor-terciaria);
+.tabela-usuarios tr{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 0.2rem;
+}
+.tabela-usuarios tbody tr:hover {
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
 }
 
-.ApagarUser {
-  background-color: var(--Cerro);
-}
-
-.TrocarSenha {
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-gap: 0.5rem;
-  width: 100%;
-  margin-top: 5rem;
-}
-
-.InputSenha input {
-  padding: 0.5rem;
-  text-indent: 1rem;
-  width: 90%;
-  background-color: var(--cor-secundaria);
-}
-
-.InputSenha {
-  border-radius: 5px;
-  align-items: center;
+.tabela-usuarios td, .tabela-usuarios th {
   display: flex;
   background-color: var(--cor-secundaria);
+  text-wrap: balance;
+  height: 2rem;
+  align-items: center;
+  padding: 0.8rem;
+  margin-top: 0.2rem;
+}
+.criar-usuario {
+  background-color: var(--cor-terciaria) !important;
+  color: var(--cor-secundaria);
+  justify-content: center;
+}
+.apagar-usuario {
+  background-color: var(--cor-alert) !important;
+  color: var(--cor-secundaria);
+  justify-content: center;
+}
+.criar-usuario:hover, .apagar-usuario:hover {
+  color: var(--cor-texto);
+  -webkit-filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 50% ));
+  filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 50% ));
+  cursor: pointer;
 }
 
-.inputSenha span {
-  width: 10%;
+.alterar-senha {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
+.display-none {
+  display: none;
+}
+
+.color-alert {
+  background-color: var(--cor-alert);
+}
+.align-center {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
 
 @media screen and (max-width: 1000px) {
 
@@ -513,59 +445,6 @@ footer {
     display: none;
   }
 
-  .NovoInserir {
-    width: 10%;
-  }
-
-  .NomeData,
-  .CriarApagar {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .InserirInput {
-    width: 100%;
-  }
-
-  .ExcluirInput {
-    height: 4.5rem;
-  }
-
-  .ExcluirInput::placeholder {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    text-wrap: balance;
-  }
-
-}
-
-.Maior {
-  font-size: 2rem;
-}
-
-.Menor {
-  font-size: 1.4rem;
-}
-
-.Menor2 {
-  font-size: 1rem;
-}
-
-.Preencher {
-  width: 100%;
-}
-
-.Flex {
-  display: flex;
-}
-
-.Invisivel {
-  display: none
-}
-
-.Pointer {
-  cursor: pointer;
 }
 
 @keyframes appear {

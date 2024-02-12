@@ -20,36 +20,34 @@
     }
   }
 
-  $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuarios ORDER BY usuario ASC') or die($conexao->error);
+  if (isset($_POST['botao_alterar_usuario'])) {
+    $user_name = isset($_POST['alterar_usuario_nome']) ? $_POST['alterar_usuario_nome'] : false;
+    $user_classe = isset($_POST['user_classe']) ? $_POST['user_classe'] : false;
+    $confirmar_senha = isset($_POST['senha_user']) ? $_POST['senha_user'] : false;
 
-  if (isset($_POST['submit_criar_user'])) {
-    $user_name = $_POST['user_name'];
-    $user_nivel = $_POST['user_nivel'];
-
-    $user_exist = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'");
-    $consulta2 = $user_exist->num_rows;
-
-    if ($consulta2 >= 1) {
-      echo  "<script>alert('Um usuário com o mesmo nome já existe cadastrado no sistema!');</script>";
+    $sql_consulta = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
+    $consulta5 = $sql_consulta->num_rows;
+    if ($consulta5 == 1) {
+      if ($user_classe) {
+        echo "<script>alert('Um usuario com o mesmo nome ja esta cadastrado.')</script>";
+      } else {
+        $sql_confirmar_senha = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$confirmar_senha'") or die('ERRO:' . $conexao->error);
+        $consulta6 = $sql_confirmar_senha->num_rows;      
+        if ($consulta6 == 1) {          
+          $conexao->query("DELETE FROM tbusuarios WHERE usuario = '$user_name'");
+          header('Refresh: 0');
+        } else {
+          echo "<script>alert('Senha incorreta.');</script>";
+        }
+      }
     } else {
-      $conexao->query("INSERT INTO tbusuarios (usuario, nivel, senha) VALUES('$user_name', $user_nivel, '$user_name')");
-      echo  "<script>alert('Usuário cadastrado com sucesso! A senha e o nome do usuário são a mesma, mas você pode alter-lá depois.');</script>";
-      header('Refresh: 0');
-    }
-  }
-
-  if (isset($_POST['user_name_excluir'])) {
-    $excluir_senha = $_POST['user_senha_excluir'];
-    $excluir_user = $_POST['user_name_excluir'];
-
-    $sql_confirmar = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$excluir_senha'") or die('ERRO:' . $conexao->error);
-
-    $consulta3 = $sql_confirmar->num_rows;
-    if ($consulta3 == 1) {
-      $conexao->query("DELETE FROM tbusuarios WHERE usuario = '$excluir_user'");
-      header('Refresh: 0');
-    } else {
-      echo "<script>alert('Senha incorreta.');</script>";
+      if ($confirmar_senha) {
+        echo "<script>alert('Este usuario nao existe.')</script>";
+      } else {
+        $conexao->query("INSERT INTO tbusuarios (usuario, nivel, senha) VALUES('$user_name', $user_classe, '$user_name')");
+        echo "<script>alert('Usuário cadastrado com sucesso! A senha e o nome do usuário são a mesma, mas você pode altera-lá depois.');</script>";
+        header('Refresh: 0');  
+      }
     }
   }
 
@@ -72,6 +70,8 @@
       echo "<script>alert('Senha incorreta.');</script>";
     }
   }
+
+  $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuarios ORDER BY usuario ASC') or die($conexao->error);
 ?>
 
 <?php include('header.php'); ?>
@@ -80,66 +80,68 @@
   <?php if (isset($_SESSION['usuario'])) {  ?>
     <?php if ($_SESSION['usuario'][1] > 1) {  ?>
 
+      <form method='post' class='display-none login' id='alterar_usuario' autocomplete='off'>
+        <h1 class='index-title' id='alterar_usuario_titulo'></h1>
+        <label for='usuario'>Usuario:</label>
+        <input class='input-login' placeholder='Digite o nome do usuário' id='alterar_usuario_nome' name='alterar_usuario_nome' type='text' required>
+        
+        <div id='criar_usuario' class='display-none'>
+          <label for="user_classe">Classe do Usuario:</label>
+          <input type='number' placeholder='Classe do usuário' name='user_classe' id='user_classe' class='UsuarioNivel'>
+        </div>
+
+        <div id='apagar_usuario' class='display-none'>
+          <label for='senha'>Senha:</label>
+          <div class='input-senha'>
+            <input type='password' name='senha_user' id='input_senha_5'>
+            <i id='span_5' onclick='mostrarSenha(5)'>visibility_off</i>
+          </div>
+        </div>
+        <button type='submit' class='botao-submit' name='botao_alterar_usuario'>Confirmar</button>
+      </form>
+
       <h1 class='index-title'>Lista de usuários</h1>
 
-      <form method='post' class='Invisivel' id='criar_usuario' autocomplete='off'>
-        <div class='CriarApagar'>
-          <input type='text' placeholder='Digite o nome do novo usuário' name='user_name' id='user_name' class='UsuarioNome' required>
-          <input type='number' required placeholder='Classe do usuário' name='user_nivel' id='user_nivel' class='UsuarioNivel'>
-        </div>
-        <button class='CriarUser UsuarioNome' type='submit' id='submit_criar_user' name='submit_criar_user' onclick='criarUsuario()'>Criar/Apagar usuário</button>
-      </form>
-
-      <form method='post' class='Invisivel' id='apagar_usuario' autocomplete='off'>
-        <div class='CriarApagar'>
-          <input type='text' placeholder='Digite o nome do usuário' name='user_name_excluir' class='UsuarioNome' required>
-          <div class='InputSenha'>
-            <input type='password' name='user_senha_excluir' id='input_senha_5' placeholder='Digite a sua senha'>
-            <i id='span_5' onclick='mostrarSenha(5)'>visibility_off</i> </div>
-        </div>
-        <button class='ApagarUser' type='submit'>Excluir</button>
-      </form>
-
-      <div class='Lista' id='lista'>
-        <div class='Usuario'>
-          <div class='UsuarioNome'>
-            <h1>usuários</h1>
-          </div>
-          <div class='UsuarioNivel'>
-            <h1>Classe</h1>
-          </div>
-        </div>
-        <?php while ($lista_usuario = $sql_usuarios->fetch_assoc()) {
-          echo "<div class='Usuario'>";
-          echo "<div class='UsuarioNome'><a>". $lista_usuario['usuario'] ."</a></div>";
-          echo "<div class='UsuarioNivel'><a>". $lista_usuario['nivel'] ."</a></div>";
-          echo "</div>";
-        } ?>
-      </div>
-
-      <div class='CriarApagar' id='criar_apagar'>
-        <div><button class='CriarUser UsuarioNome' onclick='criarUsuario()'>Criar um novo usuário</button></div>
-        <div><button class='UsuarioNivel ApagarUser' onclick='apagarUsuario()'>Apagar usuário</button></div>
-      </div>
+      <table class='tabela-usuarios' id='lista'>
+        <thead>
+          <tr>
+            <th>Usuarios</th>
+            <th>Nível de Acesso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while ($lista_usuario = $sql_usuarios->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>'. $lista_usuario['usuario'] .'</td>';
+            echo '<td>'. $lista_usuario['nivel'] .'</td>';
+            echo '</tr>';
+          } ?>
+          <tr>
+            <td class='criar-usuario' onclick="alterarUsuario('criar')">Criar um novo usuário</td>
+            <td class='apagar-usuario' onclick="alterarUsuario('apagar')">Apagar Usuario</td>
+          </tr>
+        </tbody>
+      </table>
     <?php } ?>
 
-    <form action='Login.php' method='post' class='TrocarSenha'>
+    <form method='post' class='alterar-senha'>
       <h1 class='index-title'>Alterar a senha</h1>
-      <div class='InputSenha'>
+      <div class='input-senha'>
         <input type='password' name='senha_antiga' id='input_senha_1' placeholder='Digite a sua senha atual'>
-        <i id='span_1' onclick='mostrarSenha(1)'>visibility_off</i> </div>
-      <div class='InputSenha'>
+        <i id='span_1' onclick='mostrarSenha(1)'>visibility_off</i>
+      </div>
+      <div class='input-senha'>
         <input type='password' name='nova_senha' id='input_senha_2' placeholder='Digite a nova senha'>
-        <i id='span_2' onclick='mostrarSenha(2)'>visibility_off</i> </div>
-      <div class='InputSenha'>
+        <i id='span_2' onclick='mostrarSenha(2)'>visibility_off</i>
+      </div>
+      <div class='input-senha'>
         <input type='password' name='confirmar_nova_senha' id='input_senha_3' placeholder='Confirme a senha'>
-        <i id='span_3' onclick='mostrarSenha(3)'>visibility_off</i> </div>
-      <button class='CriarUser' type='submit' name='trocar_senha'>Alterar a senha</button>
+        <i id='span_3' onclick='mostrarSenha(3)'>visibility_off</i>
+      </div>
+      <button class='botao-submit' type='submit' name='trocar_senha'>Alterar a senha</button>
     </form>
 
-    <div>
-      <button onclick="window.location.href='./sair.php'" class='BotaoInserir'>Sair</button>
-    </div>
+    <button onclick="window.location.href='./sair.php'" class='botao-submit color-alert'>Sair</button>
 
   <?php } else { ?>
     <form method='post' class='login'>
