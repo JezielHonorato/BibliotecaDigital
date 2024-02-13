@@ -21,12 +21,11 @@
   $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);
 
   while ($livro = $sql_query_livro->fetch_assoc()) {
-    $titulo = $livro['titulo'];
     $html  ="<tr>";
-    $html .="<td><a href='assets/$titulo.pdf' download='$titulo'><i> download</i></a></td>";
-    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">$titulo</a></td>";
-    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">{$livro['autor']}</a></td>";
-    $html .="<td onclick=\"window.open('assets/$titulo.pdf', '_blank')\">{$livro['data']}</a></td>";;
+    $html .="<td><a href='assets/{$livro['idLivro']}.pdf' download='{$livro['titulo']}'><i> download</i></a></td>";
+    $html .="<td onclick=\"window.open('assets/{$livro['idLivro']}.pdf', '_blank')\">{$livro['titulo']}</a></td>";
+    $html .="<td onclick=\"window.open('assets/{$livro['idLivro']}.pdf', '_blank')\">{$livro['autor']}</a></td>";
+    $html .="<td onclick=\"window.open('assets/{$livro['idLivro']}.pdf', '_blank')\">{$livro['data']}</a></td>";
     if(isset($_SESSION['usuario'])){
       $html .= "<td><a href='cadastrar.php?id={$livro['idLivro']}'><i>edit</i></a></td>";
     };

@@ -11,9 +11,7 @@ function criaRequest() {
         request = new ActiveXObject('Microsoft.XMLHTTP');
       } catch (falha) {
         request = false;
-      }
-    }
-  }
+  } } }
 
   return request ? request : alert('Seu Navegador não suporta Ajax!');
 }
@@ -57,7 +55,7 @@ function mudarPeriodo() { //Função para o Range duplo
   document.getElementById('linha_progresso').style.cssText = `background: linear-gradient(to right, var(--cor-primaria) ${pMenor}% ${pMenor}%, var(--cor-terciaria) ${pMenor}% ${pMaior}%, var(--cor-primaria) ${pMaior}%);`;
 
   pesquisarLivro();
-}
+};
 document.getElementById('range_menor').addEventListener('input', mudarPeriodo);
 document.getElementById('range_maior').addEventListener('input', mudarPeriodo);
 
@@ -75,20 +73,28 @@ function ordenarLivros(id) { //Função para os simbolos de Ordenar
   pesquisarLivro();
 } function proximoTexto(textoAtual) {
   return textoAtual === 'swap_vert' ? 'expand_more' : textoAtual === 'expand_more' ? 'expand_less' : 'expand_more';
-}
+};
 
-function mostrarSenha(x) {
+function mostrarSenha(x) { //Função para mostrar senha nos inputs password
   const inputSenha = document.getElementById('input_senha_' + x);
   const span = document.getElementById('span_' + x);
 
   inputSenha.type = span.innerHTML === 'visibility_off' ? 'text' : 'password';
   span.innerHTML = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
-}
+};
 
-function mostrarArquivo() {
+function soltarArquivo(event) { //Funções para Selecionar um arquivo
+  event.preventDefault(); 
+  var file = event.dataTransfer.files[0];
+  mostrarArquivo(file);
+} function arrastarArquivo(event) {
+  event.preventDefault();
+} function mostrarArquivoInput(event) {
+  var file = event.target.files[0];
+  mostrarArquivo(file);
+} function mostrarArquivo(file) {
   const labelFile = document.getElementById('cadastro_label_file');
-  const inputFile = document.getElementById('file');
-  labelFile.textContent = inputFile.files.length > 0 ? inputFile.files[0].name : 'Selecione o Arquivo';
+  file ? (file.size <= 10 * 1024 * 1024) ? labelFile.textContent = file.name : alert('O arquivo deve ter no máximo 10 MB.') : labelFile.textContent = 'Selecione o Arquivo';
 }
 
 function alterarUsuario(campo) {
@@ -99,8 +105,7 @@ function alterarUsuario(campo) {
   criarApagar.style.display = 'grid';
   alterarUsuario = function() {
     location.reload();
-  };
-};
+} };
 
 var cor = true
 function mudarCor() {
@@ -118,5 +123,4 @@ function mudarCor() {
     document.documentElement.style.setProperty('--cor-hover', '#4caf50');
     document.documentElement.style.setProperty('--cor-terciaria', '#3DB4F2');
     cor = true;
-  }
-};
+} };

@@ -30,35 +30,35 @@
   $sql_autor     = $conexao->query("SELECT idAutor, autor FROM tbautor ORDER BY autor ASC") or die($conexao->error);
   $sql_pais      = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
 
-  if ($file) {
+  if (isset($_POST['submit_cadastrar'])) {
     $file['error'] ? die('Falha ao enviar o arquivo') : '';
     $consulta = $conexao->query("SELECT idLivro FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor")->num_rows;
 
     if ($consulta >= 1) { 
       echo "<script>alert('Um livro com um mesmo Título e Autor já existe cadastrado no sistema!');</script>";
     } else {
-      $finalizado = move_uploaded_file($file['tmp_name'], 'assets/$titulo.pdf');
+      $finalizado = move_uploaded_file($file['tmp_name'], "assets/$id_livro-$titulo.pdf");
       if ($finalizado) {
         $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, $autor, $pais, $categoria, '$user');") or die($conexao->error);
         echo "<script>alert('Livro cadastrado com sucesso!');</script>";
         header('Location: livros.php');
-  } } }
-
-  else if ($excluir) {
+      } 
+    }
+  } elseif (isset($_POST['submit_excluir'])) {
     if ($excluir == editar('titulo')){
       $conexao->query("DELETE FROM tblivro WHERE idLivro = $id_livro") or die($conexao->error);
-      unlink('assets/$titulo.php');
+      unlink("./assets/$id_livro.php");
       echo "<script>alert('Livro Excluido com sucesso com sucesso!');</script>";
       header('Location: livros.php');
-  } else {
-    echo "<script>alert('Digite o Nome do Livro Corretamente!');</script>";
-  } }
-
-  else if($titulo && $id_livro){
+    } else {
+      echo "<script>alert('Digite o Nome do Livro Corretamente!');</script>";
+    }
+  } elseif (isset($_POST['submit_editar'])) {
     $conexao->query("UPDATE tblivro SET titulo = '$titulo', data = $data, idAutor = $autor, idPais = $pais, idCategoria = $categoria WHERE idLivro = $id_livro") or die($conexao->error);
     echo "<script>alert('Livro Editado com sucesso!');</script>";
     header('Location: livros.php');
   }
+
 /*
   if($novo_autor){
     $consulta2 = $conexao->query("SELECT idAutor FROM tbautor WHERE autor = '$novo_autor'")->num_rows;
@@ -83,6 +83,8 @@
       header('Refresh: 0');
   } }
 */
+
+
   include('header.php'); 
 
   if (!$user) {
@@ -102,12 +104,12 @@
     
     <fieldset class='cadastro-titulo-data'>
       <div>
-        <label for='pesquisar'>Titulo:</label>
-        <input type='text' id='pesquisar' value="<?= editar('titulo') ?>">
+        <label for='titulo'>Titulo:</label>
+        <input type='text' id='titulo' name='titulo' value="<?= editar('titulo') ?>">
       </div>
       <div>
-        <label for='ano'>Ano de Publicação:</label>
-        <input type='number' id='ano' value="<?= editar('data') ?>">
+        <label for='data'>Ano de Publicação:</label>
+        <input type='number' id='data' name='data' value="<?= editar('data') ?>">
       </div>
     </fieldset>
     <fieldset>
@@ -116,9 +118,9 @@
         <?php if ($id) {
           echo "<option selected value='". editar('idAutor') ."'>". editar('autor') ."</option>";
         } else {
-            echo "<option>Selecione o autor da obra</option>";
+          echo "<option>Selecione o autor da obra</option>";
         } while ($autor_db = $sql_autor->fetch_assoc()) {
-            echo "<option value='". $autor_db['idAutor'] . "'>". $autor_db['autor'] ."</option>";
+          echo "<option value='". $autor_db['idAutor'] . "'>". $autor_db['autor'] ."</option>";
         } ?>
       </select>
     </fieldset>
@@ -140,26 +142,26 @@
         <?php if ($id) {
           echo "<option selected value='". editar('idCategoria') ."'>". editar('categoria') ."</option>";
         } else {
-            echo'<option>Escolha o tipo da obra</option>';
+          echo'<option>Escolha o tipo da obra</option>';
         } while ($categoria_db = $sql_categoria->fetch_assoc()) {
-            echo "<option value='". $categoria_db['idCategoria'] . "'>" . $categoria_db['categoria'] ."</option>";
+          echo "<option value='". $categoria_db['idCategoria'] . "'>" . $categoria_db['categoria'] ."</option>";
         } ?>
       </select>
     </fieldset>
     <fieldset>
       <?php if (!$id) { ?>
         <label for='file'>Selecione o arquivo:</label>
-          <label for='file' class='cadastro-label-file' id='cadastro_label_file'>Selecione o arquivo</label>
-          <input class='display-none' type='file' name='file' id='file' onchange='mostrarArquivo()' accept='application/pdf' required>
+          <label for='file' class='cadastro-label-file' id='cadastro_label_file' ondrop='soltarArquivo(event)' ondragover='arrastarArquivo(event)'>Selecione o arquivo</label>
+          <input class='display-none' type='file' name='file' id='file' onchange='mostrarArquivoInput(event)' accept='application/pdf' required>
         </fieldset>
         <fieldset>
-          <button class='botao-submit' type='submit' name='submit'>Cadastrar</button>
+          <button class='botao-submit' type='submit' name='submit_cadastrar'>Cadastrar</button>
       <?php } else { ?>
-          <button class='botao-submit' type='submit' name='submit'>Editar</button>
+          <button class='botao-submit' type='submit' name='submit_editar'>Editar</button>
         </fieldset>
         <fieldset>
           <?= "<input type='text' class='align-center' placeholder='Digite \"". editar('titulo') ."\" para confirmar a exclusão desta obra' name='excluir' id='excluir'>" ?>
-          <button class='botao-submit color-alert' type='submit'>Excluir</button>
+          <button class='botao-submit color-alert' type='submit' name='submit_excluir'>Excluir</button>
       <?php } ?>
     </fieldset>
   </form>
