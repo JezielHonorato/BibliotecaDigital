@@ -9,8 +9,8 @@
 
     $sql_login = $conexao->query("SELECT usuario, nivel FROM tbusuarios WHERE usuario = '$usuario' AND senha = '$senha'") or die('ERRO:' . $conexao->error);
 
-    $consulta = $sql_login->num_rows;
-    if ($consulta == 1) {
+    $consulta_login = $sql_login->num_rows;
+    if ($consulta_login == 1) {
       $user = $sql_login->fetch_assoc();
       session_start();
       $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
@@ -25,9 +25,9 @@
     $user_classe = isset($_POST['user_classe']) ? $_POST['user_classe'] : false;
     $confirmar_senha = isset($_POST['senha_user']) ? $_POST['senha_user'] : false;
 
-    $sql_consulta = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
-    $consulta5 = $sql_consulta->num_rows;
-    if ($consulta5 == 1) {
+    $sql_consulta_alterar = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
+    $consulta_alterar = $sql_consulta_alterar->num_rows;
+    if ($consulta_alterar == 1) {
       if ($user_classe) {
         echo "<script>alert('Um usuario com o mesmo nome ja esta cadastrado.')</script>";
       } else {
@@ -56,10 +56,10 @@
     $nova_senha = $_POST['nova_senha'];
     $confirmar_nova_senha = $_POST['confirmar_nova_senha'];
 
-    $sql_confirmar_denovo = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$senha_antiga'") or die('ERRO:' . $conexao->error);
+    $sql_consulta_senha = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$senha_antiga'") or die('ERRO:' . $conexao->error);
 
-    $consulta4 = $sql_confirmar_denovo->num_rows;
-    if ($consulta4 == 1) {
+    $consulta_alterar_senha = $sql_consulta_senha->num_rows;
+    if ($consulta_alterar_senha == 1) {
       if ($nova_senha == $confirmar_nova_senha) {
         $conexao->query("UPDATE tbusuarios SET senha = '$nova_senha' WHERE usuario = '$user'");
         echo "<script>alert('Senha alterada com sucesso!');</script>";
@@ -153,7 +153,7 @@
       <div class='input-senha'>
         <input type='password' name='senha' id='input_senha_4'>
         <i id='span_4' onclick='mostrarSenha(4)'>visibility_off</i> </div>
-      <button type='submit' class='botao-submit'>Login</button>
+      <button type='submit' class='botao-submit' name='login-submit'>Login</button>
     </form>
   <?php } ?>
 

@@ -6,6 +6,7 @@
   $novo_autor = isset($_POST['novo_autor']) ? ucwords(mb_strtolower($_POST['novo_autor'])) : false;
   $novo_pais  = isset($_POST['novo_pais'])  ? ucwords(mb_strtolower($_POST['novo_pais']))  : false;
   $user       = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
+  $nivel      = isset($_SESSION['usuario']) ? $_SESSION['usuario'][1] : false;
   $file       = isset($_FILES['file'])      ? $_FILES['file']         : false;
   $id_livro   = isset($_POST['id'])         ? $_POST['id']            : false;
   $data       = isset($_POST['data'])       ? $_POST['data']          : false;
@@ -105,15 +106,15 @@
     <fieldset class='cadastro-titulo-data'>
       <div>
         <label for='titulo'>Titulo:</label>
-        <input type='text' id='titulo' name='titulo' value="<?= editar('titulo') ?>">
+        <input type='text' id='titulo' name='titulo' placeholder='Titulo da obra' value="<?= editar('titulo') ?>">
       </div>
       <div>
         <label for='data'>Ano de Publicação:</label>
-        <input type='number' id='data' name='data' value="<?= editar('data') ?>">
+        <input type='number' id='data' name='data'  placeholder='ano de lançamento da obra' value="<?= editar('data') ?>">
       </div>
     </fieldset>
     <fieldset>
-      <label for='ano'>Autor:</label><br>
+      <label for='ano'>Autor:</label>
       <select class='select-campos' id='autor' name='autor' required>
         <?php if ($id) {
           echo "<option selected value='". editar('idAutor') ."'>". editar('autor') ."</option>";
@@ -123,6 +124,10 @@
           echo "<option value='". $autor_db['idAutor'] . "'>". $autor_db['autor'] ."</option>";
         } ?>
       </select>
+      <?php if ($nivel > 1) { ?>
+        <input type='text' id='autor_input' name='autor' placeholder='Escreva o nome do autor, caso ele ainda NÂO esteja cadastrado' class='display-none'>
+        <button class='novo-autor-pais' id='autor_button' onclick="cadastrarNovo('autor')">Adicionar um novo autor</button>
+      <?php } ?>
     </fieldset>
     <fieldset>
       <label for='pais'>Pais:</label>
@@ -135,6 +140,10 @@
           echo "<option value='". $pais_db['idPais'] . "'>" . $pais_db['pais'] ."</option>";
         } ?>
       </select>
+      <?php if ($nivel > 1) { ?>
+        <input type='text' id='pais_input' name='pais' placeholder='Escreva o pais da obra, caso ele ainda NÂO esteja cadastrado' class='display-none'>
+        <button class='novo-autor-pais' id='pais_button' onclick="cadastrarNovo('pais')">Adicionar um novo Pais</button>
+      <?php } ?>
     </fieldset>
     <fieldset>
       <label for='categoria'>Categoria:</label>
@@ -166,29 +175,7 @@
     </fieldset>
   </form>
 </main>
-<!--
-<form class='AddAutor' id='add_autor' method='post'>
-  <a class='AddAutorTitulo'>
-    <h1>Adicionar um novo Autor</h1> <span class='Simbolo' onclick='fecharAutor()'>close</span>
-  </a>
-  <div class='Preencher'> 
-    <p><label class='Label' for='novo_autor'>Nome do Autor:</label></p>
-    <input type='text' id='novo_autor' name='novo_autor' required class='InserirInput Preencher'>
-  </div>
-  <button class='BotaoInserir' type='submit' name='novo_submit_autor'>Enviar</button>
-</form>
 
-<form class='AddPais' id='add_pais' method='post'>
-  <a Class='AddAutorTitulo'>
-    <h1>Adicionar um novo Pais</h1> <span class='Simbolo' onclick='fecharPais()'>close</span>
-  </a>
-  <div class='Preencher'>
-    <p><label class='Label' for='novo_paisr'>Nome do Pais:</label></p>
-    <input type='text' id='novo_pais' name='novo_pais' required class='InserirInput Preencher'>
-  </div>
-  <button class='BotaoInserir' type='submit' name='novo_submit_pais'>Enviar</button>
-</form>
-      -->
 <?php } include('footer.php') ; ?>
 
 </body>

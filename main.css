@@ -358,6 +358,11 @@ footer {
 .cadastro-label-file:active {
   background-color: var(--cor-hover);
 }
+.novo-autor-pais {
+  text-decoration: underline;
+  cursor: pointer;
+  float: right;
+}
 
 /** LOGIN  / login.php **/
 .login {
