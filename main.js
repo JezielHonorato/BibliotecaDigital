@@ -82,8 +82,8 @@ function mostrarSenha(x) { //Função para mostrar senha nos inputs password
   inputSenha.type = span.innerHTML === 'visibility_off' ? 'text' : 'password';
   span.innerHTML = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
 };
-var 
-cadastrar = true;
+
+var cadastrar = true;
 function cadastrarNovo(id) {
   const select = document.getElementById(id);
   const input  = document.getElementById(id + '_input');
@@ -99,15 +99,7 @@ function cadastrarNovo(id) {
     button.textContent = 'Adicionar um novo ' + id;
     cadastrar = true;
 } }
-  /*
-  cadastrarNovo = function() {
-    select.style.display = 'none';
-    input.style.display = 'block';
-    button.textContent = 'cancelar';
-    cadastrarNovo = function() {
-      main.js.reload();  
-} } };
-*/
+
 function soltarArquivo(event) { //Funções para Selecionar um arquivo
   event.preventDefault(); 
   var file = event.dataTransfer.files[0];

@@ -152,7 +152,8 @@
       <label for='senha'>Senha:</label>
       <div class='input-senha'>
         <input type='password' name='senha' id='input_senha_4'>
-        <i id='span_4' onclick='mostrarSenha(4)'>visibility_off</i> </div>
+        <i id='span_4' onclick='mostrarSenha(4)'>visibility_off</i>
+      </div>
       <button type='submit' class='botao-submit' name='login-submit'>Login</button>
     </form>
   <?php } ?>

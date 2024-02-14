@@ -42,6 +42,7 @@
       <div class='campos-input'>
         <i>expand_more</i>
         <select class='select-campos' id='pais' name='pais' onchange='pesquisarLivro()'>
+          <option></option>
           <?php while ($pais = $sql_pais->fetch_assoc()) {
             echo "<option value='". $pais['idPais'] ."'>". $pais['pais'] ."</option>";
           }

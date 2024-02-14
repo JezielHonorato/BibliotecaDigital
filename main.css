@@ -339,6 +339,7 @@ footer {
   border-radius: 5px;
   padding: 0.7rem;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 .cadastro-label-file {
