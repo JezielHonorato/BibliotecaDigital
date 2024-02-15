@@ -37,7 +37,7 @@ body {
     --cor-hover: #FFFFFF;
     --cor-terciaria: #3DB4F2;
 */
-:root {
+:root .day {
   --cor-primaria: #F1F3F7;
   --cor-secundaria: #FFFFFF;
   --cor-texto: #105503;
@@ -45,6 +45,16 @@ body {
   --cor-terciaria: #3DB4F2;
   --cor-alert: #cc3300;
 
+  --tamanho-header: 10vh;
+  --tamanho-margin-header: 13vh;
+}
+:root .dark {
+  --cor-primaria: #0B1622;
+  --cor-secundaria: #151F2E;
+  --cor-texto: #9BADBD;
+  --cor-hover: #FFFFFF;
+  --cor-terciaria: #3DB4F2;
+  
   --tamanho-header: 10vh;
   --tamanho-margin-header: 13vh;
 }

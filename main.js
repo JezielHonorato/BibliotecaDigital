@@ -124,20 +124,8 @@ function alterarUsuario(campo) {
     location.reload();
 } };
 
-var cor = true
-function mudarCor() {
-  if (cor) {
-    document.documentElement.style.setProperty('--cor-primaria', '#0B1622');
-    document.documentElement.style.setProperty('--cor-secundaria', '#151F2E');
-    document.documentElement.style.setProperty('--cor-texto', '#9BADBD');
-    document.documentElement.style.setProperty('--cor-hover', '#FFFFFF');
-    document.documentElement.style.setProperty('--cor-terciaria', '#3DB4F2');
-    cor = false;
-  } else {
-    document.documentElement.style.setProperty('--cor-primaria', '#F1F3F7');
-    document.documentElement.style.setProperty('--cor-secundaria', '#FFFFFF');
-    document.documentElement.style.setProperty('--cor-texto', '#105503');
-    document.documentElement.style.setProperty('--cor-hover', '#4caf50');
-    document.documentElement.style.setProperty('--cor-terciaria', '#3DB4F2');
-    cor = true;
-} };
+function mudarCor(tema) {
+  var novoTema = (tema == 'dark') ? 'day' : 'dark';
+  document.cookie = "tema=" + novoTema + "; expires=" + (new Date().getTime() + (1 * 24 * 60 * 60 * 1000));
+  location.reload();
+}

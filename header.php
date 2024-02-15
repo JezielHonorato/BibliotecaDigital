@@ -1,3 +1,9 @@
+<?php
+
+  !isset($_COOKIE['tema']) ? setcookie('tema', 'day', time() + 24 * 60 * 60) : '';
+
+?>
+
 <!DOCTYPE html>
 <html lang='pt-br'>
 
@@ -12,7 +18,7 @@
   <script src='main.js' defer></script>
 </head>
 
-<body>
+<body class="<?= $_COOKIE['tema'] ?? 'day'?>">
   <div id='inicio'></div>
   <header>
     <a href='./index.php' class='logo-header'> <img src='./image/logo.png' alt='Logo pequena, 3 Livros amarelos empilhados'></a>
