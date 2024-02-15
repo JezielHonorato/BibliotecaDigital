@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\sql_injection_subst;
+
   session_start();
   include('conexao.php');
 
@@ -33,8 +36,9 @@
   $sql_pais      = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
 
   if (isset($_POST['submit_cadastrar'])) {
-    $file['error'] ? die('Falha ao enviar o arquivo') : '';
-    if($novo_autor || $novo_pais){
+    if($file['error']){
+      die('Falha ao enviar o arquivo');
+    } elseif($novo_autor || $novo_pais){
       $sql_consulta_pais_autor = $conexao->query("SELECT 'Autor' AS tipo WHERE NOT EXISTS (SELECT 1 FROM tbautor WHERE autor = '$novo_autor') UNION SELECT 'Pais' AS tipo WHERE NOT EXISTS (SELECT 1 FROM tbpais WHERE pais = '$novo_pais');") or die($conexao->error);
       $linhas_consulta = $sql_consulta_pais_autor->num_rows;
       if ($linhas_consulta == 0) {
@@ -44,28 +48,26 @@
         while ($consultas = $sql_consulta_pais_autor->fetch_assoc()) {
           if ($consultas['tipo'] == 'Autor') {
             $transaction .= "INSERT INTO tbautor (autor) VALUES ('$novo_autor'); SET @idNovoAutor = LAST_INSERT_ID(); ";
-            echo "autor foi  ";
           } elseif ($consultas['tipo'] == 'Pais') {
             $transaction .= "INSERT INTO tbpais (pais) VALUES ('$novo_pais'); SET @idNovoPais = LAST_INSERT_ID(); ";
-            echo "pais foi";
-      } } }
+      } }
+      $transaction .= "INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user'); COMMIT;";
+      $conexao->multi_query("$transaction") or die($conexao->error);
+      $pegar_id = $conexao->query("SELECT MAX(idLivro) FROM tblivro");
+      $ultimo_id = $pegar_id->fetch_assoc();
+      move_uploaded_file($file['tmp_name'], "./assets/". $ultimo_id['MAX(idLivro)'] .".pdf");  
+  }
     } else {
       $consulta = $conexao->query("SELECT idLivro FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor");
       $resultado_consulta = $consulta->num_rows;
       if ($resultado_consulta >= 1) { 
         echo "<script>alert('Um livro com um mesmo Título e Autor já existe cadastrado no sistema!');</script>";
+      } else{
+        $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user');") or die($conexao->error);
+        $pegar_id = $conexao->query("SELECT MAX(idLivro) FROM tblivro");
+        $ultimo_id = $pegar_id->fetch_assoc();
+        move_uploaded_file($file['tmp_name'], "./assets/". $ultimo_id['MAX(idLivro)'] .".pdf");  
     } }
-    $finalizado = move_uploaded_file($file['tmp_name'], "assets/$id_livro.pdf");
-    if ($finalizado) {
-      if($transaction){
-        $transaction .= "INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user'); COMMIT;";
-      } else {
-        $transaction = "INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user');";
-      } 
-      echo $transaction;
-      $conexao->query("$transaction") or die($conexao->error);
-      header('Location: livros.php');
-    } 
   } elseif (isset($_POST['submit_excluir'])) {
     if ($excluir == editar('titulo')){
       $conexao->query("DELETE FROM tblivro WHERE idLivro = $id_livro") or die($conexao->error);
