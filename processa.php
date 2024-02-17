@@ -19,7 +19,7 @@
   $sql_code_livro .= " WHERE " . implode(" AND ", $condicoes);
   $sql_code_livro .= " $ordem";
   $sql_query_livro = $conexao->query($sql_code_livro) or die($conexao->error);
-
+  
   while ($livro = $sql_query_livro->fetch_assoc()) {
     $html  ="<tr>";
     $html .="<td><a href='assets/{$livro['idLivro']}.pdf' download='{$livro['titulo']}'><i> download</i></a></td>";

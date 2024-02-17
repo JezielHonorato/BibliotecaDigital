@@ -1,14 +1,7 @@
 <?php
   session_start();
-  include('conexao.php');
 
-  $sql_pais = $conexao->query('SELECT idPais, pais FROM tbpais ORDER BY pais ASC') or die($conexao->error);
-  $sql_datas = $conexao->query('SELECT MIN(data) AS menor_valor, MAX(data) AS maior_valor FROM tblivro') or die($conexao->error);
-  $sql_categoria = $conexao->query('SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC') or die($conexao->error);
-
-  $data = $sql_datas->fetch_assoc();
-  $menor_valor = $data['menor_valor'];
-  $maior_valor = $data['maior_valor'];
+  require_once "objeto.php";
 
   include('header.php');
 ?>
@@ -29,10 +22,9 @@
         <i>expand_more</i>
         <select class='select-campos' id='categoria' name='categoria' onchange='pesquisarLivro()'>
           <option></option>
-          <?php while ($categoria = $sql_categoria->fetch_assoc()) {
-            echo "<option value='". $categoria['idCategoria'] ."'>". $categoria['categoria'] ."</option>";
-          }
-          ?>
+          <?php foreach ($conn->selecionarTodos('categoria') as $value) {
+            echo "<option value='". $value['idCategoria'] ."'>". $value['categoria'] ."</option>";
+          } ?>
         </select>
       </div>
     </section>
@@ -43,10 +35,9 @@
         <i>expand_more</i>
         <select class='select-campos' id='pais' name='pais' onchange='pesquisarLivro()'>
           <option></option>
-          <?php while ($pais = $sql_pais->fetch_assoc()) {
-            echo "<option value='". $pais['idPais'] ."'>". $pais['pais'] ."</option>";
-          }
-          ?>
+          <?php foreach ($conn->selecionarTodos('pais') as $value) {
+            echo "<option value='". $value['idPais'] ."'>". $value['pais'] ."</option>";
+          } ?>
         </select>
       </div>
     </section>
@@ -59,8 +50,8 @@
       <section class='campos-input campo-range'>
         <div class='linha-progresso' id='linha_progresso'></div>
         <span class='range-duplo'>
-          <input type='range' min='<?= $menor_valor ?>' max='<?= $maior_valor ?>' value='<?= $menor_valor ?>' id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
-          <input type='range' min='<?= $menor_valor ?>' max='<?= $maior_valor ?>' value='<?= $maior_valor ?>' id='range_maior' name='range_maior' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
+          <input type='range' min='0' max='2024' value='2024' id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
+          <input type='range' min='0' max='2024' value='2024' id='range_maior' name='range_maior' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
         </span>
       </section>
     </section>

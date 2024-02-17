@@ -16,7 +16,6 @@ function criaRequest() {
   return request ? request : alert('Seu Navegador não suporta Ajax!');
 }
 
-document.getElementById('resultado').onload = pesquisarLivro()
 
 function pesquisarLivro() {
   var pesquisar  = document.getElementById('pesquisar').value;
