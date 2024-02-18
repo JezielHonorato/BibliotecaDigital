@@ -1,6 +1,10 @@
 <?php
-
+  session_start();
+  
+  require_once "objeto.php";
   !isset($_COOKIE['tema']) ? setcookie('tema', 'day', time() + 24 * 60 * 60) : '';
+
+  $user = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
 
 ?>
 
@@ -25,7 +29,7 @@
     <nav>
       <a href='./index.php'>Home</a>
       <a href='./livros.php'>Livros</a>
-      <?php if (isset($_SESSION['usuario'])) {
+      <?php if ($user) {
         echo "<a href='./cadastrar.php'>Cadastrar</a>";
       } ?>
       <a href='./login.php'>Login</a>

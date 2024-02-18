@@ -1,13 +1,14 @@
 <?php
-  session_start();
-  include('conexao.php');
+
+  require_once('conexao.php');
+
   $user = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : '';
 
   if (isset($_POST['usuario']) || isset($_POST['senha'])) {
     $usuario = $conexao->real_escape_string($_POST['usuario']);
     $senha   = $conexao->real_escape_string($_POST['senha']);
 
-    $sql_login = $conexao->query("SELECT usuario, nivel FROM tbusuarios WHERE usuario = '$usuario' AND senha = '$senha'") or die('ERRO:' . $conexao->error);
+    $sql_login = $conexao->query("SELECT usuario, nivel FROM tbusuario WHERE usuario = '$usuario' AND senha = '$senha'") or die('ERRO:' . $conexao->error);
 
     $consulta_login = $sql_login->num_rows;
     if ($consulta_login == 1) {
@@ -25,16 +26,16 @@
     $user_classe = isset($_POST['user_classe']) ? $_POST['user_classe'] : false;
     $confirmar_senha = isset($_POST['senha_user']) ? $_POST['senha_user'] : false;
 
-    $sql_consulta_alterar = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
+    $sql_consulta_alterar = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
     $consulta_alterar = $sql_consulta_alterar->num_rows;
     if ($consulta_alterar == 1) {
       if ($user_classe) {
         echo "<script>alert('Um usuario com o mesmo nome ja esta cadastrado.')</script>";
       } else {
-        $sql_confirmar_senha = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$confirmar_senha'") or die('ERRO:' . $conexao->error);
+        $sql_confirmar_senha = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user' AND senha = '$confirmar_senha'") or die('ERRO:' . $conexao->error);
         $consulta6 = $sql_confirmar_senha->num_rows;      
         if ($consulta6 == 1) {          
-          $conexao->query("DELETE FROM tbusuarios WHERE usuario = '$user_name'");
+          $conexao->query("DELETE FROM tbusuario WHERE usuario = '$user_name'");
           header('Refresh: 0');
         } else {
           echo "<script>alert('Senha incorreta.');</script>";
@@ -44,7 +45,7 @@
       if ($confirmar_senha) {
         echo "<script>alert('Este usuario nao existe.')</script>";
       } else {
-        $conexao->query("INSERT INTO tbusuarios (usuario, nivel, senha) VALUES('$user_name', $user_classe, '$user_name')");
+        $conexao->query("INSERT INTO tbusuario (usuario, nivel, senha) VALUES('$user_name', $user_classe, '$user_name')");
         echo "<script>alert('Usuário cadastrado com sucesso! A senha e o nome do usuário são a mesma, mas você pode altera-lá depois.');</script>";
         header('Refresh: 0');  
       }
@@ -56,12 +57,12 @@
     $nova_senha = $_POST['nova_senha'];
     $confirmar_nova_senha = $_POST['confirmar_nova_senha'];
 
-    $sql_consulta_senha = $conexao->query("SELECT id FROM tbusuarios WHERE usuario = '$user' AND senha = '$senha_antiga'") or die('ERRO:' . $conexao->error);
+    $sql_consulta_senha = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user' AND senha = '$senha_antiga'") or die('ERRO:' . $conexao->error);
 
     $consulta_alterar_senha = $sql_consulta_senha->num_rows;
     if ($consulta_alterar_senha == 1) {
       if ($nova_senha == $confirmar_nova_senha) {
-        $conexao->query("UPDATE tbusuarios SET senha = '$nova_senha' WHERE usuario = '$user'");
+        $conexao->query("UPDATE tbusuario SET senha = '$nova_senha' WHERE usuario = '$user'");
         echo "<script>alert('Senha alterada com sucesso!');</script>";
       } else {
         echo "<script>alert('As senhas não batem.');</script>";
@@ -71,7 +72,7 @@
     }
   }
 
-  $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuarios ORDER BY usuario ASC') or die($conexao->error);
+  $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuario ORDER BY usuario ASC') or die($conexao->error);
 ?>
 
 <?php include('header.php'); ?>
@@ -141,7 +142,9 @@
       <button class='botao-submit' type='submit' name='trocar_senha'>Alterar a senha</button>
     </form>
 
-    <button onclick="window.location.href='./sair.php'" class='botao-submit color-alert'>Sair</button>
+    <form action="requisicao.php" method="post">
+      <button type='submit' name='sair' class='botao-submit color-alert'>Sair</button>
+    </form>
 
   <?php } else { ?>
     <form method='post' class='login'>

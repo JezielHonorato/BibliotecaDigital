@@ -1,99 +1,49 @@
 <?php
 
-  session_start();
-  include('conexao.php');
+  require_once "header.php";
 
-  $titulo     = isset($_POST['titulo'])     ? ucwords(mb_strtolower($_POST['titulo']))     : false;
-  $novo_autor = isset($_POST['novo_autor']) ? ucwords(mb_strtolower($_POST['novo_autor'])) : false;
-  $novo_pais  = isset($_POST['novo_pais'])  ? ucwords(mb_strtolower($_POST['novo_pais']))  : false;
-  $autor      = isset($_POST['autor']) && is_numeric($_POST['autor']) ? $_POST['autor'] : 1;
-  $pais       = isset($_POST['pais'])  && is_numeric($_POST['pais'])  ? $_POST['pais']  : 1;
-  $user       = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
-  $nivel      = isset($_SESSION['usuario']) ? $_SESSION['usuario'][1] : false;
-  $file       = isset($_FILES['file'])     ? $_FILES['file']     : false;
-  $id_livro   = isset($_POST['id'])        ? $_POST['id']        : false;
-  $data       = isset($_POST['data'])      ? $_POST['data']      : false;
-  $categoria  = isset($_POST['categoria']) ? $_POST['categoria'] : false;
-  $excluir    = isset($_POST['excluir'])   ? $_POST['excluir']   : false;
-  $id         = isset($_GET['id'])         ? $_GET['id']         : false;
-  $transaction = false;
-
-  function editar($campo) {
-    $id = $GLOBALS['id'];
-    if ($id) {
-      $sql_livro = $GLOBALS['conexao']->query("SELECT idLivro, titulo, autor, l.idAutor, categoria, l.idCategoria, pais, l.idPais, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor INNER JOIN tbcategoria AS c ON c.idCategoria = l.idCategoria INNER JOIN tbpais AS p ON p.idPais = l.idPais WHERE idLivro = $id");
-      $livro = $sql_livro->fetch_assoc();
-      return $livro["$campo"];
-    } else {
-      return $id;
-    }
-  }
-
-  $sql_categoria = $conexao->query("SELECT idCategoria, categoria FROM tbcategoria ORDER BY categoria ASC") or die($conexao->error);
-  $sql_autor     = $conexao->query("SELECT idAutor, autor FROM tbautor ORDER BY autor ASC") or die($conexao->error);
-  $sql_pais      = $conexao->query("SELECT idPais, pais FROM tbpais ORDER BY pais ASC") or die($conexao->error);
+  $nivel     = isset($_SESSION['usuario']) ? $_SESSION['usuario'][1] : false;
+  $titulo    = isset($_POST['titulo'])    ? $_POST['titulo']    : false;
+  $file      = isset($_FILES['file'])     ? $_FILES['file']     : false;
+  $autor     = isset($_POST['autor'])     ? $_POST['autor']     : false;
+  $pais      = isset($_POST['pais'])      ? $_POST['pais']      : false;
+  $id_livro  = isset($_POST['id'])        ? $_POST['id']        : false;
+  $data      = isset($_POST['data'])      ? $_POST['data']      : false;
+  $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
+  $excluir   = isset($_POST['excluir'])   ? $_POST['excluir']   : false;
+  $id        = isset($_GET['id'])         ? $_GET['id']         : false;
 
   if (isset($_POST['submit_cadastrar'])) {
     if($file['error']){
-      die('Falha ao enviar o arquivo');
-    } elseif($novo_autor || $novo_pais){
-      $sql_consulta_pais_autor = $conexao->query("SELECT 'Autor' AS tipo WHERE NOT EXISTS (SELECT 1 FROM tbautor WHERE autor = '$novo_autor') UNION SELECT 'Pais' AS tipo WHERE NOT EXISTS (SELECT 1 FROM tbpais WHERE pais = '$novo_pais');") or die($conexao->error);
-      $linhas_consulta = $sql_consulta_pais_autor->num_rows;
-      if ($linhas_consulta == 0) {
-        echo "<script>alert('o Autor e/ou Pais ja esta cadastrado no sistema!');</script>";
-      } else {
-        $transaction = "START TRANSACTION; ";
-        while ($consultas = $sql_consulta_pais_autor->fetch_assoc()) {
-          if ($consultas['tipo'] == 'Autor') {
-            $transaction .= "INSERT INTO tbautor (autor) VALUES ('$novo_autor'); SET @idNovoAutor = LAST_INSERT_ID(); ";
-          } elseif ($consultas['tipo'] == 'Pais') {
-            $transaction .= "INSERT INTO tbpais (pais) VALUES ('$novo_pais'); SET @idNovoPais = LAST_INSERT_ID(); ";
-      } }
-      $transaction .= "INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user'); COMMIT;";
-      $conexao->multi_query("$transaction") or die($conexao->error);
-      $pegar_id = $conexao->query("SELECT MAX(idLivro) FROM tblivro");
-      $ultimo_id = $pegar_id->fetch_assoc();
-      move_uploaded_file($file['tmp_name'], "./assets/". $ultimo_id['MAX(idLivro)'] .".pdf");  
-  }
+      echo "<script>alert('Falha ao enviar o arquivo');</script>";
     } else {
-      $consulta = $conexao->query("SELECT idLivro FROM tblivro WHERE titulo = '$titulo' AND idAutor = $autor");
-      $resultado_consulta = $consulta->num_rows;
-      if ($resultado_consulta >= 1) { 
-        echo "<script>alert('Um livro com um mesmo Título e Autor já existe cadastrado no sistema!');</script>";
-      } else{
-        $conexao->query("INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES('$titulo', $data, COALESCE(@idNovoAutor, $autor), COALESCE(@idNovoPais, $pais), $categoria, '$user');") or die($conexao->error);
-        $pegar_id = $conexao->query("SELECT MAX(idLivro) FROM tblivro");
-        $ultimo_id = $pegar_id->fetch_assoc();
-        move_uploaded_file($file['tmp_name'], "./assets/". $ultimo_id['MAX(idLivro)'] .".pdf");  
-    } }
+      $livro = $conn->cadastrarLivro($titulo, $data, $autor, $pais, $categoria, $user);
+      if($livro) {
+        move_uploaded_file($file['tmp_name'], "./assets/". $livro .".pdf");  
+      } else {
+        echo "<script>alert('ERRO');</script>";
+      }
+    } 
   } elseif (isset($_POST['submit_excluir'])) {
-    if ($excluir == editar('titulo')){
-      $conexao->query("DELETE FROM tblivro WHERE idLivro = $id_livro") or die($conexao->error);
-      unlink("./assets/$id_livro.php");
-      echo "<script>alert('Livro Excluido com sucesso com sucesso!');</script>";
+    if ($conn->excluirLivro($id, $excluir)){
       header('Location: livros.php');
     } else {
-      echo "<script>alert('Digite o Nome do Livro Corretamente!');</script>";
+      echo "<script>alert('ERRO');</script>";
     }
   } elseif (isset($_POST['submit_editar'])) {
-    $conexao->query("UPDATE tblivro SET titulo = '$titulo', data = $data, idAutor = $autor, idPais = $pais, idCategoria = $categoria WHERE idLivro = $id_livro") or die($conexao->error);
-    header('Location: livros.php');
-    echo "<script>alert('Livro Editado com sucesso!');</>";
+    if ($conn->cadastrarLivro($titulo, $data, $autor, $pais, $categoria, $id)){
+      header('Location: livros.php');
+    }
   }
 
-  include('header.php'); 
-
-  if (!$user) {
-    echo "<body onclick=\'window.location.href='./login.php'\'> </body>";
-  } else {
-
+  if ($user) {
 ?>
 
 <main>
   <form method='post' enctype='multipart/form-data' class='livros-cadastro' autocomplete='off'>
     <?php if ($id) { ?>
-      <input type='hidden' id='id' name='id' value="<?= editar('idLivro') ?>">
-      <h1 class='index-title'>Editar o Livro</h1>
+      <input type='hidden' id='id' name='id' value="<?= $id ?>">
+      <h1 class='index-title'>Preencha os campos abaixo para Editar o Livro</h1>
     <?php } else {?>
       <h1 class='index-title'>Preencha os campos abaixo para adicionar novas obras ao catálogo</h1>
     <?php } ?>
@@ -101,26 +51,26 @@
     <fieldset class='cadastro-titulo-data'>
       <div>
         <label for='titulo'>Titulo:</label>
-        <input type='text' id='titulo' name='titulo' placeholder='Titulo da obra' value="<?= editar('titulo') ?>">
+        <input type='text' id='titulo' name='titulo' placeholder='Titulo da obra' value="<?= $conn->selecionarLivro($id, 'titulo') ?>">
       </div>
       <div>
         <label for='data'>Ano de Publicação:</label>
-        <input type='number' id='data' name='data'  placeholder='ano de lançamento da obra' value="<?= editar('data') ?>">
+        <input type='number' id='data' name='data'  placeholder='ano de lançamento da obra' value="<?= $conn->selecionarLivro($id, 'data') ?>">
       </div>
     </fieldset>
     <fieldset>
       <label for='ano'>Autor:</label>
       <select class='select-campos' id='autor' name='autor' required>
         <?php if ($id) {
-          echo "<option selected value='". editar('idAutor') ."'>". editar('autor') ."</option>";
+          echo "<option selected value='". $conn->selecionarLivro($id, 'idAutor') ."'>". $conn->selecionarLivro($id, 'autor') ."</option>";
         } else {
           echo "<option>Selecione o autor da obra</option>";
-        } while ($autor_db = $sql_autor->fetch_assoc()) {
-          echo "<option value='". $autor_db['idAutor'] . "'>". $autor_db['autor'] ."</option>";
+        } foreach ($conn->selecionarTodos('autor') as $value) {
+          echo "<option value='". $value['idAutor'] ."'>". $value['autor'] ."</option>";
         } ?>
       </select>
       <?php if ($nivel > 1) { ?>
-        <input type='text' id='autor_input' name='novo_autor' placeholder='Escreva o nome do autor, caso ele ainda NÂO esteja cadastrado' class='display-none'>
+        <input type='text' id='autor_input' name='autor' placeholder='Escreva o nome do autor, caso ele ainda NÂO esteja cadastrado' class='display-none' disabled>
         <button class='novo-autor-pais' id='autor_button' onclick="cadastrarNovo('autor')">Adicionar um novo autor</button>
       <?php } ?>
     </fieldset>
@@ -128,15 +78,15 @@
       <label for='pais'>Pais:</label>
       <select class='select-campos' id='pais' name='pais' required>
       <?php if ($id) {
-          echo "<option selected value='". editar('idPais') ."'>". editar('pais') ."</option>";
+          echo "<option selected value='". $conn->selecionarLivro($id, 'idPais') ."'>". $conn->selecionarLivro($id, 'pais') ."</option>";
         } else {
           echo '<option>Selecione o pais da obra</option>';
-        } while ($pais_db = $sql_pais->fetch_assoc()) {
-          echo "<option value='". $pais_db['idPais'] . "'>" . $pais_db['pais'] ."</option>";
+        } foreach ($conn->selecionarTodos('pais') as $value) {
+          echo "<option value='". $value['idPais'] ."'>". $value['pais'] ."</option>";
         } ?>
       </select>
       <?php if ($nivel > 1) { ?>
-        <input type='text' id='pais_input' name='novo_pais' placeholder='Escreva o pais da obra, caso ele ainda NÂO esteja cadastrado' class='display-none'>
+        <input type='text' id='pais_input' name='pais' placeholder='Escreva o pais da obra, caso ele ainda NÂO esteja cadastrado' class='display-none' disabled>
         <button class='novo-autor-pais' id='pais_button' onclick="cadastrarNovo('pais')">Adicionar um novo Pais</button>
       <?php } ?>
     </fieldset>
@@ -144,11 +94,11 @@
       <label for='categoria'>Categoria:</label>
       <select class='select-campos' id='categoria' name='categoria' required>
         <?php if ($id) {
-          echo "<option selected value='". editar('idCategoria') ."'>". editar('categoria') ."</option>";
+          echo "<option selected value='". $conn->selecionarLivro($id, 'idCategoria') ."'>". $conn->selecionarLivro($id, 'categoria') ."</option>";
         } else {
           echo'<option>Selecione o tipo da obra</option>';
-        } while ($categoria_db = $sql_categoria->fetch_assoc()) {
-          echo "<option value='". $categoria_db['idCategoria'] . "'>" . $categoria_db['categoria'] ."</option>";
+        } foreach ($conn->selecionarTodos('categoria') as $value) {
+          echo "<option value='". $value['idCategoria'] ."'>". $value['categoria'] ."</option>";
         } ?>
       </select>
     </fieldset>
@@ -164,14 +114,14 @@
           <button class='botao-submit' type='submit' name='submit_editar'>Editar</button>
         </fieldset>
         <fieldset>
-          <?= "<input type='text' class='align-center' placeholder='Digite \"". editar('titulo') ."\" para confirmar a exclusão desta obra' name='excluir' id='excluir'>" ?>
+          <?= "<input type='text' class='align-center' placeholder='Digite \"". $conn->selecionarLivro($id, 'titulo') ."\" para confirmar a exclusão desta obra' name='excluir' id='excluir'>" ?>
           <button class='botao-submit color-alert' type='submit' name='submit_excluir'>Excluir</button>
       <?php } ?>
     </fieldset>
   </form>
 </main>
 
-<?php } include('footer.php') ; ?>
+<?php } require_once "footer.php"; ?>
 
 </body>
 </html>

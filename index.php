@@ -1,7 +1,4 @@
-<?php
-  session_start();
-  include('header.php');
-?>
+<?php require_once('header.php'); ?>
 
 <main>
   <h1 class='index-title'>Bem-Vindo à Biblioteca Digital: Acesse Livros em Domínio Público de Forma simples e legal!</h1>
@@ -13,4 +10,4 @@
   </figure>
 </main>
 
-<?php include('footer.php'); ?>
+<?php require_once('footer.php'); ?>

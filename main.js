@@ -16,6 +16,7 @@ function criaRequest() {
   return request ? request : alert('Seu Navegador não suporta Ajax!');
 }
 
+document.getElementById("resultado").onload = pesquisarLivro();
 
 function pesquisarLivro() {
   var pesquisar  = document.getElementById('pesquisar').value;
@@ -28,7 +29,7 @@ function pesquisarLivro() {
   var result = document.getElementById('resultado_consulta');
   var xmlreq = criaRequest();
 
-  xmlreq.open('GET', 'processa.php?pesquisar=' + pesquisar + '&categoria=' + categoria + '&pais=' + pais + '&range_menor=' + rangeMenor + '&range_maior=' + rangeMaior + '&ordem=' + ordem, true);
+  xmlreq.open('GET', 'processa.php?pesquisa=%' + pesquisar + '%&categoria=' + categoria + '&pais=' + pais + '&range_menor=' + rangeMenor + '&range_maior=' + rangeMaior + '&ordem=' + ordem, true);
   xmlreq.onreadystatechange = function () {
     (xmlreq.readyState == 4) ? (xmlreq.status == 200) ? result.innerHTML = xmlreq.responseText : result.innerHTML = 'Erro: ' + xmlreq.statusText : '';
   };
@@ -90,11 +91,15 @@ function cadastrarNovo(id) {
   if(cadastrar){
     select.style.display = 'none';
     input.style.display = 'block';
+    select.disabled = true;
+    input.disabled = false;
     button.textContent = 'cancelar';
     cadastrar = false;
   } else{
     select.style.display = 'block';
     input.style.display = 'none';
+    select.disabled = false;
+    input.disabled = true;
     button.textContent = 'Adicionar um novo ' + id;
     cadastrar = true;
 } }

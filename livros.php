@@ -1,18 +1,12 @@
-<?php
-  session_start();
-
-  require_once "objeto.php";
-
-  include('header.php');
-?>
+<?php require_once 'header.php'; ?>
 
 <main>
-  <form autocomplete='off' class='pesquisa-livros'>
+  <section class='pesquisa-livros'>
     <section class='campos-pesquisa'>
       <label for='pesquisar'>Título ou Autor:</label>
       <div class='campos-input'>
         <i>search</i>
-        <input type='search' class='pesquisar' id='pesquisar' name='pesquisar' onchange='pesquisarLivro()'>
+        <input type='search' class='pesquisar' id='pesquisar' name='pesquisar' onchange='pesquisarLivro()' autocomplete='off'>
       </div>
     </section>
 
@@ -50,13 +44,13 @@
       <section class='campos-input campo-range'>
         <div class='linha-progresso' id='linha_progresso'></div>
         <span class='range-duplo'>
-          <input type='range' min='0' max='2024' value='2024' id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
+          <input type='range' min='0' max='2024' value='0' id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
           <input type='range' min='0' max='2024' value='2024' id='range_maior' name='range_maior' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
         </span>
       </section>
     </section>
-    <input type='hidden' id='ordem' value='ORDER BY titulo ASC'>
-  </form>
+    <input type='hidden' id='ordem' value='titulo ASC'>
+  </section>
 
   <table class='tabela-livros'>
     <thead class='thead-livros'>
@@ -75,4 +69,4 @@
   </table>
 </main>
 
-<?php include('footer.php'); ?>
+<?php require_once "footer.php"; ?>
