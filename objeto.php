@@ -65,20 +65,20 @@ class Conexao {
 
   public function cadastrarLivro($titulo, $data, $autor, $pais, $idCategoria, $user) {
     $titulo = ucwords(mb_strtolower($titulo));
-    if(is_string($autor)) {
+    if(!is_numeric($autor)) {
       $autor = $this->cadastrarAutorPais("autor", $autor);
     } else {
       $sqlConsulta = "SELECT 'existe' AS livro WHERE NOT EXISTS (SELECT 1 FROM tblivro WHERE titulo = :titulo AND idAutor = :idAutor);";
       $consulta = $this->conn->prepare($sqlConsulta);
   
       $consulta->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-      $consulta->bindParam(":idAutor", $titulo, PDO::PARAM_INT);
+      $consulta->bindParam(":idAutor", $autor, PDO::PARAM_INT);
       $consulta->execute();
       
       if($consulta->rowCount() == 0) {
         return false;
       }
-    } if (is_string($pais)) {
+    } if (!is_numeric($pais)) {
       $pais = $this->cadastrarAutorPais("pais", $pais);
     }
 
@@ -129,9 +129,9 @@ class Conexao {
 
   public function editarLivro($titulo, $data, $autor, $pais, $idCategoria, $id) {
     $titulo = ucwords(mb_strtolower($titulo));
-    if(is_string($autor)) {
+    if(!is_numeric($autor)) {
       $autor = $this->cadastrarAutorPais("autor", $autor);
-    } if (is_string($pais)) {
+    } if (!is_numeric($pais)) {
       $pais = $this->cadastrarAutorPais("pais", $pais);
     }
 
