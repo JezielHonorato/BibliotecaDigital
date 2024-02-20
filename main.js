@@ -37,27 +37,27 @@ function pesquisarLivro() {
   xmlreq.send(null);
 }
 
+document.getElementById('range_menor').addEventListener('input', mudarPeriodo);
+document.getElementById('range_maior').addEventListener('input', mudarPeriodo);
 function mudarPeriodo() { //Função para o Range duplo
-  let rangeMenorV = parseInt(document.getElementById('range_menor').value);
-  let rangeMaiorV = parseInt(document.getElementById('range_maior').value);
+  let rangeMenor = parseInt(document.getElementById('range_menor').value);
+  let rangeMaior = parseInt(document.getElementById('range_maior').value);
 
-  [rangeMenorV, rangeMaiorV] = (rangeMenorV > rangeMaiorV) ? [rangeMaiorV, rangeMenorV] : [rangeMenorV, rangeMaiorV];
+  [rangeMenor, rangeMaior] = (rangeMenor > rangeMaior) ? [rangeMaior, rangeMenor] : [rangeMenor, rangeMaior];
 
-  document.getElementById('input_menor_valor').innerHTML, document.getElementById('range_menor').value = rangeMenorV;
-  document.getElementById('input_maior_valor').innerHTML, document.getElementById('range_maior').value = rangeMaiorV;
+  document.getElementById('input_menor_valor').innerHTML, document.getElementById('range_menor').value = rangeMenor;
+  document.getElementById('input_maior_valor').innerHTML, document.getElementById('range_maior').value = rangeMaior;
 
   const inputRange = document.getElementById('range_menor');
 
   const total = inputRange.max - inputRange.min;
-  const pMaior = ((rangeMaiorV - inputRange.min) / total) * 100;
-  const pMenor = ((rangeMenorV - inputRange.min) / total) * 100;
+  const pMaior = ((rangeMaior - inputRange.min) / total) * 100;
+  const pMenor = ((rangeMenor - inputRange.min) / total) * 100;
 
   document.getElementById('linha_progresso').style.cssText = `background: linear-gradient(to right, var(--cor-primaria) ${pMenor}% ${pMenor}%, var(--cor-terciaria) ${pMenor}% ${pMaior}%, var(--cor-primaria) ${pMaior}%);`;
 
   pesquisarLivro();
 };
-document.getElementById('range_menor').addEventListener('input', mudarPeriodo);
-document.getElementById('range_maior').addEventListener('input', mudarPeriodo);
 
 function ordenarLivros(id) { //Função para os simbolos de Ordenar
   const elementos = ['ordenar_titulo', 'ordenar_autor', 'ordenar_data'];

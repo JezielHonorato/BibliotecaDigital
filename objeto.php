@@ -31,6 +31,24 @@ class Conexao {
     return $result; 
   }
 
+  public function selecionarDatas($ordem) {
+    $arrayPossivel = ["MIN", "MAX"];
+    if(!in_array($ordem, $arrayPossivel)) {
+      exit();
+    }
+    $sql = "SELECT $ordem(data) FROM tblivro";
+    $prepare = $this->conn->prepare($sql);
+    try {
+      $prepare->execute();
+      $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $erro) {
+      echo "Erro ao executar a consulta: " . $erro->getMessage();
+      exit();
+    }
+
+    return $result; 
+  }
+
   public function pesquisarLivros($parametros) {
     $condicoes = [];
     $parametros['pesquisa'] ? $condicoes[] = "(titulo LIKE :pesquisa OR autor LIKE :pesquisa)" : '';

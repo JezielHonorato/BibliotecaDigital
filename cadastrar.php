@@ -2,12 +2,10 @@
 
 require_once "header.php";
 
-$nivel     = isset($_SESSION['usuario']) ? $_SESSION['usuario'][1] : false;
 $titulo    = isset($_POST['titulo'])    ? $_POST['titulo']    : false;
 $file      = isset($_FILES['file'])     ? $_FILES['file']     : false;
 $autor     = isset($_POST['autor'])     ? $_POST['autor']     : false;
 $pais      = isset($_POST['pais'])      ? $_POST['pais']      : false;
-$id_livro  = isset($_POST['id'])        ? $_POST['id']        : false;
 $data      = isset($_POST['data'])      ? $_POST['data']      : false;
 $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
 $excluir   = isset($_POST['excluir'])   ? $_POST['excluir']   : false;
@@ -20,9 +18,9 @@ if (isset($_POST['submit_cadastrar'])) {
   } else {
     $livro = $conn->cadastrarLivro($titulo, $data, $autor, $pais, $categoria, $user);
     if($livro) {
-      move_uploaded_file($file['tmp_name'], "./assets/". $livro .".pdf");  
-    } else {
-      echo "<script>alert('ERRO');</script>";
+      if(move_uploaded_file($file['tmp_name'], "./assets/". $livro .".pdf")){
+        header('Location: livros.php');
+      }
     }
   } 
 } elseif (isset($_POST['submit_excluir'])) {
@@ -34,8 +32,6 @@ if (isset($_POST['submit_cadastrar'])) {
 } elseif (isset($_POST['submit_editar'])) {
   if ($conn->editarLivro($titulo, $data, $autor, $pais, $categoria, $id)){
     header('Location: livros.php');
-  } else{
-    echo "<script>alert($autor);</script>";
   }
 }
 
@@ -62,7 +58,7 @@ if ($user) {
     </div>
   </fieldset>
   <fieldset>
-    <label for='ano'>Autor:</label>
+    <label for='autor'>Autor:</label>
     <select class='select-campos' id='autor' name='autor' required>
       <?php if ($id) {
         echo "<option selected value='". $conn->selecionarLivro($id, 'idAutor') ."'>". $conn->selecionarLivro($id, 'autor') ."</option>";
