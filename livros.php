@@ -44,8 +44,8 @@
       <section class='campos-input campo-range'>
         <div class='linha-progresso' id='linha_progresso'></div>
         <span class='range-duplo'>
-          <input type='range' min='0' max='2024' value='0' id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
-          <input type='range' min='0' max='2024' value='2024' id='range_maior' name='range_maior' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
+          <input type='range' min="<?= $conn->selecionarDatas()[0]['min'] ?>" max="<?= $conn->selecionarDatas()[0]['max'] ?>" value="<?= $conn->selecionarDatas()[0]['min'] ?>" id='range_menor' name='range_menor' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
+          <input type='range' min="<?= $conn->selecionarDatas()[0]['min'] ?>" max="<?= $conn->selecionarDatas()[0]['max'] ?>" value="<?= $conn->selecionarDatas()[0]['max'] ?>" id='range_maior' name='range_maior' class='Periodo' onchange='mudarPeriodo()' onclick='pesquisarLivro()'>
         </span>
       </section>
     </section>

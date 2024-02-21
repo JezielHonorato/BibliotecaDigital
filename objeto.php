@@ -31,12 +31,8 @@ class Conexao {
     return $result; 
   }
 
-  public function selecionarDatas($ordem) {
-    $arrayPossivel = ["MIN", "MAX"];
-    if(!in_array($ordem, $arrayPossivel)) {
-      exit();
-    }
-    $sql = "SELECT $ordem(data) FROM tblivro";
+  public function selecionarDatas() {
+    $sql = "SELECT MIN(data) as min, MAX(data) as max FROM tblivro";
     $prepare = $this->conn->prepare($sql);
     try {
       $prepare->execute();
@@ -51,7 +47,7 @@ class Conexao {
 
   public function pesquisarLivros($parametros) {
     $condicoes = [];
-    $parametros['pesquisa'] ? $condicoes[] = "(titulo LIKE :pesquisa OR autor LIKE :pesquisa)" : '';
+    $parametros['pesquisa']  ? $condicoes[] = "(titulo LIKE :pesquisa OR autor LIKE :pesquisa)" : '';
     $parametros['categoria'] ? $condicoes[] = "idCategoria = :idCategoria" : '';
     $parametros['pais']      ? $condicoes[] = "idPais = :idPais" : '';
     $condicoes[] = "data BETWEEN :dataMenor AND :dataMaior";

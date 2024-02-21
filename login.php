@@ -71,6 +71,12 @@
       echo "<script>alert('Senha incorreta.');</script>";
     }
   }
+  
+  if (isset($_POST['sair'])) {
+    session_start();
+    session_destroy();
+    header("Location: index.php");
+  }
 
   $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuario ORDER BY usuario ASC') or die($conexao->error);
 ?>

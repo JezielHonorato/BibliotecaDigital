@@ -45,8 +45,8 @@ function mudarPeriodo() { //Função para o Range duplo
 
   [rangeMenor, rangeMaior] = (rangeMenor > rangeMaior) ? [rangeMaior, rangeMenor] : [rangeMenor, rangeMaior];
 
-  document.getElementById('input_menor_valor').innerHTML, document.getElementById('range_menor').value = rangeMenor;
-  document.getElementById('input_maior_valor').innerHTML, document.getElementById('range_maior').value = rangeMaior;
+  document.getElementById('input_menor_valor').textContent, document.getElementById('range_menor').value = rangeMenor;
+  document.getElementById('input_maior_valor').textContent, document.getElementById('range_maior').value = rangeMaior;
 
   const inputRange = document.getElementById('range_menor');
 
@@ -66,8 +66,8 @@ function ordenarLivros(id) { //Função para os simbolos de Ordenar
   let ordem = '';
   for (item of elementos) {
     const elemento = document.getElementById(item);
-    elemento.innerHTML = (elemento === elementoClicado) ? proximoTexto(elemento.innerHTML) : 'swap_vert';
-    ordem = elemento.innerHTML == 'expand_more' ? `ORDER BY ${id} ASC` : elemento.innerHTML == 'expand_less' ? `ORDER BY ${id} DESC` : ordem;
+    elemento.textContent = (elemento === elementoClicado) ? proximoTexto(elemento.textContent) : 'swap_vert';
+    ordem = elemento.textContent == 'expand_more' ? `${id} ASC` : elemento.textContent == 'expand_less' ? `${id} DESC` : ordem;
   }
   ordenar.value = ordem;
   pesquisarLivro();
@@ -79,8 +79,8 @@ function mostrarSenha(x) { //Função para mostrar senha nos inputs password
   const inputSenha = document.getElementById('input_senha_' + x);
   const span = document.getElementById('span_' + x);
 
-  inputSenha.type = span.innerHTML === 'visibility_off' ? 'text' : 'password';
-  span.innerHTML = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
+  inputSenha.type = span.textContent === 'visibility_off' ? 'text' : 'password';
+  span.textContent = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
 };
 
 var cadastrar = true;
