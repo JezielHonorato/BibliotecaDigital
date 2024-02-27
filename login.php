@@ -2,24 +2,7 @@
 
   require_once('conexao.php');
 
-  $user = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : '';
 
-  if (isset($_POST['usuario']) || isset($_POST['senha'])) {
-    $usuario = $conexao->real_escape_string($_POST['usuario']);
-    $senha   = $conexao->real_escape_string($_POST['senha']);
-
-    $sql_login = $conexao->query("SELECT usuario, nivel FROM tbusuario WHERE usuario = '$usuario' AND senha = '$senha'") or die('ERRO:' . $conexao->error);
-
-    $consulta_login = $sql_login->num_rows;
-    if ($consulta_login == 1) {
-      $user = $sql_login->fetch_assoc();
-      session_start();
-      $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
-      header('Location: index.php');
-    } else {
-      echo 'Falha ao conectar! Usuario ou senha incorretas.';
-    }
-  }
 
   if (isset($_POST['botao_alterar_usuario'])) {
     $user_name = isset($_POST['alterar_usuario_nome']) ? $_POST['alterar_usuario_nome'] : false;
@@ -77,15 +60,17 @@
     session_destroy();
     header("Location: index.php");
   }
-
-  $sql_usuarios = $conexao->query('SELECT usuario, nivel FROM tbusuario ORDER BY usuario ASC') or die($conexao->error);
 ?>
 
-<?php include('header.php'); ?>
+<?php include('header.php');
+    if (isset($_POST['usuario']) || isset($_POST['senha'])) {
+      $conn->conectarUsuario($_POST['usuario'], $_POST['senha']);
+    }
+?>
 
 <main>
-  <?php if (isset($_SESSION['usuario'])) {  ?>
-    <?php if ($_SESSION['usuario'][1] > 1) {  ?>
+  <?php if ($user) {  ?>
+    <?php if ($nivel > 1) {  ?>
 
       <form method='post' class='display-none login' id='alterar_usuario' autocomplete='off'>
         <h1 class='index-title' id='alterar_usuario_titulo'></h1>
@@ -117,11 +102,11 @@
           </tr>
         </thead>
         <tbody>
-          <?php while ($lista_usuario = $sql_usuarios->fetch_assoc()) {
-            echo '<tr>';
-            echo '<td>'. $lista_usuario['usuario'] .'</td>';
-            echo '<td>'. $lista_usuario['nivel'] .'</td>';
-            echo '</tr>';
+          <?php foreach ($conn->selecionarTodos("usuario") as $value) {
+            echo "<tr>";
+            echo "<td>". $value['usuario'] ."</td>";
+            echo "<td>". $value['nivel'] ."</td>";
+            echo "</tr>";
           } ?>
           <tr>
             <td class='criar-usuario' onclick="alterarUsuario('criar')">Criar um novo usuário</td>

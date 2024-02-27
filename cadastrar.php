@@ -1,6 +1,6 @@
 <?php
 
-require_once "header.php";
+require_once("header.php");
 
 $titulo    = isset($_POST['titulo'])    ? $_POST['titulo']    : false;
 $file      = isset($_FILES['file'])     ? $_FILES['file']     : false;

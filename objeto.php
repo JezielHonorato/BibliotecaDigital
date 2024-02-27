@@ -6,7 +6,6 @@ class Conexao {
   public function __construct($hostname, $name, $username, $password) {
     try {
       $this->conn = new PDO("mysql:dbname=$hostname;host=" .$name, $username, $password);
-      //echo "Sucesso! Conectado ao banco de dados $hostname como $username.\n";
     } catch (PDOException $erro) {
       echo "Erro de conexão: " . $erro->getMessage();
       exit();
@@ -81,21 +80,11 @@ class Conexao {
     $titulo = ucwords(mb_strtolower($titulo));
     if(!is_numeric($autor)) {
       $autor = $this->cadastrarAutorPais("autor", $autor);
-    } else {
-      $sqlConsulta = "SELECT 'existe' AS livro WHERE NOT EXISTS (SELECT 1 FROM tblivro WHERE titulo = :titulo AND idAutor = :idAutor);";
-      $consulta = $this->conn->prepare($sqlConsulta);
-  
-      $consulta->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-      $consulta->bindParam(":idAutor", $autor, PDO::PARAM_INT);
-      $consulta->execute();
-      
-      if($consulta->rowCount() == 0) {
-        return false;
-      }
+    } else if ($this->consultarTabela("tblivro", ['titulo', 'idAutor'], [$titulo, $autor])) {
+      return false;
     } if (!is_numeric($pais)) {
       $pais = $this->cadastrarAutorPais("pais", $pais);
     }
-
     $sql = "INSERT INTO tblivro (titulo, data, idAutor, idPais, idCategoria, usuario) VALUES(:titulo, :data, :idAutor, :idPais, :idCategoria, :user);";
     $prepare = $this->conn->prepare($sql);
 
@@ -167,16 +156,22 @@ class Conexao {
     return true;
   }
 
-  private function cadastrarAutorPais($tabela, $camp) {
-    $campo = ucwords(mb_strtolower($camp));
-    $sqlConsulta = "SELECT 'existe' AS $tabela WHERE NOT EXISTS (SELECT 1 FROM tb$tabela WHERE $tabela = :campo);";
-    $consulta = $this->conn->prepare($sqlConsulta);
-
-    $consulta->bindParam(":campo", $campo, PDO::PARAM_STR);
-    $consulta->execute();
-    if($consulta->rowCount() == 0) {
-      return false;
+  public function conectarUsuario($user, $senha) {
+    $sql = $this->conn->query("SELECT usuario, nivel FROM tbusuario WHERE usuario = '$user' AND senha = '$senha'");
+    $sql->execute();
+    if ($sql->rowCount() == 1) {
+      $user = $sql->fetch();
+      session_start();
+      $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
+      header('Location: index.php');
     } else {
+      echo 'Falha ao conectar! Usuario ou senha incorretas.';
+    }
+  }
+
+  private function cadastrarAutorPais($tabela, $campo) {
+    if($this->consultarTabela("tb$tabela", [$tabela], [$campo])) {
+      return false;
       $sql = "INSERT INTO tb$tabela ($tabela) VALUES(:campo);";
       $prepare = $this->conn->prepare($sql);
       $prepare->bindParam(":campo", $campo, PDO::PARAM_STR);
@@ -186,9 +181,25 @@ class Conexao {
       return $idAdicionado;
     }
   }
+
+  private function consultarTabela($tabela, $campos, $valores) {
+    $sqlConsulta = "SELECT 'existe' AS $tabela WHERE NOT EXISTS (SELECT 1 FROM $tabela WHERE";
+    $i = 0;
+    foreach ($campos as $item) {
+      $sqlConsulta .= $i > 0 ? " AND $item = ?" : " $item = ?";
+      $i++;
+    }
+    $sqlConsulta .= ");";
+    $consulta = $this->conn->prepare($sqlConsulta);
+
+    for ($i; $i > 0; $i--){
+      $consulta->bindParam($i, mb_strtolower($valores[$i -1]), PDO::PARAM_STR);
+    }
+    $consulta->execute();
+
+    return ($consulta->rowCount() == 0) ? true : false;
+  }
 }
 
 $conn = new Conexao("bibliotecadigital", "localhost", "root", "");
-
-//var_dump($conn->editarLivro(1, "autor"))
 ?>

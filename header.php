@@ -1,7 +1,7 @@
 <?php
   session_start();
   
-  require_once "objeto.php";
+  require_once("objeto.php");
   !isset($_COOKIE['tema']) ? setcookie('tema', 'day', time() + 24 * 60 * 60) : '';
 
   $user  = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
