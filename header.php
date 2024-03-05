@@ -1,6 +1,6 @@
 <?php
   session_start();
-  
+
   require_once("objeto.php");
   !isset($_COOKIE['tema']) ? setcookie('tema', 'day', time() + 24 * 60 * 60) : '';
 

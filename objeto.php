@@ -80,7 +80,7 @@ class Conexao {
     $titulo = ucwords(mb_strtolower($titulo));
     if(!is_numeric($autor)) {
       $autor = $this->cadastrarAutorPais("autor", $autor);
-    } else if ($this->consultarTabela("tblivro", ['titulo', 'idAutor'], [$titulo, $autor])) {
+    } else if ($this->consultarTabela("tblivro", ['titulo', 'idAutor'], [mb_strtolower($titulo), mb_strtolower($autor)])) {
       return false;
     } if (!is_numeric($pais)) {
       $pais = $this->cadastrarAutorPais("pais", $pais);
@@ -169,8 +169,33 @@ class Conexao {
     }
   }
 
+  public function alterarSenha($user, $senhaAntiga, $senhaNova, $senhaNova2) {
+    if($senhaNova != $senhaNova2){
+      return false;
+    } else if($this->consultarTabela('tbusuario', ['usuario', 'senha'], ["$user", "$senhaAntiga"])){
+      $sql = "UPDATE tbusuario SET senha = :senha WHERE usuario = :user";
+      $prepare = $this->conn->prepare($sql);
+      $prepare->bindParam(":senha", $senhaNova, PDO::PARAM_STR);
+      $prepare->bindParam(":user", $user, PDO::PARAM_STR);
+      try {
+        $prepare->execute();
+        return true;
+      } catch (PDOException $erro) {
+        throw new Exception("Erro: " . $erro->getMessage());
+      }
+    } else{
+      throw new Exception("Erro: Caralhos, consuta deu ruim");
+    }
+  }
+
+  public function desconectarUsuario() {
+    session_start();
+    session_destroy();
+    header("Location: index.php");
+  }
+
   private function cadastrarAutorPais($tabela, $campo) {
-    if($this->consultarTabela("tb$tabela", [$tabela], [$campo])) {
+    if($this->consultarTabela("tb$tabela", [$tabela], [mb_strtolower($campo)])) {
       return false;
       $sql = "INSERT INTO tb$tabela ($tabela) VALUES(:campo);";
       $prepare = $this->conn->prepare($sql);
@@ -193,7 +218,7 @@ class Conexao {
     $consulta = $this->conn->prepare($sqlConsulta);
 
     for ($i; $i > 0; $i--){
-      $consulta->bindParam($i, mb_strtolower($valores[$i -1]), PDO::PARAM_STR);
+      $consulta->bindParam($i, $valores[$i -1], PDO::PARAM_STR);
     }
     $consulta->execute();
 

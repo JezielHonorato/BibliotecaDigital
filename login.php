@@ -1,8 +1,5 @@
 <?php
-
   require_once('conexao.php');
-
-
 
   if (isset($_POST['botao_alterar_usuario'])) {
     $user_name = isset($_POST['alterar_usuario_nome']) ? $_POST['alterar_usuario_nome'] : false;
@@ -35,37 +32,17 @@
     }
   }
 
-  if (isset($_POST['trocar_senha'])) {
-    $senha_antiga = $_POST['senha_antiga'];
-    $nova_senha = $_POST['nova_senha'];
-    $confirmar_nova_senha = $_POST['confirmar_nova_senha'];
-
-    $sql_consulta_senha = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user' AND senha = '$senha_antiga'") or die('ERRO:' . $conexao->error);
-
-    $consulta_alterar_senha = $sql_consulta_senha->num_rows;
-    if ($consulta_alterar_senha == 1) {
-      if ($nova_senha == $confirmar_nova_senha) {
-        $conexao->query("UPDATE tbusuario SET senha = '$nova_senha' WHERE usuario = '$user'");
-        echo "<script>alert('Senha alterada com sucesso!');</script>";
-      } else {
-        echo "<script>alert('As senhas não batem.');</script>";
-      }
-    } else {
-      echo "<script>alert('Senha incorreta.');</script>";
-    }
-  }
-  
-  if (isset($_POST['sair'])) {
-    session_start();
-    session_destroy();
-    header("Location: index.php");
-  }
 ?>
 
 <?php include('header.php');
-    if (isset($_POST['usuario']) || isset($_POST['senha'])) {
-      $conn->conectarUsuario($_POST['usuario'], $_POST['senha']);
-    }
+
+if (isset($_POST['login_submit'])) {
+  $conn->conectarUsuario($_POST['usuario'], $_POST['senha']);
+} elseif (isset($_POST['trocar_senha'])) {
+  $conn->alterarSenha($user, $_POST['senha_antiga'], $_POST['nova_senha'], $_POST['confirmar_nova_senha']);
+} elseif (isset($_POST['sair'])) {
+  $conn->desconectarUsuario();
+}
 ?>
 
 <main>
@@ -85,7 +62,7 @@
         <div id='apagar_usuario' class='display-none'>
           <label for='senha'>Senha:</label>
           <div class='input-senha'>
-            <input type='password' name='senha_user' id='input_senha_5'>
+            <input type='password' placeholder='confime com a sua senha' name='senha_user' id='input_senha_5'>
             <i id='span_5' onclick='mostrarSenha(5)'>visibility_off</i>
           </div>
         </div>
@@ -133,7 +110,7 @@
       <button class='botao-submit' type='submit' name='trocar_senha'>Alterar a senha</button>
     </form>
 
-    <form action="requisicao.php" method="post">
+    <form action="" method="post">
       <button type='submit' name='sair' class='botao-submit color-alert'>Sair</button>
     </form>
 
@@ -148,7 +125,7 @@
         <input type='password' name='senha' id='input_senha_4'>
         <i id='span_4' onclick='mostrarSenha(4)'>visibility_off</i>
       </div>
-      <button type='submit' class='botao-submit' name='login-submit'>Login</button>
+      <button type='submit' class='botao-submit' name='login_submit'>Login</button>
     </form>
   <?php } ?>
 
