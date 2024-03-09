@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once 'objeto.php';
+  require_once ('objeto.php');
 
   foreach ($conn->pesquisarLivros($parametros = $_GET) as $livro) {
     $html  ="<tr>";

@@ -1,40 +1,4 @@
-<?php
-  require_once('conexao.php');
-
-  if (isset($_POST['botao_alterar_usuario'])) {
-    $user_name = isset($_POST['alterar_usuario_nome']) ? $_POST['alterar_usuario_nome'] : false;
-    $user_classe = isset($_POST['user_classe']) ? $_POST['user_classe'] : false;
-    $confirmar_senha = isset($_POST['senha_user']) ? $_POST['senha_user'] : false;
-
-    $sql_consulta_alterar = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user_name'") or die('ERRO:' . $conexao->error);
-    $consulta_alterar = $sql_consulta_alterar->num_rows;
-    if ($consulta_alterar == 1) {
-      if ($user_classe) {
-        echo "<script>alert('Um usuario com o mesmo nome ja esta cadastrado.')</script>";
-      } else {
-        $sql_confirmar_senha = $conexao->query("SELECT id FROM tbusuario WHERE usuario = '$user' AND senha = '$confirmar_senha'") or die('ERRO:' . $conexao->error);
-        $consulta6 = $sql_confirmar_senha->num_rows;      
-        if ($consulta6 == 1) {          
-          $conexao->query("DELETE FROM tbusuario WHERE usuario = '$user_name'");
-          header('Refresh: 0');
-        } else {
-          echo "<script>alert('Senha incorreta.');</script>";
-        }
-      }
-    } else {
-      if ($confirmar_senha) {
-        echo "<script>alert('Este usuario nao existe.')</script>";
-      } else {
-        $conexao->query("INSERT INTO tbusuario (usuario, nivel, senha) VALUES('$user_name', $user_classe, '$user_name')");
-        echo "<script>alert('Usuário cadastrado com sucesso! A senha e o nome do usuário são a mesma, mas você pode altera-lá depois.');</script>";
-        header('Refresh: 0');  
-      }
-    }
-  }
-
-?>
-
-<?php include('header.php');
+<?php require_once('header.php');
 
 if (isset($_POST['login_submit'])) {
   $conn->conectarUsuario($_POST['usuario'], $_POST['senha']);

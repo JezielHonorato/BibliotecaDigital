@@ -2,14 +2,14 @@
 
 require_once("header.php");
 
-$titulo    = isset($_POST['titulo'])    ? $_POST['titulo']    : false;
-$file      = isset($_FILES['file'])     ? $_FILES['file']     : false;
-$autor     = isset($_POST['autor'])     ? $_POST['autor']     : false;
-$pais      = isset($_POST['pais'])      ? $_POST['pais']      : false;
-$data      = isset($_POST['data'])      ? $_POST['data']      : false;
-$categoria = isset($_POST['categoria']) ? $_POST['categoria'] : false;
-$excluir   = isset($_POST['excluir'])   ? $_POST['excluir']   : false;
-$id        = isset($_GET['id'])         ? $_GET['id']         : false;
+$file = $_FILES['file'] ?? false;
+$categoria = $_POST['categoria'] ?? false;
+$excluir = $_POST['excluir'] ?? false;
+$titulo = $_POST['titulo'] ?? false;
+$autor = $_POST['autor'] ?? false;
+$pais = $_POST['pais'] ?? false;
+$data = $_POST['data'] ?? false;
+$id = $_GET['id'] ?? false;
 
 
 if (isset($_POST['submit_cadastrar'])) {

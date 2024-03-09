@@ -45,8 +45,8 @@ function mudarPeriodo() { //Função para o Range duplo
 
   [rangeMenor, rangeMaior] = (rangeMenor > rangeMaior) ? [rangeMaior, rangeMenor] : [rangeMenor, rangeMaior];
 
-  document.getElementById('input_menor_valor').textContent, document.getElementById('range_menor').value = rangeMenor;
-  document.getElementById('input_maior_valor').textContent, document.getElementById('range_maior').value = rangeMaior;
+  [document.getElementById('input_menor_valor').textContent, document.getElementById('range_menor').value] = [rangeMenor, rangeMenor];
+  [document.getElementById('input_maior_valor').textContent, document.getElementById('range_maior').value] = [rangeMaior, rangeMaior];
 
   const inputRange = document.getElementById('range_menor');
 

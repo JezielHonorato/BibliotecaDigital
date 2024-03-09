@@ -4,8 +4,8 @@
   require_once("objeto.php");
   !isset($_COOKIE['tema']) ? setcookie('tema', 'day', time() + 24 * 60 * 60) : '';
 
-  $user  = isset($_SESSION['usuario']) ? $_SESSION['usuario'][0] : false;
-  $nivel = isset($_SESSION['usuario']) ? $_SESSION['usuario'][1] : false;
+  $user  = $_SESSION['usuario'][0] ?? false;
+  $nivel = $_SESSION['usuario'][1] ?? false;
 
 ?>
 
