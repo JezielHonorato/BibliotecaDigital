@@ -184,7 +184,7 @@ class Conexao {
         throw new Exception("Erro: " . $erro->getMessage());
       }
     } else{
-      throw new Exception("Erro: Caralhos, consuta deu ruim");
+      return false;
     }
   }
 
