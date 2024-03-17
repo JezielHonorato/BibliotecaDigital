@@ -53,7 +53,7 @@ class Conexao {
 
     $sql  = "SELECT idLivro, titulo, autor, data FROM tblivro AS l INNER JOIN tbautor AS a ON a.idAutor = l.idAutor";
     $sql .= " WHERE " . implode(" AND ", $condicoes);
-    $sql .= " ORDER BY :ordem";
+    $sql .= " ORDER BY $parametros[ordem]";
   
     $prepare = $this->conn->prepare($sql);
 
@@ -62,7 +62,6 @@ class Conexao {
     $parametros['pais']      ? $prepare->bindParam(':idPais', $parametros['pais'], PDO::PARAM_INT) : '';
     $prepare->bindParam(':dataMenor', $parametros['range_menor'], PDO::PARAM_INT);
     $prepare->bindParam(':dataMaior', $parametros['range_maior'], PDO::PARAM_INT);
-    $prepare->bindParam(':ordem', $parametros['ordem'], PDO::PARAM_STR);
 
     try {
       $prepare->execute();
