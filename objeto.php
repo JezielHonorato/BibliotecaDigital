@@ -126,7 +126,6 @@ class Conexao {
     } catch (PDOException $erro) {
       echo "Erro: " . $erro->getMessage();
       exit();
-      return false;
     }
   }
 
@@ -157,25 +156,19 @@ class Conexao {
   }
 
   public function conectarUsuario($user, $senha) {
-    $sql = $this->conn->query("SELECT usuario, nivel FROM tbusuario WHERE usuario = '$user' AND senha = '$senha'");
-    $sql->execute();
-    if ($sql->rowCount() == 1) {
-      $user = $sql->fetch();
+    if ($this->verificarSenha($user, $senha)){
       session_start();
-      $_SESSION['usuario'] = array($user['usuario'], $user['nivel']);
-      header('Location: index.php');
-    } else {
-      echo 'Falha ao conectar! Usuario ou senha incorretas.';
+      $_SESSION['usuario'] = $this->verificarSenha($user, $senha);
+      header("Location: index.php");
     }
   }
 
-  public function alterarSenha($user, $senhaAntiga, $senhaNova, $senhaNova2) {
-    if($senhaNova != $senhaNova2){
-      return false;
-    } else if($this->consultarTabela('tbusuario', ['usuario', 'senha'], ["$user", "$senhaAntiga"])){
+  public function alterarSenha($user, $senha, $senhaNova) {
+    if($this->verificarSenha($user, $senha)) {
+      $hash = password_hash($senhaNova, PASSWORD_DEFAULT );
       $sql = "UPDATE tbusuario SET senha = :senha WHERE usuario = :user";
       $prepare = $this->conn->prepare($sql);
-      $prepare->bindParam(":senha", $senhaNova, PDO::PARAM_STR);
+      $prepare->bindParam(":senha", $hash, PDO::PARAM_STR);
       $prepare->bindParam(":user", $user, PDO::PARAM_STR);
       try {
         $prepare->execute();
@@ -183,8 +176,37 @@ class Conexao {
       } catch (PDOException $erro) {
         throw new Exception("Erro: " . $erro->getMessage());
       }
-    } else{
+    } else {
       return false;
+    }
+  }
+
+  public function cadastrarUsuario($nome, $nivel) {
+    $sql = "INSERT INTO tbusuario (usuario, nivel, senha) VALUES(:nome, :nivel, :senha)";
+    $hash = password_hash($nome, PASSWORD_DEFAULT);
+    $prepare = $this->conn->prepare($sql);
+    $prepare->bindParam(':nome', $nome, PDO::PARAM_STR);
+    $prepare->bindParam(':nivel', $nivel, PDO::PARAM_INT, 1);
+    $prepare->bindParam(':senha', $hash, PDO::PARAM_STR);
+    try {
+      $prepare->execute();
+      return true;
+    } catch (PDOException $erro) {
+      echo "Erro: " . $erro->getMessage();
+      exit();
+    }
+  }
+
+  public function apagarUsuario($nome) {
+    $sql = "DELETE FROM tbusuario WHERE usuario = :usuario";
+    $prepare = $this->conn->prepare($sql);
+    $prepare->bindParam(":usuario", $nome, PDO::PARAM_STR);
+    try {
+      $prepare->execute();
+      return true;
+    } catch (PDOException $erro) {
+      echo "Erro: " . $erro->getMessage();
+      exit();
     }
   }
 
@@ -195,16 +217,17 @@ class Conexao {
   }
 
   private function cadastrarAutorPais($tabela, $campo) {
-    if($this->consultarTabela("tb$tabela", [$tabela], [mb_strtolower($campo)])) {
+    $campo = ucwords(mb_strtolower($campo));
+    if($this->consultarTabela("tb$tabela", [$tabela], [$campo])) {
       return false;
-      $sql = "INSERT INTO tb$tabela ($tabela) VALUES(:campo);";
-      $prepare = $this->conn->prepare($sql);
-      $prepare->bindParam(":campo", $campo, PDO::PARAM_STR);
-      $prepare->execute();
-
-      $idAdicionado = $this->conn->lastInsertId();
-      return $idAdicionado;
     }
+    $sql = "INSERT INTO tb$tabela ($tabela) VALUES(:campo);";
+    $prepare = $this->conn->prepare($sql);
+    $prepare->bindParam(":campo", $campo, PDO::PARAM_STR);
+    $prepare->execute();
+
+    $idAdicionado = $this->conn->lastInsertId();
+    return $idAdicionado;
   }
 
   private function consultarTabela($tabela, $campos, $valores) {
@@ -222,9 +245,23 @@ class Conexao {
     }
     $consulta->execute();
 
-    return ($consulta->rowCount() == 0) ? true : false;
+    return ($consulta->rowCount() == 0) ? true : false; //Se existir retorna true
+  }
+
+  private function verificarSenha($user, $senha) {
+    $sql = "SELECT usuario, nivel, senha FROM tbusuario WHERE usuario = :user";
+    $prepare = $this->conn->prepare($sql);
+    $prepare->bindParam(":user", $user, PDO::PARAM_STR);
+    try {
+      $prepare->execute();
+      $result = $prepare->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $erro) {
+      throw new Exception("Erro: " . $erro->getMessage());
+    }
+    return password_verify($senha, $result['senha']) ? [$result['usuario'], $result['nivel']] : false;
   }
 }
+
 
 $conn = new Conexao("bibliotecadigital", "localhost", "root", "");
 ?>

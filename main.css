@@ -30,13 +30,6 @@ body {
 
 /** ROOTS **/
 
-/*
-    --cor-primaria: #0B1622;
-    --cor-secundaria: #151F2E;
-    --cor-texto: #9BADBD;
-    --cor-hover: #FFFFFF;
-    --cor-terciaria: #3DB4F2;
-*/
 :root .day {
   --cor-primaria: #F1F3F7;
   --cor-secundaria: #FFFFFF;
@@ -54,21 +47,26 @@ body {
   --cor-texto: #9BADBD;
   --cor-hover: #FFFFFF;
   --cor-terciaria: #3DB4F2;
-  
+  --cor-alert: #cc3300;
+
   --tamanho-header: 10vh;
   --tamanho-margin-header: 13vh;
 }
 
-input {
+input[type=text], input[type=number], input[type=password] {
+  background-color: var(--cor-secundaria);
   text-indent: 1rem;
   width: 100%;
   height: 2rem;
   border-radius: 5px;
 }
 
-a, label, option, ::placeholder, th, td, button, span, p, input, select, h1, h2, h3 {
+a, label, option, ::placeholder, th, td, button, span, p, input, select, h1, h2, h3, sub {
   color: var(--cor-texto);
   text-decoration: none;
+}
+sub{
+  opacity: 0.5;
 }
 
 i:hover {
@@ -389,6 +387,23 @@ footer {
   background-color: var(--cor-secundaria);
   align-items: center;
   justify-items: center;
+}
+
+.nivel-usuario{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+}
+
+.nivel-usuario input{
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  margin-top: 15px;
+  background-color: var(--cor-secundaria);
+}
+.nivel-usuario input:checked{
+  background-color: var(--cor-terciaria);
 }
 
 .tabela-usuarios {

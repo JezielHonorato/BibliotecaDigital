@@ -83,7 +83,7 @@ function mostrarSenha(x) { //Função para mostrar senha nos inputs password
   span.textContent = inputSenha.type === 'password' ? 'visibility_off' : 'visibility';
 };
 
-var cadastrar = true;
+var cadastrar = false;
 function cadastrarNovo(id) {
   const select = document.getElementById(id);
   const input  = document.getElementById(id + '_input');
@@ -102,7 +102,8 @@ function cadastrarNovo(id) {
     input.disabled = true;
     button.textContent = 'Adicionar um novo ' + id;
     cadastrar = true;
-} }
+  } event.preventDefault();
+}
 
 function soltarArquivo(event) { //Funções para Selecionar um arquivo
   event.preventDefault(); 

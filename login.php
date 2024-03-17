@@ -3,7 +3,11 @@
 if (isset($_POST['login_submit'])) {
   $conn->conectarUsuario($_POST['usuario'], $_POST['senha']);
 } elseif (isset($_POST['trocar_senha'])) {
-  $conn->alterarSenha($user, $_POST['senha_antiga'], $_POST['nova_senha'], $_POST['confirmar_nova_senha']);
+  ($_POST['nova_senha'] == $_POST['confirmar_nova_senha']) ? $conn->alterarSenha($user, $_POST['senha_antiga'], $_POST['nova_senha']) : '';
+} elseif (isset($_POST['botao_alterar_usuario']) && isset($_POST['user_nivel'])) {
+  $conn->cadastrarUsuario($_POST['alterar_usuario_nome'], $_POST['user_nivel']);
+} elseif (isset($_POST['botao_alterar_usuario']) && isset($_POST['senha_user'])) {
+  $conn->apagarUsuario($_POST['alterar_usuario_nome']);
 } elseif (isset($_POST['sair'])) {
   $conn->desconectarUsuario();
 }
@@ -18,18 +22,17 @@ if (isset($_POST['login_submit'])) {
         <label for='usuario'>Usuario:</label>
         <input class='input-login' placeholder='Digite o nome do usuário' id='alterar_usuario_nome' name='alterar_usuario_nome' type='text' required>
         
-        <div id='criar_usuario' class='display-none'>
-          <label for="user_classe">Classe do Usuario:</label>
-          <input type='number' placeholder='Classe do usuário' name='user_classe' id='user_classe' class='UsuarioNivel'>
-        </div>
-
-        <div id='apagar_usuario' class='display-none'>
-          <label for='senha'>Senha:</label>
-          <div class='input-senha'>
-            <input type='password' placeholder='confime com a sua senha' name='senha_user' id='input_senha_5'>
-            <i id='span_5' onclick='mostrarSenha(5)'>visibility_off</i>
+        <div id='criar_usuario' class='display-none nivel-usuario'>
+          <div>
+            <input type="radio" id="estagiario" name="user_nivel" value="1">
+            <label for="estagiario">Estagiario</label><sub>(Consegue criar e editar livros)</sub>
+          </div>
+          <div>
+            <input type="radio" id="admin" name="user_nivel" value="2">
+            <label for="admin">Administrador</label><sub>(consegue gerenciar usuarios)</sub>
           </div>
         </div>
+
         <button type='submit' class='botao-submit' name='botao_alterar_usuario'>Confirmar</button>
       </form>
 
