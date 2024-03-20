@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31/01/2024 às 01:44
+-- Tempo de geração: 20/03/2024 às 01:16
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -37,15 +37,15 @@ CREATE TABLE `tbautor` (
 --
 
 INSERT INTO `tbautor` (`idAutor`, `autor`) VALUES
-(1, 'Machado de Assis'),
-(2, 'Franz Kafka'),
-(3, ''),
-(4, 'Dante Alighieri'),
-(5, 'Lima Barreto'),
-(6, 'Aluísio Azevedo'),
-(7, 'José De Alencar'),
-(8, 'Olavo Bilac'),
-(9, 'Raul Pompeia');
+(1, 'Dante Alighieri'),
+(2, 'Machado De Assis'),
+(3, 'Lima Barreto'),
+(4, 'Raul Pompeia'),
+(5, 'Franz Kafka'),
+(6, 'Luís Vaz De Camoes'),
+(7, 'Agostinho De Hipona'),
+(8, 'George Orwell'),
+(9, 'Platao');
 
 -- --------------------------------------------------------
 
@@ -92,21 +92,16 @@ CREATE TABLE `tblivro` (
 --
 
 INSERT INTO `tblivro` (`idLivro`, `titulo`, `data`, `idAutor`, `idCategoria`, `idPais`, `usuario`) VALUES
-(1, 'Crisálidas', 1964, 1, 5, 3, 'Jeziel Honorato'),
-(2, 'Dom Casmurro', 1899, 1, 6, 3, 'Jeziel Honorato'),
-(3, 'Helena', 1876, 1, 6, 3, 'Jeziel Honorato'),
-(4, 'Memórias Póstumas De Brás Cubas', 1881, 1, 6, 3, 'Jeziel Honorato'),
-(6, 'O Cortiço', 1890, 6, 6, 3, 'Jeziel Honorato'),
-(8, 'Iracema', 1892, 7, 6, 3, 'Jeziel Honorato'),
-(9, 'Triste Fim De Policarpo Quaresma', 1915, 5, 6, 3, 'Jeziel Honorato'),
-(10, 'Diario Intimo', 1953, 5, 6, 3, 'admin'),
-(13, 'Senhora', 1874, 7, 6, 3, 'admin'),
-(14, 'Diva', 1864, 7, 6, 3, 'admin'),
-(15, 'Os Deuses De Casaca', 1865, 1, 7, 3, 'admin'),
-(16, 'Papéis Avulsos', 1882, 1, 2, 3, 'admin'),
-(17, 'O Ateneu', 1888, 9, 6, 3, 'Jeziel Honorato'),
-(18, 'A Divina Comédia', 1314, 4, 5, 18, 'Jeziel Honorato'),
-(19, 'Espumas Flutuantes', 1870, 9, 5, 3, 'Jeziel Honorato');
+(1, 'A Divina Comedia', 1314, 1, 5, 1, 'Jeziel Honorato'),
+(2, 'Dom Casmurro', 1899, 2, 6, 2, 'Jeziel Honorato'),
+(3, 'Quase Ministro', 1864, 2, 7, 2, 'Jeziel Honorato'),
+(4, 'O Triste Fim De Policarpo Quaresma', 1915, 3, 6, 2, 'Jeziel Honorato'),
+(5, 'O Ateneu', 1888, 4, 6, 2, 'Jeziel Honorato'),
+(6, 'A Metamorfose', 1915, 5, 6, 3, 'Jeziel Honorato'),
+(7, 'Os Lusiadas', 1572, 6, 5, 4, 'Jeziel Honorato'),
+(8, 'Confissoes', 397, 7, 1, 5, 'Jeziel Honorato'),
+(9, '1984', 1949, 8, 6, 6, 'Jeziel Honorato'),
+(10, 'A Republica', -380, 9, 4, 7, 'Jeziel Honorato');
 
 -- --------------------------------------------------------
 
@@ -124,41 +119,34 @@ CREATE TABLE `tbpais` (
 --
 
 INSERT INTO `tbpais` (`idPais`, `pais`) VALUES
-(0, ''),
-(1, 'Alemanha'),
-(2, 'Austrália'),
-(3, 'Brasil'),
-(4, 'Colômbia'),
-(5, 'Estados Unidos'),
-(6, 'Inglaterra'),
-(7, 'Japão'),
-(8, 'Moçambique'),
-(9, 'Portugal'),
-(10, 'Rússia'),
-(14, 'Noruega'),
-(17, 'República Tcheca'),
-(18, 'Itália');
+(1, 'Italia'),
+(2, 'Brasil'),
+(3, 'Austria-Hungria'),
+(4, 'Portugal'),
+(5, 'Selecione O Pais Da Obra'),
+(6, 'India'),
+(7, 'Grecia');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tbusuarios`
+-- Estrutura para tabela `tbusuario`
 --
 
-CREATE TABLE `tbusuarios` (
+CREATE TABLE `tbusuario` (
   `id` int(11) NOT NULL,
   `usuario` varchar(25) NOT NULL,
-  `senha` varchar(25) NOT NULL,
+  `senha` varchar(255) NOT NULL,
   `nivel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `tbusuarios`
+-- Despejando dados para a tabela `tbusuario`
 --
 
-INSERT INTO `tbusuarios` (`id`, `usuario`, `senha`, `nivel`) VALUES
-(1, 'Jeziel Honorato', 'Aleatória', 3),
-(6, 'estagiario', 'estagiario', 1);
+INSERT INTO `tbusuario` (`id`, `usuario`, `senha`, `nivel`) VALUES
+(1, 'Jeziel Honorato', '$2y$10$SXHk8HNEXABSHvPQtc8.je5fVFht5TumRVO3/dgM1N.L4WVf87U2i', 3),
+(4, 'Joao', '$2y$10$cFNxmBvdsVaE1/EgECe0auYKWlkeZTTC7h0Rj12lyy78EQ//GaA/K', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -192,9 +180,9 @@ ALTER TABLE `tbpais`
   ADD PRIMARY KEY (`idPais`);
 
 --
--- Índices de tabela `tbusuarios`
+-- Índices de tabela `tbusuario`
 --
-ALTER TABLE `tbusuarios`
+ALTER TABLE `tbusuario`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -217,37 +205,19 @@ ALTER TABLE `tbcategoria`
 -- AUTO_INCREMENT de tabela `tblivro`
 --
 ALTER TABLE `tblivro`
-  MODIFY `idLivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idLivro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `tbpais`
 --
 ALTER TABLE `tbpais`
-  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de tabela `tbusuarios`
+-- AUTO_INCREMENT de tabela `tbusuario`
 --
-ALTER TABLE `tbusuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `tbautor`
---
-ALTER TABLE `tbautor`
-  ADD CONSTRAINT `idpais` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idpais`);
-
---
--- Restrições para tabelas `tblivro`
---
-ALTER TABLE `tblivro`
-  ADD CONSTRAINT `tblivro_ibfk_1` FOREIGN KEY (`idautor`) REFERENCES `tbautor` (`idautor`),
-  ADD CONSTRAINT `tblivro_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `tbcategoria` (`idcategoria`),
-  ADD CONSTRAINT `tblivro_ibfk_3` FOREIGN KEY (`idpais`) REFERENCES `tbpais` (`idpais`);
+ALTER TABLE `tbusuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
