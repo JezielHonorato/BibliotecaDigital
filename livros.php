@@ -16,7 +16,7 @@
         <i>expand_more</i>
         <select class='select-campos' id='categoria' name='categoria' onchange='pesquisarLivro()'>
           <option></option>
-          <?php foreach ($conn->selecionarTodos('categoria') as $value) {
+          <?php foreach ($conn->selecionarTodos(2) as $value) {
             echo "<option value='". $value['idCategoria'] ."'>". $value['categoria'] ."</option>";
           } ?>
         </select>
@@ -29,7 +29,7 @@
         <i>expand_more</i>
         <select class='select-campos' id='pais' name='pais' onchange='pesquisarLivro()'>
           <option></option>
-          <?php foreach ($conn->selecionarTodos('pais') as $value) {
+          <?php foreach ($conn->selecionarTodos(3) as $value) {
             echo "<option value='". $value['idPais'] ."'>". $value['pais'] ."</option>";
           } ?>
         </select>

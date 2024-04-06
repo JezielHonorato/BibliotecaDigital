@@ -29,28 +29,28 @@ body {
 }
 
 /** ROOTS **/
+:root {
+  --cor-terciaria: #3db4f2;
+  --cor-alert: #cc3300;
+  --cor-warning: #ffc107;
 
+  --tamanho-header: 10vh;
+  --tamanho-margin-header: 13vh;
+}
 :root .day {
   --cor-primaria: #F1F3F7;
   --cor-secundaria: #FFFFFF;
   --cor-texto: #105503;
   --cor-hover: #4caf50;
-  --cor-terciaria: #3DB4F2;
-  --cor-alert: #cc3300;
-
-  --tamanho-header: 10vh;
-  --tamanho-margin-header: 13vh;
+  --sombra: rgba(0 0 0 / 20%);
 }
 :root .dark {
   --cor-primaria: #0B1622;
   --cor-secundaria: #151F2E;
   --cor-texto: #9BADBD;
   --cor-hover: #FFFFFF;
-  --cor-terciaria: #3DB4F2;
-  --cor-alert: #cc3300;
+  --sombra: rgba(255, 255, 255, 30%);
 
-  --tamanho-header: 10vh;
-  --tamanho-margin-header: 13vh;
 }
 
 input[type=text], input[type=number], input[type=password] {
@@ -70,8 +70,8 @@ sub{
 }
 
 i:hover {
-  -webkit-filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
-  filter: drop-shadow(0px 0px 10px rgba(0 0 0 / 100%));
+  -webkit-filter: drop-shadow(0px 0px 10px var(--sombra));
+  filter: drop-shadow(0px 0px 10px var(--sombra));
   cursor: pointer;
 }
 
@@ -118,8 +118,8 @@ nav {
 }
 
 .logo-header:hover {
-  -webkit-filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 80%));
-  filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 80%));
+  -webkit-filter: drop-shadow(0px 0px 5px var(--sombra));
+  filter: drop-shadow(0px 0px 5px var(--sombra));
   cursor: pointer;
 }
 
@@ -262,8 +262,8 @@ main {
 }
 
 .tbody-livros tr:hover {
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
-  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  -webkit-filter: drop-shadow(0px 0px 2px var(--sombra));
+  filter: drop-shadow(0px 0px 2px var(--sombra));
   cursor: pointer;
 }
 
@@ -361,13 +361,14 @@ footer {
   cursor: pointer;
 }
 .cadastro-label-file:hover {
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
-  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  -webkit-filter: drop-shadow(0px 0px 2px var(--sombra));
+  filter: drop-shadow(0px 0px 2px var(--sombra));
 }
 .cadastro-label-file:active {
   background-color: var(--cor-hover);
 }
 .novo-autor-pais {
+  background-color: var(--cor-secundaria);
   text-decoration: underline;
   cursor: pointer;
   float: right;
@@ -418,8 +419,8 @@ footer {
     grid-gap: 0.2rem;
 }
 .tabela-usuarios tbody tr:hover {
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
-  filter: drop-shadow(0px 0px 2px rgba(0 0 0 / 30%));
+  -webkit-filter: drop-shadow(0px 0px 2px var(--sombra));
+  filter: drop-shadow(0px 0px 2px var(--sombra));
 }
 
 .tabela-usuarios td, .tabela-usuarios th {
@@ -431,9 +432,15 @@ footer {
   padding: 0.8rem;
   margin-top: 0.2rem;
 }
+
+.editar-tabela {
+  -webkit-filter: drop-shadow(0px 0px 2px var(--sombra));
+  filter: drop-shadow(0px 0px 2px var(--sombra));
+}
+
 .criar-usuario {
   background-color: var(--cor-terciaria) !important;
-  color: var(--cor-secundaria);
+  color: var(--cor-secundaria); 
   justify-content: center;
 }
 .apagar-usuario {
@@ -443,9 +450,14 @@ footer {
 }
 .criar-usuario:hover, .apagar-usuario:hover {
   color: var(--cor-texto);
-  -webkit-filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 50% ));
-  filter: drop-shadow(0px 0px 5px rgba(0 0 0 / 50% ));
+  -webkit-filter: drop-shadow(0px 0px 5px var(--sombra));
+  filter: drop-shadow(0px 0px 5px var(--sombra));
   cursor: pointer;
+}
+
+.ferramenta-editar {
+  display: flex;
+  justify-content: space-around;
 }
 
 .alterar-senha {
@@ -463,6 +475,16 @@ footer {
 .color-alert {
   background-color: var(--cor-alert);
 }
+.item-alert {
+  color: var(--cor-alert);
+}
+.item-warning {
+  color: var(--cor-warning);
+}
+.no-background {
+  background-color: transparent;
+}
+
 .align-center {
   display: flex;
   text-align: center;

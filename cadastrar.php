@@ -64,7 +64,7 @@ if ($user) {
         echo "<option selected value='". $conn->selecionarLivro($id, 'idAutor') ."'>". $conn->selecionarLivro($id, 'autor') ."</option>";
       } else {
         echo "<option>Selecione o autor da obra</option>";
-      } foreach ($conn->selecionarTodos('autor') as $value) {
+      } foreach ($conn->selecionarTodos(1) as $value) {
         echo "<option value='". $value['idAutor'] ."'>". $value['autor'] ."</option>";
       } ?>
     </select>
@@ -80,7 +80,7 @@ if ($user) {
         echo "<option selected value='". $conn->selecionarLivro($id, 'idPais') ."'>". $conn->selecionarLivro($id, 'pais') ."</option>";
       } else {
         echo '<option>Selecione o pais da obra</option>';
-      } foreach ($conn->selecionarTodos('pais') as $value) {
+      } foreach ($conn->selecionarTodos(3) as $value) {
         echo "<option value='". $value['idPais'] ."'>". $value['pais'] ."</option>";
       } ?>
     </select>
@@ -96,7 +96,7 @@ if ($user) {
         echo "<option selected value='". $conn->selecionarLivro($id, 'idCategoria') ."'>". $conn->selecionarLivro($id, 'categoria') ."</option>";
       } else {
         echo'<option>Selecione o tipo da obra</option>';
-      } foreach ($conn->selecionarTodos('categoria') as $value) {
+      } foreach ($conn->selecionarTodos(2) as $value) {
         echo "<option value='". $value['idCategoria'] ."'>". $value['categoria'] ."</option>";
       } ?>
     </select>

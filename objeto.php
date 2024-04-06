@@ -12,11 +12,9 @@ class Conexao {
     }
   }
 
-  public function selecionarTodos($campo) {
-    $arrayPossivel = ["categoria", "pais", "usuario", "autor"];
-    if(!in_array($campo, $arrayPossivel)) {
-      throw new Exception("A tabela '$campo' não é válida.");
-    }
+  public function selecionarTodos($chave) {
+    $arrayPossivel = [ 1 => "autor", 2 => "categoria", 3 => "pais", 4 => "usuario"];
+    $campo = $arrayPossivel[$chave];
     $sql = "SELECT * FROM tb$campo ORDER BY $campo ASC";
     $prepare = $this->conn->prepare($sql);
     try {
@@ -194,6 +192,20 @@ class Conexao {
       echo "Erro: " . $erro->getMessage();
       exit();
     }
+  }
+
+  public function alterarAutorPais($tabela, $id, $funcao) {
+    /*if ($funcao == "excluir") {
+      $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
+      $prepare->execute();
+    } else if ($funcao == "editar") {
+      $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
+      $prepare->execute();
+    }*/
+    $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
+    $prepare->bindParam(":id", $id, PDO::PARAM_INT);
+    $prepare->execute();
+    header('Location: login.php');
   }
 
   public function apagarUsuario($nome) {

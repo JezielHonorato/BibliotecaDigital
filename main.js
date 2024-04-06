@@ -29,7 +29,7 @@ function pesquisarLivro() {
   var result = document.getElementById('resultado_consulta');
   var xmlreq = criaRequest();
 
-  xmlreq.open('GET', 'processa.php?pesquisa=%' + pesquisar + '%&categoria=' + categoria + '&pais=' + pais + '&range_menor=' + rangeMenor + '&range_maior=' + rangeMaior + '&ordem=' + ordem, true);
+  xmlreq.open('GET', `processa.php?pesquisa=%${pesquisar}%&categoria=${categoria}&pais=${pais}&range_menor=${rangeMenor}&range_maior=${rangeMaior}&ordem=${ordem}`, true);
   xmlreq.onreadystatechange = function () {
     (xmlreq.readyState == 4) ? (xmlreq.status == 200) ? result.innerHTML = xmlreq.responseText : result.innerHTML = 'Erro: ' + xmlreq.statusText : '';
   };
@@ -75,7 +75,7 @@ function ordenarLivros(id) { //Função para os simbolos de Ordenar
   return textoAtual === 'swap_vert' ? 'expand_more' : textoAtual === 'expand_more' ? 'expand_less' : 'expand_more';
 };
 
-function mostrarSenha(x) { //Função para mostrar senha nos inputs password
+function mostrarSenha(x) {
   const inputSenha = document.getElementById('input_senha_' + x);
   const span = document.getElementById('span_' + x);
 
@@ -127,7 +127,31 @@ function alterarUsuario(campo) {
   criarApagar.style.display = 'grid';
   alterarUsuario = function() {
     location.reload();
-} };
+  } 
+};
+
+function editarCampo(id, abrir = false) {
+  const linhasAbertas = Array.from(document.getElementsByClassName('editar-tabela'));
+  linhasAbertas.forEach(element => {
+    element.style.display = 'none';
+  });
+
+  if (abrir) {
+    const linhaEditar = document.getElementById(id);
+    linhaEditar.style.display = linhaEditar.style.display == 'none' ? 'grid' : 'none';
+  }
+}
+
+function excluirCampo(id, abrir = false) {
+  const linhasAbertas = Array.from(document.getElementsByClassName('editar-tabela'));
+  linhasAbertas.forEach(element => {
+    element.style.display = 'none';
+  });
+  if (abrir) {
+    const linhaExcluir = document.getElementById(id);
+    linhaExcluir.style.display = linhaExcluir.style.display == 'none' ? 'grid' : 'none';
+  }
+}
 
 function mudarCor(tema) {
   var novoTema = (tema == 'dark') ? 'day' : 'dark';
