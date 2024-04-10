@@ -5,4 +5,3 @@
   <i onclick="mudarCor('<?= $_COOKIE['tema'] ?? 'day' ?>')"> palette </i>
   <a>&copy; 2023 Biblioteca Digital. Todos os direitos reservados.</a>
 </footer>
-</html>

@@ -118,7 +118,7 @@ class Conexao {
     $prepare->bindParam(":titulo", $titulo, PDO::PARAM_STR);
     try {
       $prepare->execute();
-      unlink("./assets/$id.php");
+      unlink("./assets/$id.pdf");
       return true;
     } catch (PDOException $erro) {
       echo "Erro: " . $erro->getMessage();
@@ -194,18 +194,37 @@ class Conexao {
     }
   }
 
-  public function alterarAutorPais($tabela, $id, $funcao) {
-    /*if ($funcao == "excluir") {
-      $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
-      $prepare->execute();
-    } else if ($funcao == "editar") {
-      $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
-      $prepare->execute();
-    }*/
-    $prepare = $this->conn->prepare("INSERT INTO teste(funcionou) VALUES (:id)");
+  public function editarAutorPais($chave, $id, $nome) {
+    $arrayPossivel = [ 1 => "autor", 3 => "pais"];
+    $campo = $arrayPossivel[$chave];
+    if($this->consultarTabela("tb$campo", [$campo], [$nome])) {
+      return false;
+    };
+    $prepare = $this->conn->prepare("UPDATE tb$campo SET $campo = :nome WHERE id$campo = :id");
+    $prepare->bindParam(":nome", $nome, PDO::PARAM_STR);
     $prepare->bindParam(":id", $id, PDO::PARAM_INT);
-    $prepare->execute();
-    header('Location: login.php');
+    try {
+      $prepare->execute();
+      return true;
+    } catch (PDOException $erro) {
+      throw new Exception("Erro: " . $erro->getMessage());
+    }
+  }
+
+  public function excluirAutorPais($chave, $id) {
+    $arrayPossivel = [ 1 => "autor", 3 => "pais"];
+    $campo = $arrayPossivel[$chave];
+    if($this->consultarTabela("tblivro", ["id$campo"], [$id])) {
+      return false;
+    };
+    $prepare = $this->conn->prepare("DELETE FROM tb$campo WHERE id$campo = :id");
+    $prepare->bindParam(":id", $id, PDO::PARAM_INT);
+    try {
+      $prepare->execute();
+      return true;
+    } catch (PDOException $erro) {
+      exit();
+    }
   }
 
   public function apagarUsuario($nome) {

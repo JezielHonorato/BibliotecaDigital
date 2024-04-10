@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/03/2024 às 01:16
+-- Tempo de geração: 10/04/2024 às 13:18
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -38,14 +38,14 @@ CREATE TABLE `tbautor` (
 
 INSERT INTO `tbautor` (`idAutor`, `autor`) VALUES
 (1, 'Dante Alighieri'),
-(2, 'Machado De Assis'),
+(2, 'Machado de Assis'),
 (3, 'Lima Barreto'),
 (4, 'Raul Pompeia'),
 (5, 'Franz Kafka'),
-(6, 'Luís Vaz De Camoes'),
+(6, 'Luíz Vaz de Camões'),
 (7, 'Agostinho De Hipona'),
 (8, 'George Orwell'),
-(9, 'Platao');
+(9, 'Platão');
 
 -- --------------------------------------------------------
 
@@ -123,7 +123,6 @@ INSERT INTO `tbpais` (`idPais`, `pais`) VALUES
 (2, 'Brasil'),
 (3, 'Austria-Hungria'),
 (4, 'Portugal'),
-(5, 'Selecione O Pais Da Obra'),
 (6, 'India'),
 (7, 'Grecia');
 

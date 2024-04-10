@@ -10,8 +10,10 @@ if (isset($_POST['login_submit'])) {
   $conn->apagarUsuario($_POST['alterar_usuario_nome']);
 } elseif (isset($_POST['sair'])) {
   $conn->desconectarUsuario();
-} elseif (isset($_GET['tabela'])) {
-  $conn->alterarAutorPais("a", 1, "a");
+} elseif (isset($_POST['editar_autor_pais_submit'])) {
+  $conn->editarAutorPais($_POST['tabela'], $_POST['id_autor_pais'], $_POST['editar_autor_pais']);
+} elseif (isset($_POST['excluir_autor_pais_submit'])) {
+  echo ($conn->excluirAutorPais($_POST['tabela'], $_POST['id_autor_pais'])) ? : "<script>alert('Não é possível excluir o $campo pois já existe um livro cadastrado com ele!')</script>";
 }
 ?>
 
@@ -71,26 +73,30 @@ if (isset($_POST['login_submit'])) {
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($conn->selecionarTodos(1) as $value) {
-            echo "<tr>";  
-            echo "<td>". $value['autor'] ."</td>";
-            echo "<td class='ferramenta-editar'><i onclick='editarCampo(\"editar_autor_". $value['idAutor'] ."\", true)'> edit </i> | <i class='item-alert' onclick='excluirCampo(\"excluir_autor_". $value['idAutor'] ."\", true)'> delete </i></td>";
-            echo "</tr>";
+          <?php foreach ($conn->selecionarTodos(1) as $value) { ?>
+            <tr>
+              <td><?= $value['autor'] ?></td>
+              <td class='ferramenta-editar'><i onclick="editarCampo('editar_autor_<?= $value['idAutor'] ?>', true)"> edit </i> | <i class='item-alert' onclick="excluirCampo('excluir_autor_<?= $value['idAutor'] ?>', true)"> delete </i></td>
+            </tr>
 
-            echo "<tr class='editar-tabela' style='display:none' id='editar_autor_". $value['idAutor'] ."'>";
-            echo "<form method='post'>";
-            echo "<td> <input type='text' name='editar_autor' placeholder='Digite o novo nome para o Autor | ". $value['autor'] ."'></td>";
-            echo "<td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='editar_autor_submit'> <i class='item-warning'> done </i></button> | <i class='item-alert' onclick='editarCampo(\"editar_autor_". $value['idAutor'] ."\")'> close </i></td>";
-            echo "</form>";
-            echo "</tr>";
+            <tr class='editar-tabela' style='display:none' id='editar_autor_<?= $value['idAutor'] ?>' autocomplete='off'>
+              <form method='post' autocomplete='off'>
+                <td> <input type='text' name='editar_autor_pais' placeholder='Digite o novo nome para o Autor | <?= $value['autor'] ?>'></td>
+                <input type='hidden' name='id_autor_pais' value='<?= $value['idAutor'] ?>'>
+                <input type='hidden' name='tabela' value='1'>
+                <td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='editar_autor_pais_submit'> <i class='item-warning'> done </i></button> | <i class='item-alert' onclick="editarCampo('editar_autor_<?= $value['idAutor'] ?>')"> close </i></td>
+              </form>
+            </tr>
 
-            echo "<tr class='editar-tabela' style='display:none' id='excluir_autor_". $value['idAutor'] ."'>";
-            echo "<form method='post'>";
-            echo "<td> Tem Certeza que deseja excluir o autor: ". $value['autor'] ."</td>";
-            echo "<td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='excluir_autor_submit'> <i class='item-warning'> delete </i></button> | <i class='item-alert' onclick='excluirCampo(\"excluir_autor_". $value['idAutor'] ."\")'> close </i></td>";
-            echo "</form>";
-            echo "</tr>";
-          } ?>
+            <tr class='editar-tabela' style='display:none' id='excluir_autor_<?= $value['idAutor'] ?>'>
+              <form method='post'>
+                <td> Tem Certeza que deseja excluir o autor: <?= $value['autor'] ?></td>
+                <input type='hidden' name='id_autor_pais' value='<?= $value['idAutor'] ?>'>
+                <input type='hidden' name='tabela' value='1'>
+                <td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='excluir_autor_pais_submit'> <i class='item-warning'> delete </i></button> | <i class='item-alert' onclick="excluirCampo('excluir_autor_<?= $value['idAutor'] ?>')"> close </i></td>
+              </form>
+            </tr>
+          <?php } ?>
         </tbody>
       </table>
 
@@ -104,26 +110,30 @@ if (isset($_POST['login_submit'])) {
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($conn->selecionarTodos(3) as $value) {
-            echo "<tr>";
-            echo "<td>". $value['pais'] ."</td>";
-            echo "<td class='ferramenta-editar'><i onclick='editarCampo(\"editar_pais_". $value['idPais'] ."\", true)'> edit </i> | <i class='item-alert' onclick='excluirCampo(\"excluir_pais_". $value['idPais'] ."\", true)'> delete </i></td>";
-            echo "</tr>";
+          <?php foreach ($conn->selecionarTodos(3) as $value) { ?>
+            <tr>
+            <td> <?= $value['pais'] ?> </td>
+            <td class='ferramenta-editar'><i onclick="editarCampo('editar_pais_<?= $value['idPais'] ?>', true)"> edit </i> | <i class='item-alert' onclick="excluirCampo('excluir_pais_<?= $value['idPais'] ?>', true)"> delete </i></td>
+            </tr>
 
-            echo "<tr class='editar-tabela' style='display:none' id='editar_pais_". $value['idPais'] ."'>";
-            echo "<form method='post id='form_editar_pais'>";
-            echo "<td> <input type='text' name='editar_pais' placeholder='Digite o novo nome para o pais | ". $value['pais'] ."'></td>";
-            echo "<td class='ferramenta-editar'> <button class='no-background' type='submit' name='editar_pais_submit'> <i class='item-warning'> done </i></button> | <i class='item-alert' onclick='editarCampo(\"editar_pais_". $value['idPais'] ."\")'> close </i> </td>";
-            echo "</form>";
-            echo "</tr>";
+            <tr class='editar-tabela' style='display:none' id="editar_pais_<?= $value['idPais']?>">
+              <form method='post' autocomplete='off'>
+                <td> <input type='text' name='editar_autor_pais' placeholder='Digite o novo nome para o pais | <?= $value['pais'] ?>'></td>
+                <input type='hidden' name='id_autor_pais' value='<?= $value['idPais'] ?>'>
+                <input type='hidden' name='tabela' value='3'>
+                <td class='ferramenta-editar'> <button class='no-background' type='submit' name='editar_autor_pais_submit'> <i class='item-warning'> done </i></button> | <i class='item-alert' onclick="editarCampo('editar_pais_<?= $value['pais'] ?>')"> close </i> </td>
+              </form>
+            </tr>
 
-            echo "<tr class='editar-tabela' style='display:none' id='excluir_pais_". $value['idPais'] ."'>";
-            echo "<form method='post'>";
-            echo "<td> Tem Certeza que deseja excluir o Paas: ". $value['pais'] ."</td>";
-            echo "<td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='excluir_pais_submit'> <i class='item-warning'> delete </i></button> | <i class='item-alert' onclick='excluirCampo(\"excluir_pais_". $value['idPais'] ."\")'> close </i></td>";
-            echo "</form>";
-            echo "</tr>";
-          } ?>
+            <tr class='editar-tabela' style='display:none' id='excluir_pais_<?= $value['idPais'] ?>'>
+              <form method='post'>
+                <td> Tem Certeza que deseja excluir o Pais: <?= $value['pais'] ?></td>
+                <input type='hidden' name='id_autor_pais' value='<?= $value['idPais'] ?>'>
+                <input type='hidden' name='tabela' value='3'>
+                <td class='ferramenta-editar'> <button class='no-background' type='submit' class='align-center' name='excluir_autor_pais_submit'> <i class='item-warning'> delete </i></button> | <i class='item-alert' onclick="excluirCampo('excluir_pais_<?= $value['pais'] ?>')"> close </i></td>
+              </form>
+            </tr>
+          <?php } ?>
         </tbody>
       </table>
     <?php } ?>
