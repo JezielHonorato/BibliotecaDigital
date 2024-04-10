@@ -30,7 +30,7 @@
     <nav>
       <a href='./index.php'>Home</a>
       <a href='./livros.php'>Livros</a>
-      <?= $user ? "<a href='./cadastrar.php'>Cadastrar</a>": '' ?>
+      <?= $user ? "<a href='./cadastrar.php'>Cadastrar</a>" : '' ?>
       <a href='./login.php'>Login</a>
     </nav>
     <a href='./livros.php'><i>search</i></a>
